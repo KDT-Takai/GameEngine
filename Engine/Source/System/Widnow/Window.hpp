@@ -1,18 +1,26 @@
 ﻿#pragma once
 #define NOMINMAX	// minの定義を抑制するためのマクロ
 #include <windows.h>	// Windows APIのヘッダーファイル
-#include "Utility/Singleton/Singleton.hpp"
 
 // ウィンドウの生成
-class Window : public Singleton<Window>
+class Window
 {
-	DECLARE_SINGLETON(Window)
-private:
+public:
 	Window();
 	~Window();
-public:
 	// 初期化
-
-	// 
-
+	bool Initialize(const wchar_t* title, LONG width, LONG height);
+	// メッセージ処理
+	bool ProcessMessage();
+	// ゲッター
+	HWND GetHwnd() const { return m_hwnd; }
+	HINSTANCE GetHInstance() const { return m_wndClass.hInstance; }
+private:
+	// ウィンドウクラスの登録
+	bool RegisterWindowClass();
+	// ウィンドウの生成
+	bool CreateNativeWindow(const wchar_t* title, LONG width, LONG height);
+private:
+	HWND m_hwnd = nullptr;		// ウィンドウハンドル
+	WNDCLASSEX m_wndClass = {};	// ウィンドウクラス
 };

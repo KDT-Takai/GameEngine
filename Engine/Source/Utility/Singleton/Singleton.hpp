@@ -16,8 +16,10 @@ protected:
 	Singleton() = default;
 	virtual ~Singleton() = default;
 public:
-	Singleton(const Singleton) = delete;
-	Singleton& operator=(const Singleton) = delete;
+	Singleton(const Singleton&) = delete;
+	Singleton& operator=(const Singleton&) = delete;
+	Singleton(Singleton&&) = delete;
+	Singleton& operator=(Singleton&&) = delete;
 	// 生成
 	template <typename... Args>
 	static void Create(Args&&... args) {

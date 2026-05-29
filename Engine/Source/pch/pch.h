@@ -85,3 +85,6 @@
 #include <format>
 
 namespace DX = DirectX;
+
+// log
+#include "Utility/Logger/Log.hpp"
