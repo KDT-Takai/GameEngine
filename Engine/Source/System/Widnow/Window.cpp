@@ -14,19 +14,19 @@ Window::~Window()
 	}
 }
 
-static LRESULT CALLBACK WindowProcedure(HWND a_hwnd, UINT a_msg, WPARAM a_wparam, LPARAM a_lparam)
+static LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
 	// ウィンドウが破棄されたら呼ばれる
-	if (a_msg == WM_DESTROY)
+	if (msg == WM_DESTROY)
 	{
 		// OSに対してこのアプリは終了と伝える
 		PostQuitMessage(0);
 		return 0;
 	}
-	return DefWindowProc(a_hwnd, a_msg, a_wparam, a_lparam);
+	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
-bool Window::Initialize(const wchar_t* a_title, LONG a_width, LONG a_height)
+bool Window::Initialize(const wchar_t* title, LONG width, LONG height)
 {
 	// ウィンドウクラスの登録
 	bool RegisterWindowFlag = RegisterWindowClass();
@@ -36,7 +36,7 @@ bool Window::Initialize(const wchar_t* a_title, LONG a_width, LONG a_height)
 		return false;
 	}
 	// ウィンドウクラスの生成
-	bool CreateNativeWindowFlag = CreateNativeWindow(a_title, a_width, a_height);
+	bool CreateNativeWindowFlag = CreateNativeWindow(title, width, height);
 	if (!CreateNativeWindowFlag)
 	{
 		LOG_CRITICAL("ウィンドウ生成失敗");
