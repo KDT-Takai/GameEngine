@@ -97,7 +97,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Engine\Source;..\external\SpdLog\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>..\x64\Debug\Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
@@ -129,7 +129,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Engine\Source;..\external\SpdLog\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>..\x64\Debug\Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>

@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 // Window
-
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
@@ -83,8 +82,6 @@
 #include <initializer_list>
 
 #include <format>
-
-namespace DX = DirectX;
 
 // log
 #include "Utility/Logger/Log.hpp"
