@@ -61,6 +61,29 @@
 - エンドポイントは kebab-case
 - リソース指向で設計する  
 
+## 5.3 ブランチ
+
+### 基本ルール
+
+* ブランチ名は `{type}/{Name}` 形式で作成する
+* 種別ごとにプレフィックスを付与する
+* 機能名・修正内容は PascalCase を使用する
+* 内容が分かる命名にする
+
+---
+
+### ブランチ種別
+
+| 種別         | 用途       | 例                         |
+| ---------- | -------- | ------------------------- |
+| `feature`  | 新機能追加    | `feature/AddLoginSystem`  |
+| `fix`      | バグ修正     | `fix/LoginValidation`     |
+| `refactor` | リファクタリング | `refactor/UserService`    |
+| `hotfix`   | 緊急修正     | `hotfix/FixCrashOnStart`  |
+| `docs`     | ドキュメント修正 | `docs/UpdateReadme`       |
+| `test`     | テスト追加・修正 | `test/AddUserServiceTest` |
+
+
 ---
 
 ## 6. 禁止パターン
