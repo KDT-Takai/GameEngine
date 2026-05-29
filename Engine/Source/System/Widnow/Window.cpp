@@ -3,7 +3,6 @@
 
 Window::Window()
 {
-
 }
 
 Window::~Window()
@@ -56,13 +55,13 @@ bool Window::ProcessMessage()
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 
-		// アプリケーションが終わるときにmessageがWM_QUITになる
+		// アプリケーションが終わるときにmessageがWM_QUIT
 		if (msg.message == WM_QUIT)
 		{
-			return true;
+			return false;
 		}
 	}
-	return false;
+	return true;
 }
 
 bool Window::RegisterWindowClass()
@@ -75,6 +74,8 @@ bool Window::RegisterWindowClass()
 	m_wndClass.lpszClassName = _T("DirectX12");
 	// ハンドルの取得
 	m_wndClass.hInstance = GetModuleHandle(nullptr);
+	// 背景色
+	m_wndClass.hbrBackground = (HBRUSH)GetStockObject(GRAY_BRUSH);
 	// アプリケーションクラス
 	// ウィンドウクラスの指定をOSに伝える
 	if (!RegisterClassEx(&m_wndClass))
