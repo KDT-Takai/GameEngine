@@ -1,28 +1,32 @@
 #include "Framework.hpp"
 
-bool Framework::Initialize(int width, int height, const char* title)
+namespace Engine::System
 {
-	Logger::Initialize();
-	window = std::make_unique<Window>();
-	bool InitializeWindowFlag = window->Initialize(std::wstring(title, title + strlen(title)).c_str(), width, height);
-	if (!InitializeWindowFlag)
+	bool Framework::Initialize(int width, int height, const char* title)
 	{
-		return false;
-	}
-	return true;
-}
-
-void Framework::Run()
-{
-	while (true)
-	{
-		if (!window->ProcessMessage())
+		Engine::Utility::Logger::Create();
+		window = std::make_unique<Window>();
+		bool InitializeWindowFlag = window->Initialize(std::wstring(title, title + strlen(title)).c_str(), width, height);
+		if (!InitializeWindowFlag)
 		{
-			break;
+			return false;
+		}
+		return true;
+	}
+
+	void Framework::Run()
+	{
+		while (true)
+		{
+			if (!window->ProcessMessage())
+			{
+				break;
+			}
 		}
 	}
-}
 
-void Framework::Finalize()
-{
+	void Framework::Finalize()
+	{
+		Engine::Utility::Logger::Delete();
+	}
 }

@@ -1,6 +1,8 @@
 # ノート
 DirectX12の初期化クラス構成
 
+TODO: NAMING.mdにnamespaceを追加する
+
 Engine
  └─ Source
      ├─ Framework
@@ -35,3 +37,15 @@ Dx12RenderContext
  ├ ID3D12CommandAllocator (フレームごとにリセットして使うメモリ)
  ├ ID3D12GraphicsCommandList (実際の描画コマンドを記録する場所)
  └ Dx12Fence (CPUとGPUの同期用)
+
+メモ
+DirectX12の初期化について
+DX12Device
+デバイス(デバイスの生成)、デバック、ファクトリー
+DX12RendererContext
+コマンドリスト、コマンドキュー、スワップチェイン、コマンドアロケータ
+ディスクリプタヒープ、レンダーターゲットビュー、深度ステンシルバッファ
+フェンス
+わからないところ
+GPUのウェイトのかける処理
+バッファ関係App::OnInitはどうするべき

@@ -18,13 +18,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif//defined(DEBUG) || defined(_DEBUG)
 
-	Framework::Create();
-	if (!Framework::Get().Initialize(1280, 720, "DirectX12"))
+	Engine::System::Framework::Create();
+	if (!Engine::System::Framework::Get().Initialize(1280, 720, "DirectX12"))
 	{
 		return -1;
 	}
-	Framework::Get().Run();
-	Framework::Get().Finalize();
-
+	Engine::System::Framework::Get().Run();
+	Engine::System::Framework::Get().Finalize();
+	Engine::System::Framework::Delete();
 	return 0;
 }

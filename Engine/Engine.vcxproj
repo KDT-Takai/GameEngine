@@ -145,6 +145,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Graphics\DX12\RenderContext\DX12RendererContext.cpp" />
+    <ClCompile Include="Source\Graphics\DX12\Render\DX12Renderer.cpp" />
+    <ClCompile Include="Source\Graphics\DX12\Device\DX12Device.cpp" />
     <ClCompile Include="Source\Framework\Framework.cpp" />
     <ClCompile Include="Source\pch\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -155,7 +158,11 @@
     <ClCompile Include="Source\System\Widnow\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Graphics\DX12\RenderContext\DX12RendererContext.hpp" />
+    <ClInclude Include="Source\Graphics\DX12\Render\DX12Renderer.hpp" />
+    <ClInclude Include="Source\Graphics\DX12\Device\DX12Device.hpp" />
     <ClInclude Include="Source\Framework\Framework.hpp" />
+    <ClInclude Include="Source\Graphics\DX12\Type.hpp" />
     <ClInclude Include="Source\pch\pch.h" />
     <ClInclude Include="Source\Utility\Logger\Log.hpp" />
     <ClInclude Include="Source\Utility\Singleton\Singleton.hpp" />

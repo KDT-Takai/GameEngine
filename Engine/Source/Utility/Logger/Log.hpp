@@ -1,14 +1,23 @@
 #pragma once
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 #include <spdlog/spdlog.h>
+#include "Utility/Singleton/Singleton.hpp"
 
-namespace Logger
+namespace Engine::Utility
 {
-    inline void Initialize()
+    class Logger : public Singleton<Logger>
     {
-        spdlog::set_pattern("[%H:%M:%S][%^%l%$][%s:%#] %v");
-        spdlog::set_level(spdlog::level::trace);
-    }
+        DECLARE_SINGLETON(Logger);
+
+    private:
+        Logger()
+        {
+            spdlog::set_pattern("[%H:%M:%S][%^%l%$][%s:%#] %v");
+            spdlog::set_level(spdlog::level::trace);
+        }
+
+        ~Logger() = default;
+    };
 }
 
 #define LOG_TRACE(...)    SPDLOG_TRACE(__VA_ARGS__)
