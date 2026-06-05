@@ -1,7 +1,7 @@
 #include "pch/pch.h"
 #include "DX12Device.hpp"
 
-namespace Engine::Graphics::DX12
+namespace Engine::Graphics
 {
 	bool DX12Device::Initialize() {
 		if (!EnableDebugLayer()) {

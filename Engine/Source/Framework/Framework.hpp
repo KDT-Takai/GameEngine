@@ -3,7 +3,7 @@
 #include "System/Widnow/Window.hpp"
 
 #include "Utility/Singleton/Singleton.hpp"
-#include "../Graphics/DX12/Device/DX12Device.hpp"
+#include "Graphics/DX12/Device/DX12Device.hpp"
 
 namespace Engine::System
 {

@@ -31,7 +31,7 @@ Dx12Device (基盤・ファクトリー層)
 Dx12Render (描画システム全体・パイプライン管理)
  ├ Dx12SwapChain (画面表示バッファの管理)
  ├ Dx12PipelineStateManager (PSOやRootSignatureの管理)
- └ Dx12RenderContext (★描画実行のスレッドや単位ごとの文脈)
+ └ Dx12RenderContext (描画実行のスレッドや単位ごとの文脈)
 
 Dx12RenderContext
  ├ ID3D12CommandAllocator (フレームごとにリセットして使うメモリ)
@@ -39,6 +39,7 @@ Dx12RenderContext
  └ Dx12Fence (CPUとGPUの同期用)
 
 ## メモ
+### DirectX 12の初期化クラス構成について
 ファイル構成
 DX12の中にDeviceとRendererとRendererContextのファイルを作成しそれぞれのファイルに.hppと.cppを作成する
 Rendererはシングルトンで管理する
@@ -52,6 +53,31 @@ DX12RendererContext
 コマンドリスト、コマンドキュー、スワップチェイン、コマンドアロケータ
 ディスクリプタヒープ、レンダーターゲットビュー、深度ステンシルバッファ
 フェンス
+
+### RendererとContextの役割分担
+```sh
+最初はRendererとContextを分けずにやってみる
+マルチスレッド化させるタイミングでRendererContextからRendererを切り離す
+Rendererは管理だけにする
+```
+
+Rendererは画面出力・同期
+* スワップチェーン (IDXGISwapChain)
+* レンダーターゲットビュー (RTV) / 深度ステンシルビュー (DSV) のディスクリプタヒープ
+* バックバッファリソース（画面の絵をためる場所）
+* フェンス (ID3D12Fence) と WaitGPU() メソッド
+
+コマンド関係をContext側にまとめる
+* コマンドキュー (ID3D12CommandQueue)
+* コマンドアロケータ (ID3D12CommandAllocator)
+* コマンドリスト (ID3D12GraphicsCommandList)
+
+---
+
+RendererがContextを管理させる
+Contextを取得したいときはRendererから取得する形にする
+
+---
 
 WaitGPUはcontext側にメソッド作って入れておく
 

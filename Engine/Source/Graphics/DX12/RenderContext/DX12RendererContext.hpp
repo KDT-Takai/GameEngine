@@ -1,5 +1,8 @@
 #pragma once
-class DX12RendererContext
-{
-};
 
+namespace Engine::Graphics
+{
+	class DX12RendererContext
+	{
+	};
+}

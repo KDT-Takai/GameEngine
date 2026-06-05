@@ -12,8 +12,8 @@ namespace Engine::System
 		{
 			return false;
 		}
-		Engine::Graphics::DX12::DX12Device::Create();
-		if (!Engine::Graphics::DX12::DX12Device::Get().Initialize())
+		Engine::Graphics::DX12Device::Create();
+		if (!Engine::Graphics::DX12Device::Get().Initialize())
 		 {
 			 return false;
 		}
@@ -36,8 +36,8 @@ namespace Engine::System
 	{
 		Engine::Utility::Logger::Delete();
 		// æ‚ÉDX12Device‚ğíœ‚µ‚Ä‚¨‚­
-		Engine::Graphics::DX12::DX12Device::Get().Finalize();
+		Engine::Graphics::DX12Device::Get().Finalize();
 		// DX12Device‚Ìíœ
-		Engine::Graphics::DX12::DX12Device::Delete();
+		Engine::Graphics::DX12Device::Delete();
 	}
 }

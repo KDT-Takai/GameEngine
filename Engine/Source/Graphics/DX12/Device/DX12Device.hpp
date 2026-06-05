@@ -1,8 +1,8 @@
 #pragma once
 #include "../Type.hpp"
-#include "../../../Utility/Singleton/Singleton.hpp"
+#include "Utility/Singleton/Singleton.hpp"
 
-namespace Engine::Graphics::DX12
+namespace Engine::Graphics
 {
 	class DX12Device : public Engine::Utility::Singleton<DX12Device>
 	{
