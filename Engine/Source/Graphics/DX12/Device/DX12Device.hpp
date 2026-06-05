@@ -1,23 +1,25 @@
 #pragma once
 #include "../Type.hpp"
+#include "../../../Utility/Singleton/Singleton.hpp"
 
 namespace Engine::Graphics::DX12
 {
-	class DX12Device
+	class DX12Device : public Engine::Utility::Singleton<DX12Device>
 	{
+		DECLARE_SINGLETON(DX12Device)
 	public:
 		// 初期化
 		bool Initialize();
 		// 終了
 		void Finalize();
 		// ゲッター
-		dx12::DevicePtr GetDevice() const { return device; }
+		dx12::Device GetDevice() const { return device; }
 		// デバッグデバイスのゲッター
-		dx12::DebugDevicePtr GetDebugDevice() const { return debugDevice; }
+		dx12::DebugDevice GetDebugDevice() const { return debugDevice; }
 		// アダプターのゲッター
-		dx12::AdapterPtr GetAdapter() const { return adapter; }
+		dx12::Adapter GetAdapter() const { return adapter; }
 		// ファクトリーのゲッター
-		dx12::Factory6Ptr GetFactory() const { return factory; }
+		dx12::Factory6 GetFactory() const { return factory; }
 		// デバイスの作成
 		bool CreateDevice();
 		// デバッグデバイスの作成
@@ -30,12 +32,12 @@ namespace Engine::Graphics::DX12
 		// デバイスのレベル
 		D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL_12_1;
 		// デバイス
-		dx12::DevicePtr device;
+		dx12::Device device;
 		// デバッグデバイス
-		dx12::DebugDevicePtr debugDevice;
+		dx12::DebugDevice debugDevice;
 		// アダプター
-		dx12::AdapterPtr adapter;
+		dx12::Adapter adapter;
 		// ファクトリー
-		dx12::Factory6Ptr factory;
+		dx12::Factory6 factory;
 	};
 }
