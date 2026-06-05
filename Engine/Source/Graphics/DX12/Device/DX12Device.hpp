@@ -22,6 +22,7 @@ namespace Engine::Graphics::DX12
 		// ファクトリーのゲッター
 		dx12::Factory6 GetFactory() const { return factory; }
 
+	private:
 		// デバッグ層の有効化
 		bool EnableDebugLayer();
 		// ファクトリーの作成
@@ -32,7 +33,7 @@ namespace Engine::Graphics::DX12
 		bool CreateDevice();
 		// デバッグデバイスの作成
 		bool CreateDebugDevice();
-	private:
+	
 		// デバイスのレベル
 		D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL_12_1;
 		// デバイス本体
