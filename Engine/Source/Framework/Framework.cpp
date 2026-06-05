@@ -1,3 +1,4 @@
+#include "pch/pch.h"
 #include "Framework.hpp"
 
 namespace Engine::System
@@ -11,6 +12,12 @@ namespace Engine::System
 		{
 			return false;
 		}
+		Engine::Graphics::DX12::DX12Device::Create();
+		if (!Engine::Graphics::DX12::DX12Device::Get().Initialize())
+		 {
+			 return false;
+		}
+
 		return true;
 	}
 
@@ -28,5 +35,9 @@ namespace Engine::System
 	void Framework::Finalize()
 	{
 		Engine::Utility::Logger::Delete();
+		// æ‚ÉDX12Device‚ğíœ‚µ‚Ä‚¨‚­
+		Engine::Graphics::DX12::DX12Device::Get().Finalize();
+		// DX12Device‚Ìíœ
+		Engine::Graphics::DX12::DX12Device::Delete();
 	}
 }

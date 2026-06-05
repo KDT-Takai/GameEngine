@@ -17,6 +17,7 @@ namespace dx12
 	using Resource = ComPtr<ID3D12Resource>;
 	using DescriptorHeap = ComPtr<ID3D12DescriptorHeap>;
 	using Fence = ComPtr<ID3D12Fence>;
+	using Debug = ComPtr<ID3D12Debug>;
 	using DebugDevice = ComPtr<ID3D12DebugDevice>;
 	using Adapter = ComPtr<IDXGIAdapter4>;
 }

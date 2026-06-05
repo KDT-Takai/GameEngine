@@ -12,7 +12,8 @@ namespace Engine::Graphics::DX12
 		bool Initialize();
 		// 終了
 		void Finalize();
-		// ゲッター
+
+		// デバイスのゲッター
 		dx12::Device GetDevice() const { return device; }
 		// デバッグデバイスのゲッター
 		dx12::DebugDevice GetDebugDevice() const { return debugDevice; }
@@ -20,18 +21,21 @@ namespace Engine::Graphics::DX12
 		dx12::Adapter GetAdapter() const { return adapter; }
 		// ファクトリーのゲッター
 		dx12::Factory6 GetFactory() const { return factory; }
+
+		// デバッグ層の有効化
+		bool EnableDebugLayer();
+		// ファクトリーの作成
+		bool CreateFactory();
+		// アダプターの作成
+		bool CreateAdapter();
 		// デバイスの作成
 		bool CreateDevice();
 		// デバッグデバイスの作成
 		bool CreateDebugDevice();
-		// アダプターの作成
-		bool CreateAdapter();
-		// ファクトリーの作成
-		bool CreateFactory();
 	private:
 		// デバイスのレベル
 		D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL_12_1;
-		// デバイス
+		// デバイス本体
 		dx12::Device device;
 		// デバッグデバイス
 		dx12::DebugDevice debugDevice;
