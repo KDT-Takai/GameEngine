@@ -8,8 +8,19 @@ namespace Engine::Graphics
 	{
 		DECLARE_SINGLETON(DX12Renderer)
 	public:
+		// 初期化
+		bool Initialize(HWND hwnd, UINT width, UINT height);
+		// 終了
+		void Finalize();
 
+		// フレーム処理
+		bool BeginFrame();
+		bool EndFrame();
+
+		// DX12RendererContextの取得用メソッド
+		DX12RendererContext* GetContext() const { return context.get(); }
 	private:
-
+		// レンダラーコンテキスト
+		std::unique_ptr<DX12RendererContext> context;
 	};
 }

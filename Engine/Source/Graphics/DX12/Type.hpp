@@ -12,6 +12,7 @@ namespace dx12
 	using Factory6 = ComPtr<IDXGIFactory6>;
 	using SwapChain = ComPtr<IDXGISwapChain4>;
 	using CmdList = ComPtr<ID3D12CommandList>;
+	using GraphicsCmdList = ComPtr<ID3D12GraphicsCommandList>;
 	using CmdQueue = ComPtr<ID3D12CommandQueue>;
 	using CmdAllocator = ComPtr<ID3D12CommandAllocator>;
 	using Resource = ComPtr<ID3D12Resource>;
