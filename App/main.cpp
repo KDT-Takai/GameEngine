@@ -5,7 +5,6 @@
 
 #include <windows.h>
 #include <tchar.h>
-#include <spdlog/spdlog.h>
 #include "Framework/Framework.hpp"
 
 #ifdef _DEBUG

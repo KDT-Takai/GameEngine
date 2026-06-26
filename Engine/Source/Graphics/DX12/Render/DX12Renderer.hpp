@@ -23,4 +23,4 @@ namespace Engine::Graphics
 		// レンダラーコンテキスト
 		std::unique_ptr<DX12RendererContext> context;
 	};
-}
+} // Engine::Graphics

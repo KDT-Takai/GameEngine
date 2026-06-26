@@ -79,4 +79,24 @@ namespace Engine::Graphics
 	{
 		count = 0;
 	}
-}
+
+	UINT DX12DescriptorHeap::GetIndexFromHandle(D3D12_CPU_DESCRIPTOR_HANDLE handle) const
+	{
+		// 未初期化、またはこのヒープの範囲より前のアドレスなら無効
+		if (descriptorSize == 0 || handle.ptr < cpuStart.ptr)
+		{
+			return DescriptorHandle::InvalidIndex;
+		}
+
+		SIZE_T diff = handle.ptr - cpuStart.ptr;
+		UINT index = static_cast<UINT>(diff / descriptorSize);
+
+		if (index >= capacity)
+		{
+			return DescriptorHandle::InvalidIndex;
+		}
+
+		return index;
+	}
+
+} // Engine::Graphics

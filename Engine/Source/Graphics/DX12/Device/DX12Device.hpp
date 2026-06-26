@@ -45,4 +45,4 @@ namespace Engine::Graphics
 		// ファクトリー
 		dx12::Factory6 factory;
 	};
-}
+} // Engine::Graphics

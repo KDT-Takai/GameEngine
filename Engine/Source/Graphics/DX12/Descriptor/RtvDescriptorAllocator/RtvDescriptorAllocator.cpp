@@ -23,4 +23,4 @@ namespace Engine::Graphics
 		auto handle = heap.Allocate();
 		return handle.cpuHandle;
 	}
-}
+} // Engine::Graphics

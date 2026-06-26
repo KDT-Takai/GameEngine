@@ -34,4 +34,4 @@ namespace Engine::Graphics
 	{
 		return context->EndFrame();
 	}
-}
+} // Engine::Graphics

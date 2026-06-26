@@ -13,6 +13,7 @@ namespace Engine::Graphics
 		DescriptorHandle Allocate();
 		// ディスクリプタの解放
 		void Free(const DescriptorHandle& handle);
+		void Free(D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle, D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle);
 
 		ID3D12DescriptorHeap* GetHeap() const { return heap.GetHeap(); }
 
@@ -21,4 +22,4 @@ namespace Engine::Graphics
 		DX12DescriptorHeap heap;
 		std::vector<UINT> freeList;
 	};
-}
+} // Engine::Graphics

@@ -43,4 +43,21 @@ namespace Engine::Graphics
 
 		freeList.push_back(handle.index);
 	}
-}
+
+	void CbvSrvUavDescriptorAllocator::Free(D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle, D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle)
+	{
+		// gpuHandleはインデックス逆算には使わない（CPU側のアドレス間隔で計算できるため）
+		// 引数として受け取るのはImGuiのコールバックシグネチャに合わせるため
+		(void)gpuHandle;
+		
+		UINT index = heap.GetIndexFromHandle(cpuHandle);
+		if (index == DescriptorHandle::InvalidIndex)
+		{
+			LOG_ERROR("無効なハンドルをFreeしようとしました");
+			return;
+		}
+
+		freeList.push_back(index);
+	}
+
+} // Engine::Graphics

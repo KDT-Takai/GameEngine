@@ -15,7 +15,7 @@ namespace Engine::System
 		// メッセージ処理
 		bool ProcessMessage();
 		// ゲッター
-		HWND GetHwnd() const { return m_hwnd; }
+		HWND GetHWnd() const { return m_hwnd; }
 		HINSTANCE GetHInstance() const { return m_wndClass.hInstance; }
 	private:
 		// ウィンドウクラスの登録

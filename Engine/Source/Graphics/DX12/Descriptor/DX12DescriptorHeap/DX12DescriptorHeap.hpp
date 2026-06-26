@@ -30,6 +30,9 @@ namespace Engine::Graphics
 		// 指定インデックスのハンドルを再計算
 		DescriptorHandle GetHandle(UINT index) const;
 
+		// CPUハンドルから対応するインデックスを逆算する
+		UINT GetIndexFromHandle(D3D12_CPU_DESCRIPTOR_HANDLE handle) const;
+
 		// 発行数を０に
 		void Reset();
 
@@ -48,4 +51,4 @@ namespace Engine::Graphics
 		D3D12_CPU_DESCRIPTOR_HANDLE cpuStart{};
 		D3D12_GPU_DESCRIPTOR_HANDLE gpuStart{};
 	};
-}
+} // Engine::Graphics

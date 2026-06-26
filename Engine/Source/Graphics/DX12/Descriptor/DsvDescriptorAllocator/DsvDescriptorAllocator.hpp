@@ -14,4 +14,4 @@ namespace Engine::Graphics
 	private:
 		DX12DescriptorHeap heap;
 	};
-}
+} // Engine::Graphics

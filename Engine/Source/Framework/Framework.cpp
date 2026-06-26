@@ -1,5 +1,7 @@
 #include "pch/pch.h"
 #include "Framework.hpp"
+#include "System//ImGui/ImGuiManager.hpp"
+#include "Graphics/DX12/Render/DX12Renderer.hpp"
 
 namespace Engine::System
 {
@@ -14,7 +16,7 @@ namespace Engine::System
 		}
 		Engine::Graphics::DX12Device::Create();
 		if (!Engine::Graphics::DX12Device::Get().Initialize())
-		 {
+		{
 			 return false;
 		}
 

@@ -124,4 +124,4 @@ namespace Engine::Graphics
 #endif
 		return true;
 	}
-}
+} // Engine::Graphics

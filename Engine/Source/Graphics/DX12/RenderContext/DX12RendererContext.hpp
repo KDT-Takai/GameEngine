@@ -46,6 +46,8 @@ namespace Engine::Graphics
 		dx12::CmdQueue GetCmdQueue() const { return cmdQueue; }
 		const FrameResource& GetCurrentFrame() const { return frameResources[currentFrameIndex]; }
 		UINT GetFrameIndex() const { return currentFrameIndex; }
+		DXGI_FORMAT GetBackBufferFormat()  const { return backBufferFormat; }
+		DXGI_FORMAT GetDepthBufferFormat() const { return depthBufferFormat; }
 
 	private:
 		bool CreateCommandQueue();
@@ -91,6 +93,7 @@ namespace Engine::Graphics
 
 		// レンダー設定 
 		DXGI_FORMAT backBufferFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
+		DXGI_FORMAT depthBufferFormat = DXGI_FORMAT_D32_FLOAT;
 		FLOAT clearColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
 
 		// ウィンドウサイズ
@@ -98,4 +101,4 @@ namespace Engine::Graphics
 		UINT windowHeight = 0;
 
 	};
-}
+} // Engine::Graphics
