@@ -145,6 +145,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="external\ImGui\imgui.cpp" />
+    <ClCompile Include="external\ImGui\ImGuizmo.cpp" />
+    <ClCompile Include="external\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="external\ImGui\imgui_impl_dx12.cpp" />
+    <ClCompile Include="external\ImGui\imgui_impl_win32.cpp" />
+    <ClCompile Include="external\ImGui\imgui_tables.cpp" />
+    <ClCompile Include="external\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Descriptor\CbvSrvUavDescriptorAllocator\CbvSrvUavDescriptorAllocator.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Descriptor\DsvDescriptorAllocator\DsvDescriptorAllocator.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Descriptor\RtvDescriptorAllocator\RtvDescriptorAllocator.cpp" />
@@ -162,6 +169,16 @@
     <ClCompile Include="Source\System\Widnow\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="external\ImGui\imconfig.h" />
+    <ClInclude Include="external\ImGui\imgui.h" />
+    <ClInclude Include="external\ImGui\ImGuizmo.h" />
+    <ClInclude Include="external\ImGui\imgui_impl_dx12.h" />
+    <ClInclude Include="external\ImGui\imgui_impl_win32.h" />
+    <ClInclude Include="external\ImGui\imgui_internal.h" />
+    <ClInclude Include="external\ImGui\imgui_win32_forward.h" />
+    <ClInclude Include="external\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="external\ImGui\imstb_textedit.h" />
+    <ClInclude Include="external\ImGui\imstb_truetype.h" />
     <ClInclude Include="Source\Graphics\DX12\Descriptor\CbvSrvUavDescriptorAllocator\CbvSrvUavDescriptorAllocator.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Descriptor\DsvDescriptorAllocator\DsvDescriptorAllocator.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Descriptor\RtvDescriptorAllocator\RtvDescriptorAllocator.hpp" />
