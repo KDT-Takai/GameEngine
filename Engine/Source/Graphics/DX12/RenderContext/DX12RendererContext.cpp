@@ -87,8 +87,8 @@ namespace Engine::Graphics
 			frame.backBuffer.Reset();
 		}
 		fence.Reset();
-		dsvHeap.Reset();
-		rtvHeap.Reset();
+		dsvAllocator.Finalize();
+		rtvAllocator.Finalize();
 		depthBuffer.Reset();
 		swapChain.Reset();
 		cmdQueue.Reset();
@@ -172,7 +172,6 @@ namespace Engine::Graphics
 	void DX12RendererContext::SetRenderTarget()
 	{
 		auto& frame = frameResources[currentFrameIndex];
-		auto dsvHandle = dsvHeap->GetCPUDescriptorHandleForHeapStart();
 
 		cmdList->OMSetRenderTargets(1, &frame.rtvHandle, FALSE, &dsvHandle);
 	}
@@ -180,10 +179,9 @@ namespace Engine::Graphics
 	void DX12RendererContext::ClearRenderTarget()
 	{
 		auto& frame = frameResources[currentFrameIndex];
-		auto dsvHanlde = dsvHeap->GetCPUDescriptorHandleForHeapStart();
 
 		cmdList->ClearRenderTargetView(frame.rtvHandle, clearColor, 0, nullptr);
-		cmdList->ClearDepthStencilView(dsvHanlde, D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, 1.0f, 0, 0, nullptr);
+		cmdList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, 1.0f, 0, 0, nullptr);
 	}
 
 	void DX12RendererContext::WaitGPU()
@@ -296,27 +294,18 @@ namespace Engine::Graphics
 
 	bool DX12RendererContext::CreateRTVHeap()
 	{
-		D3D12_DESCRIPTOR_HEAP_DESC desc{};
-		desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
-		desc.NumDescriptors = FRAME_COUNT;
-		desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
-		desc.NodeMask = 0;
-
-		auto hr = device->CreateDescriptorHeap(&desc, IID_PPV_ARGS(rtvHeap.GetAddressOf()));
-		if (FAILED(hr))
+		// RTV用アロケータをフレーム数分の容量で初期化
+		if (!rtvAllocator.Initialize(device, FRAME_COUNT))
 		{
-			LOG_ERROR("RTVDescriptorHeapの生成に失敗");
+			LOG_ERROR("RtvDescriptorAllocatorの初期化に失敗");
 			return false;
 		}
-
-		rtvDescriptorSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 
 		return true;
 	}
 
 	bool DX12RendererContext::CreateRenderTargetViews()
 	{
-		D3D12_CPU_DESCRIPTOR_HANDLE handle = rtvHeap->GetCPUDescriptorHandleForHeapStart();
 		for (UINT i = 0; i < FRAME_COUNT; i++)
 		{
 			// スワップチェインからバックバッファリソースを取得
@@ -326,35 +315,32 @@ namespace Engine::Graphics
 				LOG_ERROR("バックバッファの取得に失敗");
 				return false;
 			}
+			// アロケータからRTV用ディスクリプタを確保
+			auto handle = rtvAllocator.Allocate();
+			if (handle.ptr == 0)
+			{
+				LOG_ERROR("RTV用ディスクリプタの確保に失敗");
+				return false;
+			}
 			// RTVを作成
 			device->CreateRenderTargetView(frameResources[i].backBuffer.Get(), nullptr, handle);
-			
 			// ハンドルを保存
 			frameResources[i].rtvHandle = handle;
-
-			// 次のディスクリプタハンドルへ移動
-			handle.ptr += rtvDescriptorSize;
 		}
-
 		return true;
 	}
 
 	bool DX12RendererContext::CreateDSVHeap()
 	{
-		D3D12_DESCRIPTOR_HEAP_DESC desc{};
-		desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
-		desc.NumDescriptors = 1;
-		desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
-		desc.NodeMask = 0;
-
-		auto hr = device->CreateDescriptorHeap(&desc, IID_PPV_ARGS(dsvHeap.GetAddressOf()));
-		if (FAILED(hr))
+		// DSV用アロケータを容量1で初期化
+		if (!dsvAllocator.Initialize(device, 1))
 		{
-			LOG_ERROR("DSVDescriptorHeapの生成に失敗");
+			LOG_ERROR("DsvDescriptorAllocatorの初期化に失敗");
 			return false;
 		}
 
 		return true;
+
 	}
 
 	bool DX12RendererContext::CreateDepthBuffer(UINT width, UINT height)
@@ -413,7 +399,7 @@ namespace Engine::Graphics
 		device->CreateDepthStencilView(
 			depthBuffer.Get(),
 			&dsvDesc,
-			dsvHeap->GetCPUDescriptorHandleForHeapStart()
+			dsvHandle
 		);
 
 		return true;

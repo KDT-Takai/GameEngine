@@ -1,5 +1,7 @@
 #pragma once
 #include "../Type.hpp"
+#include "../Descriptor/RtvDescriptorAllocator/RtvDescriptorAllocator.hpp"
+#include "../Descriptor/DsvDescriptorAllocator/DsvDescriptorAllocator.hpp"
 
 namespace Engine::Graphics
 {
@@ -70,10 +72,10 @@ namespace Engine::Graphics
 		FrameResource frameResources[FRAME_COUNT];
 		UINT          currentFrameIndex = 0;
 
-		// ディスクリプタヒープ 
-		dx12::DescriptorHeap rtvHeap;
-		UINT rtvDescriptorSize = 0;
-		dx12::DescriptorHeap dsvHeap;
+		// ディスクリプタ
+		RtvDescriptorAllocator rtvAllocator;
+		DsvDescriptorAllocator dsvAllocator;
+		D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle{}; // SetRenderTarget/ClearRenderTargetで使用
 
 		// 深度バッファ 
 		dx12::Resource depthBuffer;

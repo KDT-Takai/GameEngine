@@ -145,6 +145,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Graphics\DX12\Descriptor\CbvSrvUavDescriptorAllocator\CbvSrvUavDescriptorAllocator.cpp" />
+    <ClCompile Include="Source\Graphics\DX12\Descriptor\DsvDescriptorAllocator\DsvDescriptorAllocator.cpp" />
+    <ClCompile Include="Source\Graphics\DX12\Descriptor\RtvDescriptorAllocator\RtvDescriptorAllocator.cpp" />
+    <ClCompile Include="Source\Graphics\DX12\Descriptor\DX12DescriptorHeap\DX12DescriptorHeap.cpp" />
     <ClCompile Include="Source\Graphics\DX12\RenderContext\DX12RendererContext.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Render\DX12Renderer.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Device\DX12Device.cpp" />
@@ -158,6 +162,10 @@
     <ClCompile Include="Source\System\Widnow\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Graphics\DX12\Descriptor\CbvSrvUavDescriptorAllocator\CbvSrvUavDescriptorAllocator.hpp" />
+    <ClInclude Include="Source\Graphics\DX12\Descriptor\DsvDescriptorAllocator\DsvDescriptorAllocator.hpp" />
+    <ClInclude Include="Source\Graphics\DX12\Descriptor\RtvDescriptorAllocator\RtvDescriptorAllocator.hpp" />
+    <ClInclude Include="Source\Graphics\DX12\Descriptor\DX12DescriptorHeap\DX12DescriptorHeap.hpp" />
     <ClInclude Include="Source\Graphics\DX12\RenderContext\DX12RendererContext.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Render\DX12Renderer.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Device\DX12Device.hpp" />
@@ -176,6 +184,7 @@
     <Import Project="..\packages\directxtk12_desktop_win10.2026.5.8.1\build\native\directxtk12_desktop_win10.targets" Condition="Exists('..\packages\directxtk12_desktop_win10.2026.5.8.1\build\native\directxtk12_desktop_win10.targets')" />
     <Import Project="..\packages\Microsoft.Direct3D.D3D12.1.619.3\build\native\Microsoft.Direct3D.D3D12.targets" Condition="Exists('..\packages\Microsoft.Direct3D.D3D12.1.619.3\build\native\Microsoft.Direct3D.D3D12.targets')" />
     <Import Project="..\packages\Microsoft.Windows.CppWinRT.3.0.260520.1\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.3.0.260520.1\build\native\Microsoft.Windows.CppWinRT.targets')" />
+    <Import Project="..\packages\directxtex_desktop_win10.2026.5.8.1\build\native\directxtex_desktop_win10.targets" Condition="Exists('..\packages\directxtex_desktop_win10.2026.5.8.1\build\native\directxtex_desktop_win10.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -186,5 +195,6 @@
     <Error Condition="!Exists('..\packages\Microsoft.Direct3D.D3D12.1.619.3\build\native\Microsoft.Direct3D.D3D12.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Direct3D.D3D12.1.619.3\build\native\Microsoft.Direct3D.D3D12.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.3.0.260520.1\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.3.0.260520.1\build\native\Microsoft.Windows.CppWinRT.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.3.0.260520.1\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.3.0.260520.1\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+    <Error Condition="!Exists('..\packages\directxtex_desktop_win10.2026.5.8.1\build\native\directxtex_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtex_desktop_win10.2026.5.8.1\build\native\directxtex_desktop_win10.targets'))" />
   </Target>
 </Project>
