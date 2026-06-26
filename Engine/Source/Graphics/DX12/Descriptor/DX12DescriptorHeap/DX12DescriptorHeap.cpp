@@ -61,7 +61,7 @@ namespace Engine::Graphics
 	{
 		if (index >= capacity)
 		{
-			LOG_ERROR("DescriptorHeapの範囲害インデックスです");
+			LOG_ERROR("DescriptorHeapの範囲外インデックスです");
 			return DescriptorHandle{};
 		}
 

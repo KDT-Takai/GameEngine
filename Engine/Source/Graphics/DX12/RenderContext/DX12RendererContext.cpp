@@ -285,6 +285,7 @@ namespace Engine::Graphics
 		if (FAILED(hr))
 		{
 			LOG_ERROR("IDXGISwapChain4へのキャストに失敗");
+			return false;
 		}
 
 		currentFrameIndex = swapChain->GetCurrentBackBufferIndex();
@@ -386,6 +387,14 @@ namespace Engine::Graphics
 		if (FAILED(hr))
 		{
 			LOG_ERROR("深度バッファの生成に失敗");
+			return false;
+		}
+
+		// アロケータからDSV用ディスクリプタを確保
+		dsvHandle = dsvAllocator.Allocate();
+		if (dsvHandle.ptr == 0)
+		{
+			LOG_ERROR("DSV用ディスクリプタの確保に失敗");
 			return false;
 		}
 

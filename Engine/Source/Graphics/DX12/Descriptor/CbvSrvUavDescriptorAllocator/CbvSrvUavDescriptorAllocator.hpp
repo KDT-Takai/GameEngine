@@ -7,7 +7,7 @@ namespace Engine::Graphics
 	class CbvSrvUavDescriptorAllocator
 	{
 	public:
-		bool Initialize(ID3D12Device* device, UINT capcity);
+		bool Initialize(ID3D12Device* device, UINT capacity);
 		void Finalize();
 
 		DescriptorHandle Allocate();
