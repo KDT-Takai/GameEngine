@@ -158,8 +158,8 @@
     <ClCompile Include="Source\Graphics\DX12\Descriptor\DsvDescriptorAllocator\DsvDescriptorAllocator.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Descriptor\RtvDescriptorAllocator\RtvDescriptorAllocator.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Descriptor\DX12DescriptorHeap\DX12DescriptorHeap.cpp" />
-    <ClCompile Include="Source\Graphics\DX12\RenderContext\DX12RendererContext.cpp" />
-    <ClCompile Include="Source\Graphics\DX12\Render\DX12Renderer.cpp" />
+    <ClCompile Include="Source\Graphics\DX12\RendererContext\DX12RendererContext.cpp" />
+    <ClCompile Include="Source\Graphics\DX12\Renderer\DX12Renderer.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Device\DX12Device.cpp" />
     <ClCompile Include="Source\Framework\Framework.cpp" />
     <ClCompile Include="Source\pch\pch.cpp">
@@ -187,8 +187,8 @@
     <ClInclude Include="Source\Graphics\DX12\Descriptor\DsvDescriptorAllocator\DsvDescriptorAllocator.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Descriptor\RtvDescriptorAllocator\RtvDescriptorAllocator.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Descriptor\DX12DescriptorHeap\DX12DescriptorHeap.hpp" />
-    <ClInclude Include="Source\Graphics\DX12\RenderContext\DX12RendererContext.hpp" />
-    <ClInclude Include="Source\Graphics\DX12\Render\DX12Renderer.hpp" />
+    <ClInclude Include="Source\Graphics\DX12\RendererContext\DX12RendererContext.hpp" />
+    <ClInclude Include="Source\Graphics\DX12\Renderer\DX12Renderer.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Device\DX12Device.hpp" />
     <ClInclude Include="Source\Framework\Framework.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Type.hpp" />

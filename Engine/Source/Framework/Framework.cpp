@@ -1,7 +1,6 @@
 #include "pch/pch.h"
 #include "Framework.hpp"
 #include "System//ImGui/ImGuiManager.hpp"
-#include "Graphics/DX12/Render/DX12Renderer.hpp"
 
 namespace Engine::System
 {
@@ -19,7 +18,27 @@ namespace Engine::System
 		{
 			 return false;
 		}
+		Engine::Graphics::DX12Renderer::Create();
+		if (!Engine::Graphics::DX12Renderer::Get().Initialize(window->GetHWnd(), width, height))
+		{
+			return false;
+		}
+		Engine::Graphics::DX12DescriptorHeapManager::Create();
+		if (!Engine::Graphics::DX12DescriptorHeapManager::Get().Initialize(Engine::Graphics::DX12Device::Get().GetDevice().Get(), 512))
+		{
+			return false;
+		}
 
+		Engine::System::ImGuiManager::Create();
+		if (!Engine::System::ImGuiManager::Get().Initialize(
+			*window,
+			Engine::Graphics::DX12Device().Get(),
+			*Engine::Graphics::DX12Renderer().Get().GetContext(),
+			Engine::Graphics::DX12DescriptorHeapManager::Get()
+		))
+		{
+			return false;
+		}
 		return true;
 	}
 

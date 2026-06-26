@@ -2,7 +2,7 @@
 #include "ImGuiManager.hpp"
 
 #include "Graphics/DX12/Device/DX12Device.hpp"
-#include "Graphics/DX12/RenderContext/DX12RendererContext.hpp"
+#include "Graphics/DX12/RendererContext/DX12RendererContext.hpp"
 #include "Graphics/DX12/Descriptor/DX12DescriptorHeapManager.hpp"
 #include "System/Widnow/Window.hpp"
 

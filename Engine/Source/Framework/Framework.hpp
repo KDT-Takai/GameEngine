@@ -4,6 +4,8 @@
 
 #include "Utility/Singleton/Singleton.hpp"
 #include "Graphics/DX12/Device/DX12Device.hpp"
+#include "Graphics/DX12/Renderer/DX12Renderer.hpp"
+#include "Graphics/DX12/Descriptor/DX12DescriptorHeapManager.hpp"
 
 namespace Engine::System
 {

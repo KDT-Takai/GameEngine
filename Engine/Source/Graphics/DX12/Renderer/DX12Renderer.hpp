@@ -1,6 +1,6 @@
 #pragma once
 #include "Utility/Singleton/Singleton.hpp"
-#include "../RenderContext/DX12RendererContext.hpp"
+#include "../RendererContext/DX12RendererContext.hpp"
 
 namespace Engine::Graphics
 {
