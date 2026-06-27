@@ -8,7 +8,7 @@ namespace Engine::Graphics
 		context = std::make_unique<DX12RendererContext>();
 		if (!context->Initialize(hwnd, width, height))
 		{
-			LOG_ERROR("DX12ReendererContext‚Ì‰Šú‰»‚É¸”s");
+			LOG_ERROR("DX12RendererContext‚Ì‰Šú‰»‚É¸”s");
 			return false;
 		}
 
