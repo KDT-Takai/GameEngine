@@ -354,7 +354,7 @@ namespace Engine::Graphics
 		desc.Height = height;
 		desc.DepthOrArraySize = 1;
 		desc.MipLevels = 1;
-		desc.Format = DXGI_FORMAT_D32_FLOAT;
+		desc.Format = depthBufferFormat;
 		desc.SampleDesc.Count = 1;
 		desc.SampleDesc.Quality = 0;
 		desc.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN;
@@ -362,7 +362,7 @@ namespace Engine::Graphics
 
 		// 最適クリア値
 		D3D12_CLEAR_VALUE clearValue{};
-		clearValue.Format = DXGI_FORMAT_D32_FLOAT;
+		clearValue.Format = depthBufferFormat;
 		clearValue.DepthStencil.Depth = 1.0f;
 		clearValue.DepthStencil.Stencil = 0;
 
@@ -400,7 +400,7 @@ namespace Engine::Graphics
 
 		// DSVの生成
 		D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
-		dsvDesc.Format = DXGI_FORMAT_D32_FLOAT;
+		dsvDesc.Format = depthBufferFormat;
 		dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
 		dsvDesc.Flags = D3D12_DSV_FLAG_NONE;
 		dsvDesc.Texture2D.MipSlice = 0;
