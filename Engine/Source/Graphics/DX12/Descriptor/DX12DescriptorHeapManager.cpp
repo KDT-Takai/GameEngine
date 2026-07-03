@@ -10,6 +10,7 @@ namespace Engine::Graphics
 			LOG_ERROR("CbvSrvUavDescriptorAllocator‚Ì‰Šú‰»‚É¸”s");
 			return false;
 		}
+		LOG_INFO("CbvSrvUavDescriptorAllocator‚Ì‰Šú‰»‚É¬Œ÷");
 		return true;
 	}
 

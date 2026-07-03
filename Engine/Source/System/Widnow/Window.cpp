@@ -1,5 +1,6 @@
 ﻿#include "Window.hpp"
 #include <tchar.h>
+#include "System/ImGui/ImGuiManager.hpp"
 
 namespace Engine::System
 {
@@ -18,6 +19,10 @@ namespace Engine::System
 
 	static LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 	{
+		if (Engine::System::ImGuiManager::WndProcHandler(hwnd, msg, wparam, lparam)) {
+			return true;
+		}
+
 		// ウィンドウが破棄されたら呼ばれる
 		if (msg == WM_DESTROY)
 		{
@@ -123,4 +128,4 @@ namespace Engine::System
 		}
 		return true;
 	}
-}
+} // Engine::System

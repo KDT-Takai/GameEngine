@@ -26,4 +26,4 @@ namespace Engine::System
 		HWND m_hwnd = nullptr;		// ウィンドウハンドル
 		WNDCLASSEX m_wndClass = {};	// ウィンドウクラス
 	};
-}
+} // Engine::System

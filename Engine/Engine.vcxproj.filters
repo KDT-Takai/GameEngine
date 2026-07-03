@@ -72,6 +72,12 @@
     <ClCompile Include="Source\Graphics\DX12\Descriptor\DX12DescriptorHeapManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\Primitive\Triangle.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Shader\ShaderLoader.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\System\Widnow\Window.hpp">
@@ -149,8 +155,20 @@
     <ClInclude Include="Source\Graphics\DX12\Descriptor\DX12DescriptorHeapManager.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Graphics\Shader\ShaderBytecode.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Primitive\Triangle.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Shader\ShaderLoader.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Source\Graphics\Shader\HLSL\Triangle.hlsl" />
   </ItemGroup>
 </Project>

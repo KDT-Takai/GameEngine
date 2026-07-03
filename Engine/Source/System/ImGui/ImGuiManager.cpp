@@ -7,7 +7,6 @@
 #include "System/Widnow/Window.hpp"
 
 // ImGui
-#include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_win32.h"
 #include "ImGui/imgui_impl_dx12.h"
 
@@ -49,6 +48,15 @@ namespace Engine::System
 
 		ImGuiIO& io = ImGui::GetIO();
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+
+		ImGuiStyle& style = ImGui::GetStyle();
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			style.WindowRounding = 0.0f;
+			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		}
+
 		ImGui::StyleColorsDark();
 
 		if (!ImGui_ImplWin32_Init(window.GetHWnd()))
@@ -129,6 +137,9 @@ namespace Engine::System
 		cmdList->SetDescriptorHeaps(1, heaps);
 
 		ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), cmdList.Get());
+
+		ImGui::UpdatePlatformWindows();
+		ImGui::RenderPlatformWindowsDefault();
 	}
 
 	void ImGuiManager::AddDebugUI(std::function<void()> guiFunc, const std::string& key)

@@ -85,3 +85,7 @@
 
 // log
 #include "Utility/Logger/Log.hpp"
+
+#define IMGUI_DEFINE_MATH_OPERATORS
+
+#include "ImGui/imgui.h"

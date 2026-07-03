@@ -18,6 +18,8 @@ namespace Engine::System
 		void Run();
 		void Finalize();
 	private:
+		bool DX12Initialize(int width, int height);
+		void DX12Finalize();
 		// ウィンドウ
 		std::unique_ptr<Window> window;
 	};
