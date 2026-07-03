@@ -19,5 +19,4 @@ namespace Engine::Graphics
 			return { GetBufferPointer(), GetBufferSize() };
 		}
 	};
-
 }

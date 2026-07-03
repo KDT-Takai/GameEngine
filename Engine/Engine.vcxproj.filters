@@ -168,7 +168,4 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="Source\Graphics\Shader\HLSL\Triangle.hlsl" />
-  </ItemGroup>
 </Project>
