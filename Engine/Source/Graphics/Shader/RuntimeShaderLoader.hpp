@@ -1,5 +1,8 @@
 #pragma once
-class RuntimeShaderLoader
-{
-};
 
+namespace Engine::Graphics
+{
+	class RuntimeShaderLoader
+	{
+	};
+} // Engine::Graphics
