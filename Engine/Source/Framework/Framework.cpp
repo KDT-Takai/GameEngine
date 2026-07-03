@@ -18,8 +18,8 @@ namespace Engine::System
 			return false;
 		}
 		ImGuiManager::Get().AddDebugUI([]() {
-			ImGui::Begin("Test");
-			ImGui::Text("Hello");
+			ImGui::Begin("ImGui");
+			ImGui::Text("Test");
 			ImGui::End();
 			}, "test");
 		return true;

@@ -145,7 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Graphics\Shader\ShaderLoader.cpp" />
+    <ClCompile Include="Source\Graphics\Shader\Precompiledshaderloader.cpp" />
+    <ClCompile Include="Source\Graphics\Shader\RuntimeShaderLoader.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Descriptor\DX12DescriptorHeapManager.cpp" />
     <ClCompile Include="external\ImGui\imgui.cpp" />
     <ClCompile Include="external\ImGui\ImGuizmo.cpp" />
@@ -173,8 +174,9 @@
     <ClCompile Include="Source\Graphics\Primitive\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Graphics\Shader\ShaderLoader.hpp" />
-    <ClInclude Include="Source\Graphics\Shader\ShaderBytecode.hpp" />
+    <ClInclude Include="Source\Graphics\Shader\Precompiledshaderloader.hpp" />
+    <ClInclude Include="Source\Graphics\Shader\RuntimeShaderLoader.hpp" />
+    <ClInclude Include="Source\Graphics\Shader\IShaderLoader.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Descriptor\DX12DescriptorHeapManager.hpp" />
     <ClInclude Include="external\ImGui\imconfig.h" />
     <ClInclude Include="external\ImGui\imgui.h" />
