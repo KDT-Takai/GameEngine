@@ -51,6 +51,8 @@ namespace Engine::System
 			context->SetRenderTarget();
 			context->ClearRenderTarget();
 
+			triangle->Draw(context->GetCmdList().Get());
+
 			// ImGuiのUI更新
 			imgui.Update();
 
@@ -107,11 +109,33 @@ namespace Engine::System
 		{
 			return false;
 		}
+		// シェーダローダー・三角形
+		auto* device = Engine::Graphics::DX12Device::Get().GetDevice().Get();
+		auto* context = Engine::Graphics::DX12Renderer::Get().GetContext();
+
+		shaderLoader = std::make_unique<Engine::Graphics::RuntimeShaderLoader>();
+		triangle = std::make_unique<Engine::Graphics::Triangle>();
+
+		if (!triangle->Initialize(
+			device,
+			*shaderLoader,
+			context->GetBackBufferFormat(),
+			context->GetDepthBufferFormat()
+		))
+		{
+			LOG_ERROR("Triangleの初期化に失敗");
+			return false;
+		}
+
 		return true;
 	}
 
 	void Framework::DX12Finalize()
 	{
+		triangle->Finalize();
+		triangle.reset();
+		shaderLoader.reset();
+
 		Engine::System::ImGuiManager::Get().Finalize();
 		Engine::System::ImGuiManager::Delete();
 		Engine::Graphics::DX12DescriptorHeapManager::Get().Finalize();
