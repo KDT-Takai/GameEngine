@@ -84,8 +84,8 @@
 #include <format>
 
 // log
+#define HR_LOG(hr) static_cast<uint32_t>(hr)
 #include "Utility/Logger/Log.hpp"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
-
 #include "ImGui/imgui.h"

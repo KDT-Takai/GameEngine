@@ -11,17 +11,17 @@ namespace Engine::Graphics
 	{
 		if (!CreateRootSignature(device))
 		{
-			LOG_ERROR("Triangle: RootSignature‚Ì¶¬‚ÉŽ¸”s");
+			LOG_ERROR("RootSignature‚Ì¶¬‚ÉŽ¸”s");
 			return false;
 		}
 		if (!CreatePipelineState(device, shaderLoader, rtvFormat, dsvFormat))
 		{
-			LOG_ERROR("Triangle: PipelineState‚Ì¶¬‚ÉŽ¸”s");
+			LOG_ERROR("PipelineState‚Ì¶¬‚ÉŽ¸”s");
 			return false;
 		}
 		if (!CreateVertexBuffer(device))
 		{
-			LOG_ERROR("Triangle: VertexBuffer‚Ì¶¬‚ÉŽ¸”s");
+			LOG_ERROR("VertexBuffer‚Ì¶¬‚ÉŽ¸”s");
 			return false;
 		}
 
@@ -80,7 +80,7 @@ namespace Engine::Graphics
 		);
 		if (FAILED(hr))
 		{
-			LOG_ERROR("RootSignature‚Ì¶¬‚ÉŽ¸”s");
+			LOG_ERROR("RootSignature‚Ì¶¬‚ÉŽ¸”s: {0:x}", HR_LOG(hr));
 			return false;
 		}
 
@@ -98,13 +98,13 @@ namespace Engine::Graphics
 
 		// ’¸“_ƒVƒF[ƒ_
 		ShaderLoadDesc vsDesc;
-		vsDesc.path = L"Assets/Shader/Triangle.hlsl";
+		vsDesc.path = L"../Engine/Assets/Shader/Triangle.hlsl";
 		vsDesc.entryPoint = "VSMain";
 		vsDesc.target = "vs_5_0";
 
 		// ƒsƒNƒZƒ‹ƒVƒF[ƒ_
 		ShaderLoadDesc psDesc;
-		psDesc.path = L"Assets/Shader/Triangle.hlsl";
+		psDesc.path = L"../Engine/Assets/Shader/Triangle.hlsl";
 		psDesc.entryPoint = "PSMain";
 		psDesc.target = "ps_5_0";
 
@@ -164,7 +164,7 @@ namespace Engine::Graphics
 		);
 		if (FAILED(hr))
 		{
-			LOG_ERROR("PipelineStateObject‚Ì¶¬‚ÉŽ¸”s");
+			LOG_ERROR("PipelineStateObject‚Ì¶¬‚ÉŽ¸”s: {0:x}", HR_LOG(hr));
 			return false;
 		}
 
@@ -204,7 +204,7 @@ namespace Engine::Graphics
 		);
 		if (FAILED(hr))
 		{
-			LOG_ERROR("VertexBuffer‚Ì¶¬‚ÉŽ¸”s");
+			LOG_ERROR("VertexBuffer‚Ì¶¬‚ÉŽ¸”s: {0:x}", HR_LOG(hr));
 			return false;
 		}
 
@@ -213,7 +213,8 @@ namespace Engine::Graphics
 		hr = vertexBuffer->Map(0, nullptr, &mapped);
 		if (FAILED(hr))
 		{
-			LOG_ERROR("VertexBuffer‚Ìƒ}ƒbƒv‚ÉŽ¸”s");
+			LOG_ERROR("Map failed: {}", static_cast<uint32_t>(hr));
+//			LOG_ERROR("VertexBuffer‚Ìƒ}ƒbƒv‚ÉŽ¸”s: {}", HR_LOG(hr));
 			return false;
 		}
 		memcpy(mapped, vertices, bufferSize);
