@@ -6,6 +6,11 @@ namespace Engine::System
 {
 	bool Framework::Initialize(int width, int height, const char* title)
 	{
+		wchar_t currentDir[MAX_PATH];
+		GetCurrentDirectoryW(MAX_PATH, currentDir);
+		std::wstring wdir(currentDir);
+		LOG_INFO("作業ディレクトリ: " + std::string(wdir.begin(), wdir.end()));
+
 		Engine::Utility::Logger::Create();
 		window = std::make_unique<Window>();
 		bool InitializeWindowFlag = window->Initialize(std::wstring(title, title + strlen(title)).c_str(), width, height);

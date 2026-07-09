@@ -80,7 +80,7 @@ namespace Engine::Graphics
 		);
 		if (FAILED(hr))
 		{
-			LOG_ERROR("RootSignature‚Ì¶¬‚É¸”s : {0:x}", static_cast<unsigned int>(hr));
+			LOG_ERROR("RootSignature‚Ì¶¬‚É¸”s");
 			return false;
 		}
 
@@ -164,7 +164,7 @@ namespace Engine::Graphics
 		);
 		if (FAILED(hr))
 		{
-			LOG_ERROR("PipelineStateObject‚Ì¶¬‚É¸”s : {0:x}", static_cast<unsigned int>(hr));
+			LOG_ERROR("PipelineStateObject‚Ì¶¬‚É¸”s");
 			return false;
 		}
 
@@ -204,7 +204,7 @@ namespace Engine::Graphics
 		);
 		if (FAILED(hr))
 		{
-			LOG_ERROR("VertexBuffer‚Ì¶¬‚É¸”s : {0:x}", static_cast<unsigned int>(hr));
+			LOG_ERROR("VertexBuffer‚Ì¶¬‚É¸”s");
 			return false;
 		}
 
@@ -213,7 +213,7 @@ namespace Engine::Graphics
 		hr = vertexBuffer->Map(0, nullptr, &mapped);
 		if (FAILED(hr))
 		{
-			LOG_ERROR("VertexBuffer‚Ìƒ}ƒbƒv‚É¸”s : {0:x}", static_cast<unsigned int>(hr));
+			LOG_ERROR("VertexBuffer‚Ìƒ}ƒbƒv‚É¸”s");
 			return false;
 		}
 		memcpy(mapped, vertices, bufferSize);
