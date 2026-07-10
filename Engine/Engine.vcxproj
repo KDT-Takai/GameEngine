@@ -175,6 +175,7 @@
     <ClCompile Include="Source\Graphics\Primitive\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="external\entt\entt.hpp" />
     <ClInclude Include="Source\Graphics\ConstantBuffer\ConstantBuffer.hpp" />
     <ClInclude Include="Source\Graphics\ConstantBuffer\TransformBuffer.hpp" />
     <ClInclude Include="Source\Graphics\Shader\Precompiledshaderloader.hpp" />
