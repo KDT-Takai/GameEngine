@@ -1,3 +1,8 @@
+cbuffer TransformBuffer : register(b0)
+{
+    float4x4 wvp; // World * View * Projection 行列
+};
+
 struct VSInput
 {
     float3 position : POSITION;
@@ -11,19 +16,15 @@ struct PSInput
 };
 
 // 頂点シェーダ
-// 今回は座標変換なし（NDC座標をそのまま渡す）
-// 将来: float4x4 の変換行列を定数バッファから受け取ってここで掛ける
 PSInput VSMain(VSInput input)
 {
     PSInput output;
-    output.position = float4(input.position, 1.0f);
+    output.position = mul(float4(input.position, 1.0f), wvp);
     output.color = input.color;
     return output;
 }
 
 // ピクセルシェーダ
-// 今回は頂点カラーをそのまま返す（各ピクセルで補間された色が来る）
-// 将来: テクスチャサンプリングやライティング計算をここに追加する
 float4 PSMain(PSInput input) : SV_TARGET
 {
     return input.color;

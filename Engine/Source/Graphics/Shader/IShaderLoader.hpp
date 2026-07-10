@@ -18,4 +18,4 @@ namespace Engine::Graphics
 
 		virtual bool Load(const ShaderLoadDesc& desc, ID3DBlob** ppBlob) = 0;
 	};
-}
+} // Engine::Graphics

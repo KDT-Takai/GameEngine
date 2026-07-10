@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Graphics\ConstantBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Shader\Precompiledshaderloader.cpp" />
     <ClCompile Include="Source\Graphics\Shader\RuntimeShaderLoader.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Descriptor\DX12DescriptorHeapManager.cpp" />
@@ -174,6 +175,8 @@
     <ClCompile Include="Source\Graphics\Primitive\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Graphics\ConstantBuffer\ConstantBuffer.hpp" />
+    <ClInclude Include="Source\Graphics\ConstantBuffer\TransformBuffer.hpp" />
     <ClInclude Include="Source\Graphics\Shader\Precompiledshaderloader.hpp" />
     <ClInclude Include="Source\Graphics\Shader\RuntimeShaderLoader.hpp" />
     <ClInclude Include="Source\Graphics\Shader\IShaderLoader.hpp" />

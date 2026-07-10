@@ -6,12 +6,13 @@ namespace Engine::System
 {
 	bool Framework::Initialize(int width, int height, const char* title)
 	{
+		Engine::Utility::Logger::Create();
+
 		wchar_t currentDir[MAX_PATH];
 		GetCurrentDirectoryW(MAX_PATH, currentDir);
 		std::wstring wdir(currentDir);
 		LOG_INFO("作業ディレクトリ: " + std::string(wdir.begin(), wdir.end()));
 
-		Engine::Utility::Logger::Create();
 		window = std::make_unique<Window>();
 		bool InitializeWindowFlag = window->Initialize(std::wstring(title, title + strlen(title)).c_str(), width, height);
 		if (!InitializeWindowFlag)
@@ -36,6 +37,8 @@ namespace Engine::System
 		auto* context = renderer.GetContext();
 		auto& imgui = Engine::System::ImGuiManager::Get();
 
+		float angle = 0.0f;
+
 		while (true)
 		{
 			if (!window->ProcessMessage())
@@ -56,6 +59,9 @@ namespace Engine::System
 			context->SetRenderTarget();
 			context->ClearRenderTarget();
 
+			angle += 0.01f;
+			auto wvp = DirectX::XMMatrixRotationZ(angle);
+			triangle->SetWVP(wvp);
 			triangle->Draw(context->GetCmdList().Get());
 
 			// ImGuiのUI更新

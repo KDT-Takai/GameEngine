@@ -42,4 +42,4 @@ namespace Engine::Graphics
 
 		return true;
 	}
-}
+} // Engine::Graphics

@@ -24,22 +24,42 @@ namespace Engine::Graphics
 			LOG_ERROR("VertexBuffer‚Ì¶¬‚ÉŽ¸”s");
 			return false;
 		}
+		if (!constantBuffer.Initialize(device))
+		{
+			LOG_ERROR("ConstantBuffer‚Ì¶¬‚ÉŽ¸”s");
+			return false;
+		}
+
+		// ’PˆÊs—ñ‚Å‰Šú‰»
+		TransformBuffer initData{};
+		DirectX::XMStoreFloat4x4(&initData.wvp, DirectX::XMMatrixIdentity());
+		constantBuffer.Update(initData);
 
 		LOG_INFO("Triangle‚Ì‰Šú‰»‚É¬Œ÷");
+
 		return true;
 	}
 
 	void Triangle::Finalize()
 	{
+		constantBuffer.Finalize();
 		vertexBuffer.Reset();
 		pipelineState.Reset();
 		rootSignature.Reset();
+	}
+
+	void Triangle::SetWVP(const DirectX::XMMATRIX& wvp)
+	{
+		TransformBuffer data{};
+		DirectX::XMStoreFloat4x4(&data.wvp, wvp);
+		constantBuffer.Update(data);
 	}
 
 	void Triangle::Draw(ID3D12GraphicsCommandList* cmdList)
 	{
 		cmdList->SetGraphicsRootSignature(rootSignature.Get());
 		cmdList->SetPipelineState(pipelineState.Get());
+		cmdList->SetGraphicsRootConstantBufferView(0, constantBuffer.GetGPUVirtualAddress());
 		cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		cmdList->IASetVertexBuffers(0, 1, &vertexBufferView);
 		cmdList->DrawInstanced(3, 1, 0, 0);
@@ -47,9 +67,16 @@ namespace Engine::Graphics
 
 	bool Triangle::CreateRootSignature(ID3D12Device* device)
 	{
+		D3D12_ROOT_PARAMETER rootParam{};
+		rootParam.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+		rootParam.Descriptor.ShaderRegister = 0; // b0
+		rootParam.Descriptor.RegisterSpace = 0;
+		rootParam.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+
+
 		D3D12_ROOT_SIGNATURE_DESC desc{};
-		desc.NumParameters = 0;
-		desc.pParameters = nullptr;
+		desc.NumParameters = 1;
+		desc.pParameters = &rootParam;
 		desc.NumStaticSamplers = 0;
 		desc.pStaticSamplers = nullptr;
 		desc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
@@ -227,4 +254,4 @@ namespace Engine::Graphics
 
 		return true;
 	}
-}
+} // Engine::Graphics

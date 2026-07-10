@@ -8,4 +8,4 @@ namespace Engine::Graphics
 	public:
 		bool Load(const ShaderLoadDesc& desc, ID3DBlob** ppBlob) override;
 	};
-}
+} // Engine::Graphics
