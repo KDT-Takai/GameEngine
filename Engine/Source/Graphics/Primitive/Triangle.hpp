@@ -2,6 +2,7 @@
 #include "Graphics/DX12/Type.hpp"
 #include "Graphics/Shader/IShaderLoader.hpp"
 #include "Graphics/ConstantBuffer/ConstantBuffer.hpp"
+#include "Graphics/ConstantBuffer/TransformBuffer.hpp"
 #include <dxgi1_6.h>
 #include <DirectXMath.h>
 
@@ -11,11 +12,6 @@ namespace Engine::Graphics
 	{
 		float position[3];
 		float color[4];
-	};
-
-	struct TransformBuffer
-	{
-		DirectX::XMFLOAT4X4 wvp;
 	};
 
 	class Triangle
