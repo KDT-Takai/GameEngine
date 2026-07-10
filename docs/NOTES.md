@@ -1,7 +1,12 @@
 # ノート
 DirectX12の初期化クラス構成
 
-TODO: NAMING.mdにnamespaceを追加する
+## TODO: 
+---
+
+画像の描画
+
+---
 
 Engine
  └─ Source
@@ -112,13 +117,22 @@ RTV, DSV, CBV/SRV/UAVなどの各種ディスクリプタヒープを解放します。
 6 スワップチェーンの破棄
 IDXGISwapChainを解放します。デバイス・ファクトリの破棄最後に、デバイス（ID3D12Device）とDXGIファクトリ（IDXGIFactory）を解放します。
 
-## 次の手順
-ディスクリプタヒープの管理
-IMGUIの追加
-
 ## メモ
 ENTT
 テクスチャ側のリソース
+リソース
+メモリ割り当て情報
+SRV用のディスクリプタスロット
+テクスチャの幅
+
+---
+
+DescriptorHandleを引数で参照
+DX12DescriptorHeapManager 参照
+// DX12DescriptorHeapManager singletonで持ってくる
+
+---
+
 リソースの管理
 スプライトコンポーネント（パラメータだけ、テクスチャの参照）
 スプライトのパイプライン
@@ -135,10 +149,6 @@ ENTT
 ライブラリ入れるか入れないかどっちなんだい！
 
 マルチスレッド
-
-
-
-
 
 イニシャライズをboolを特定のエラーハンドルを作成する。
 このIDはこれーとか
