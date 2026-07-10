@@ -7,6 +7,12 @@ namespace Engine::System
 	bool Framework::Initialize(int width, int height, const char* title)
 	{
 		Engine::Utility::Logger::Create();
+
+		wchar_t currentDir[MAX_PATH];
+		GetCurrentDirectoryW(MAX_PATH, currentDir);
+		std::wstring wdir(currentDir);
+		LOG_INFO("作業ディレクトリ: " + std::string(wdir.begin(), wdir.end()));
+
 		window = std::make_unique<Window>();
 		bool InitializeWindowFlag = window->Initialize(std::wstring(title, title + strlen(title)).c_str(), width, height);
 		if (!InitializeWindowFlag)
@@ -31,6 +37,8 @@ namespace Engine::System
 		auto* context = renderer.GetContext();
 		auto& imgui = Engine::System::ImGuiManager::Get();
 
+		float angle = 0.0f;
+
 		while (true)
 		{
 			if (!window->ProcessMessage())
@@ -50,6 +58,11 @@ namespace Engine::System
 			// レンダーターゲットのクリアと設定
 			context->SetRenderTarget();
 			context->ClearRenderTarget();
+
+			angle += 0.01f;
+			auto wvp = DirectX::XMMatrixRotationZ(angle);
+			triangle->SetWVP(wvp);
+			triangle->Draw(context->GetCmdList().Get());
 
 			// ImGuiのUI更新
 			imgui.Update();
@@ -107,11 +120,33 @@ namespace Engine::System
 		{
 			return false;
 		}
+		// シェーダローダー・三角形
+		auto* device = Engine::Graphics::DX12Device::Get().GetDevice().Get();
+		auto* context = Engine::Graphics::DX12Renderer::Get().GetContext();
+
+		shaderLoader = std::make_unique<Engine::Graphics::RuntimeShaderLoader>();
+		triangle = std::make_unique<Engine::Graphics::Triangle>();
+
+		if (!triangle->Initialize(
+			device,
+			*shaderLoader,
+			context->GetBackBufferFormat(),
+			context->GetDepthBufferFormat()
+		))
+		{
+			LOG_ERROR("Triangleの初期化に失敗");
+			return false;
+		}
+
 		return true;
 	}
 
 	void Framework::DX12Finalize()
 	{
+		triangle->Finalize();
+		triangle.reset();
+		shaderLoader.reset();
+
 		Engine::System::ImGuiManager::Get().Finalize();
 		Engine::System::ImGuiManager::Delete();
 		Engine::Graphics::DX12DescriptorHeapManager::Get().Finalize();

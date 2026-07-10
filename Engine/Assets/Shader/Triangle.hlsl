@@ -1,18 +1,31 @@
-struct GSOutput
+cbuffer TransformBuffer : register(b0)
 {
-	float4 pos : SV_POSITION;
+    float4x4 wvp; // World * View * Projection 行列
 };
 
-[maxvertexcount(3)]
-void main(
-	triangle float4 input[3] : SV_POSITION, 
-	inout TriangleStream< GSOutput > output
-)
+struct VSInput
 {
-	for (uint i = 0; i < 3; i++)
-	{
-		GSOutput element;
-		element.pos = input[i];
-		output.Append(element);
-	}
+    float3 position : POSITION;
+    float4 color : COLOR;
+};
+
+struct PSInput
+{
+    float4 position : SV_POSITION;
+    float4 color : COLOR;
+};
+
+// 頂点シェーダ
+PSInput VSMain(VSInput input)
+{
+    PSInput output;
+    output.position = mul(float4(input.position, 1.0f), wvp);
+    output.color = input.color;
+    return output;
+}
+
+// ピクセルシェーダ
+float4 PSMain(PSInput input) : SV_TARGET
+{
+    return input.color;
 }

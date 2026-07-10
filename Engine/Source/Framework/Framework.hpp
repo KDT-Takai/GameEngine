@@ -7,6 +7,16 @@
 #include "Graphics/DX12/Renderer/DX12Renderer.hpp"
 #include "Graphics/DX12/Descriptor/DX12DescriptorHeapManager.hpp"
 
+#include "Graphics/Shader/RuntimeShaderLoader.hpp"
+#include "Graphics/Primitive/Triangle.hpp"
+
+// 前方宣言
+namespace Engine::Graphics
+{
+	class Triangle;
+	class RuntimeShaderLoader;
+}
+
 namespace Engine::System
 {
 	class Window;
@@ -22,5 +32,9 @@ namespace Engine::System
 		void DX12Finalize();
 		// ウィンドウ
 		std::unique_ptr<Window> window;
+
+		// 描画テスト用（Triangle表示確認後は適切なSceneやEntityに移す）
+		std::unique_ptr<Engine::Graphics::Triangle> triangle;
+		std::unique_ptr<Engine::Graphics::RuntimeShaderLoader> shaderLoader;
 	};
 }
