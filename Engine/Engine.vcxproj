@@ -156,6 +156,8 @@
     <ClCompile Include="external\ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="external\ImGui\imgui_tables.cpp" />
     <ClCompile Include="external\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Source\Graphics\Sprite\SpriteRenderer\SpriteRenderer.cpp" />
+    <ClCompile Include="Source\Graphics\Sprite\SpriteRenderSystem\SpriteRenderSystem.cpp" />
     <ClCompile Include="Source\Graphics\Texture\Texture\Texture.cpp" />
     <ClCompile Include="Source\System\ImGui\ImGuiManager.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Descriptor\CbvSrvUavDescriptorAllocator\CbvSrvUavDescriptorAllocator.cpp" />
@@ -178,6 +180,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="external\entt\entt.hpp" />
+    <ClInclude Include="Source\Graphics\Component\SpriteComponent\SpriteComponent.hpp" />
+    <ClInclude Include="Source\Graphics\Component\TransformComponent\TransformComponent.hpp" />
     <ClInclude Include="Source\Graphics\ConstantBuffer\ConstantBuffer.hpp" />
     <ClInclude Include="Source\Graphics\ConstantBuffer\TransformBuffer.hpp" />
     <ClInclude Include="Source\Graphics\Shader\Precompiledshaderloader.hpp" />
@@ -194,6 +198,7 @@
     <ClInclude Include="external\ImGui\imstb_rectpack.h" />
     <ClInclude Include="external\ImGui\imstb_textedit.h" />
     <ClInclude Include="external\ImGui\imstb_truetype.h" />
+    <ClInclude Include="Source\Graphics\Sprite\SpriteRenderer\SpriteRenderer.hpp" />
     <ClInclude Include="Source\Graphics\Texture\Texture\Texture.hpp" />
     <ClInclude Include="Source\Graphics\Texture\TextureID\TextureID.hpp" />
     <ClInclude Include="Source\System\ImGui\ImGuiManager.hpp" />
@@ -213,6 +218,7 @@
     <ClInclude Include="Source\System\Widnow\Window.hpp" />
     <ClInclude Include="Source\Graphics\Primitive\Triangle.hpp" />
     <ClInclude Include="Source\Graphics\Texture\TextureManager\TextureManager.hpp" />
+    <ClInclude Include="Source\Graphics\Sprite\SpriteRenderSystem\SpriteRenderSystem.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

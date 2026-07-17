@@ -10,7 +10,7 @@ namespace Engine::Graphics
         ID3D12GraphicsCommandList* cmdList,
         const std::wstring& path)
     {
-        auto device = DX12Device::Get().GetDevice().Get();
+        auto device = DX12Device::GetInstance().GetDevice().Get();
 
         // ファイル読み込み
         DirectX::ScratchImage image;
@@ -136,7 +136,7 @@ namespace Engine::Graphics
         cmdList->ResourceBarrier(1, &barrier);
 
         // SRV作成
-        handle = DX12DescriptorHeapManager::Get().GetCbvSrvUavAllocator().Allocate();
+        handle = DX12DescriptorHeapManager::GetInstance().GetCbvSrvUavAllocator().Allocate();
         if (!handle.IsValid())
         {
             LOG_ERROR("SRVスロットの確保に失敗");
@@ -162,7 +162,7 @@ namespace Engine::Graphics
     void Texture::Finalize()
     {
         ReleaseUploadBuffer();
-        DX12DescriptorHeapManager::Get().GetCbvSrvUavAllocator().Free(handle);
+        DX12DescriptorHeapManager::GetInstance().GetCbvSrvUavAllocator().Free(handle);
         resource.Reset();
         handle = DescriptorHandle{};
         width = 0;
@@ -172,5 +172,13 @@ namespace Engine::Graphics
     void Texture::ReleaseUploadBuffer()
     {
         uploadBuffer.Reset();
+    }
+    
+    void Texture::InitializeFromResource(dx12::ComPtr<ID3D12Resource> res, const DescriptorHandle& handle, UINT w, UINT h)
+    {
+        this->resource = std::move(res);
+        this->handle = handle;
+        this->width = w;
+        this->height = h;
     }
 } // Engine::Graphics

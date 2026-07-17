@@ -18,12 +18,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 #endif//defined(DEBUG) || defined(_DEBUG)
 
 	Engine::System::Framework::Create();
-	if (!Engine::System::Framework::Get().Initialize(1280, 720, "DirectX12"))
+	if (!Engine::System::Framework::GetInstance().Initialize(1280, 720, "DirectX12"))
 	{
 		return -1;
 	}
-	Engine::System::Framework::Get().Run();
-	Engine::System::Framework::Get().Finalize();
+	Engine::System::Framework::GetInstance().Run();
+	Engine::System::Framework::GetInstance().Finalize();
 	Engine::System::Framework::Delete();
 	return 0;
 }

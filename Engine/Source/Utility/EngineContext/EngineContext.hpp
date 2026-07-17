@@ -4,6 +4,11 @@
 #include <unordered_map>
 #include <typeindex>
 
+// マクロ
+#define ENGINE_CONTEXT()       Engine::Utility::EngineContext::GetInstance()
+#define GET_CONTEXT(Type)      Engine::Utility::EngineContext::GetInstance().Get<Type>()
+#define REGISTER_CONTEXT(inst) Engine::Utility::EngineContext::GetInstance().Register(inst)
+
 namespace Engine::Utility
 {
     class EngineContext : public Singleton<EngineContext>
@@ -15,6 +20,7 @@ namespace Engine::Utility
         {
             auto key = std::type_index(typeid(T));
             services[key] = &instance;
+            LOG_DEBUG("Registered service: {}", typeid(T).name());
         }
 
         template<typename T>
@@ -33,8 +39,3 @@ namespace Engine::Utility
         std::unordered_map<std::type_index, void*> services;
     };
 } // Engine::Utility
-
-// マクロ
-#define ENGINE_CONTEXT()       Engine::Utility::EngineContext::GetInstance()
-#define GET_CONTEXT(Type)      Engine::Utility::EngineContext::GetInstance().Get<Type>()
-#define REGISTER_CONTEXT(inst) Engine::Utility::EngineContext::GetInstance().Register(inst)

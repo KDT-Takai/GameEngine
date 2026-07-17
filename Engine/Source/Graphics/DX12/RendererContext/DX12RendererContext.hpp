@@ -25,6 +25,9 @@ namespace Engine::Graphics
 		// I—¹
 		void Finalize();
 
+		// EngineContext‚É“o˜^
+		void AddContext();
+
 		// ƒtƒŒ[ƒ€ˆ—
 		bool BeginFrame();
 		bool EndFrame();

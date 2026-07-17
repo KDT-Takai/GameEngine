@@ -1,6 +1,7 @@
 #include "pch/pch.h"
 #include "Framework.hpp"
 #include "System/ImGui/ImGuiManager.hpp"
+#include "Utility/EngineContext/EngineContext.hpp"
 
 namespace Engine::System
 {
@@ -8,22 +9,28 @@ namespace Engine::System
 	{
 		Engine::Utility::Logger::Create();
 
+		// EngineContext の生成（最初に作る）
+		Engine::Utility::EngineContext::Create();
+
 		wchar_t currentDir[MAX_PATH];
 		GetCurrentDirectoryW(MAX_PATH, currentDir);
 		std::wstring wdir(currentDir);
 		LOG_INFO("作業ディレクトリ: " + std::string(wdir.begin(), wdir.end()));
 
+		// ウィンドウの生成
 		window = std::make_unique<Window>();
 		bool InitializeWindowFlag = window->Initialize(std::wstring(title, title + strlen(title)).c_str(), width, height);
 		if (!InitializeWindowFlag)
 		{
 			return false;
 		}
+		// DX12の初期化
 		if (!DX12Initialize(width, height))
 		{
 			return false;
 		}
-		ImGuiManager::Get().AddDebugUI([]() {
+		// ImGuiのテスト
+		ImGuiManager::GetInstance().AddDebugUI([]() {
 			ImGui::Begin("ImGui");
 			ImGui::Text("Test");
 			ImGui::End();
@@ -33,9 +40,9 @@ namespace Engine::System
 
 	void Framework::Run()
 	{
-		auto& renderer = Engine::Graphics::DX12Renderer::Get();
+		auto& renderer = Engine::Graphics::DX12Renderer::GetInstance();
 		auto* context = renderer.GetContext();
-		auto& imgui = Engine::System::ImGuiManager::Get();
+		auto& imgui = Engine::System::ImGuiManager::GetInstance();
 
 		float angle = 0.0f;
 
@@ -83,7 +90,7 @@ namespace Engine::System
 	{
 		DX12Finalize();
 		// 先にDX12Deviceを削除しておく
-		Engine::Graphics::DX12Device::Get().Finalize();
+		Engine::Graphics::DX12Device::GetInstance().Finalize();
 		Engine::Graphics::DX12Device::Delete();
 
 		Engine::Utility::Logger::Delete();
@@ -93,36 +100,38 @@ namespace Engine::System
 	{
 		// デバイス
 		Engine::Graphics::DX12Device::Create();
-		if (!Engine::Graphics::DX12Device::Get().Initialize())
+		if (!Engine::Graphics::DX12Device::GetInstance().Initialize())
 		{
 			return false;
 		}
 		// レンダラー
 		Engine::Graphics::DX12Renderer::Create();
-		if (!Engine::Graphics::DX12Renderer::Get().Initialize(window->GetHWnd(), width, height))
+		if (!Engine::Graphics::DX12Renderer::GetInstance().Initialize(window->GetHWnd(), width, height))
 		{
 			return false;
 		}
+		// EngineContextに登録
+		Engine::Graphics::DX12Renderer::GetInstance().GetContext()->AddContext();
 		// ディスクリプタヒープマネージャ
 		Engine::Graphics::DX12DescriptorHeapManager::Create();
-		if (!Engine::Graphics::DX12DescriptorHeapManager::Get().Initialize(Engine::Graphics::DX12Device::Get().GetDevice().Get(), 512))
+		if (!Engine::Graphics::DX12DescriptorHeapManager::GetInstance().Initialize(Engine::Graphics::DX12Device::GetInstance().GetDevice().Get(), 512))
 		{
 			return false;
 		}
 		// ImGui
 		Engine::System::ImGuiManager::Create();
-		if (!Engine::System::ImGuiManager::Get().Initialize(
+		if (!Engine::System::ImGuiManager::GetInstance().Initialize(
 			*window,
-			Engine::Graphics::DX12Device::Get(),
-			*Engine::Graphics::DX12Renderer::Get().GetContext(),
-			Engine::Graphics::DX12DescriptorHeapManager::Get()
+			Engine::Graphics::DX12Device::GetInstance(),
+			*Engine::Graphics::DX12Renderer::GetInstance().GetContext(),
+			Engine::Graphics::DX12DescriptorHeapManager::GetInstance()
 		))
 		{
 			return false;
 		}
 		// シェーダローダー・三角形
-		auto* device = Engine::Graphics::DX12Device::Get().GetDevice().Get();
-		auto* context = Engine::Graphics::DX12Renderer::Get().GetContext();
+		auto* device = Engine::Graphics::DX12Device::GetInstance().GetDevice().Get();
+		auto* context = Engine::Graphics::DX12Renderer::GetInstance().GetContext();
 
 		shaderLoader = std::make_unique<Engine::Graphics::RuntimeShaderLoader>();
 		triangle = std::make_unique<Engine::Graphics::Triangle>();
@@ -147,11 +156,11 @@ namespace Engine::System
 		triangle.reset();
 		shaderLoader.reset();
 
-		Engine::System::ImGuiManager::Get().Finalize();
+		Engine::System::ImGuiManager::GetInstance().Finalize();
 		Engine::System::ImGuiManager::Delete();
-		Engine::Graphics::DX12DescriptorHeapManager::Get().Finalize();
+		Engine::Graphics::DX12DescriptorHeapManager::GetInstance().Finalize();
 		Engine::Graphics::DX12DescriptorHeapManager::Delete();
-		Engine::Graphics::DX12Renderer::Get().Finalize();
+		Engine::Graphics::DX12Renderer::GetInstance().Finalize();
 		Engine::Graphics::DX12Renderer::Delete();
 	}
 }

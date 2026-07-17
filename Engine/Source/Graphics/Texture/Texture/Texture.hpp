@@ -18,7 +18,7 @@ namespace Engine::Graphics
         const DescriptorHandle& GetHandle() const { return handle; }
         UINT GetWidth()  const { return width; }
         UINT GetHeight() const { return height; }
-
+        void InitializeFromResource(dx12::ComPtr<ID3D12Resource> res, const DescriptorHandle& handle, UINT w, UINT h);
     private:
         dx12::ComPtr<ID3D12Resource> resource;
         dx12::ComPtr<ID3D12Resource> uploadBuffer;  

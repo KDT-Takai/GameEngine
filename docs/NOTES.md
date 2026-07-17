@@ -153,3 +153,9 @@ DX12DescriptorHeapManager 参照
 イニシャライズをboolを特定のエラーハンドルを作成する。
 このIDはこれーとか
 ID string
+
+## シェーダー
+VSMain（頂点シェーダ）
+頂点の座標をWVP行列で変換して画面上の位置を決めています。UVは uvRect を使って「テクスチャのどの範囲を表示するか」に変換
+PSMain（ピクセルシェーダ）
+テクスチャから色をサンプリングして、SpriteComponent::color を掛け合わせています。フォールバックのホワイトテクスチャの場合は color がそのまま出力

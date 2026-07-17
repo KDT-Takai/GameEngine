@@ -1,13 +1,14 @@
 #include "pch/pch.h"
 #include "DX12RendererContext.hpp"
 #include "../Device/DX12Device.hpp"
+#include "Utility/EngineContext/EngineContext.hpp"
 
 namespace Engine::Graphics
 {
 	bool DX12RendererContext::Initialize(HWND hwnd, UINT width, UINT height)
 	{
 		// デバイスの取得
-		device = DX12Device::Get().GetDevice().Get();
+		device = DX12Device::GetInstance().GetDevice().Get();
 		if (!device)
 		{
 			LOG_ERROR("DX12Deviceが未初期化");
@@ -92,6 +93,11 @@ namespace Engine::Graphics
 		depthBuffer.Reset();
 		swapChain.Reset();
 		cmdQueue.Reset();
+	}
+
+	void DX12RendererContext::AddContext()
+	{
+		REGISTER_CONTEXT(*this);
 	}
 
 	bool DX12RendererContext::BeginFrame()
@@ -262,7 +268,7 @@ namespace Engine::Graphics
 		desc.AlphaMode = DXGI_ALPHA_MODE_UNSPECIFIED;
 		desc.Flags = 0;
 
-		auto factory = DX12Device::Get().GetFactory();
+		auto factory = DX12Device::GetInstance().GetFactory();
 
 		dx12::ComPtr<IDXGISwapChain1> swapChain1;
 		auto hr = factory->CreateSwapChainForHwnd(
