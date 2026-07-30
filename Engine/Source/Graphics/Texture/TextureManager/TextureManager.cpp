@@ -18,7 +18,7 @@ namespace Engine::Graphics
         );
         if (FAILED(hr))
         {
-            LOG_ERROR("TextureManager: CommandAllocatorの生成に失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("TextureManager: CommandAllocatorの生成に失敗", hr);
             return false;
         }
 
@@ -32,7 +32,7 @@ namespace Engine::Graphics
         );
         if (FAILED(hr))
         {
-            LOG_ERROR("TextureManager: CommandListの生成に失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("TextureManager: CommandListの生成に失敗", hr);
             return false;
         }
 
@@ -40,7 +40,7 @@ namespace Engine::Graphics
         hr = cmdList->Close();
         if (FAILED(hr))
         {
-            LOG_ERROR("TextureManager: CommandListのCloseに失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("TextureManager: CommandListのCloseに失敗", hr);
             return false;
         }
 
@@ -52,7 +52,7 @@ namespace Engine::Graphics
         );
         if (FAILED(hr))
         {
-            LOG_ERROR("TextureManager: Fenceの生成に失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("TextureManager: Fenceの生成に失敗", hr);
             return false;
         }
 
@@ -117,14 +117,14 @@ namespace Engine::Graphics
         HRESULT hr = cmdAllocator->Reset();
         if (FAILED(hr))
         {
-            LOG_ERROR("TextureManager: CommandAllocatorのResetに失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("TextureManager: CommandAllocatorのResetに失敗", hr);
             return InvalidTextureID;
         }
 
         hr = cmdList->Reset(cmdAllocator.Get(), nullptr);
         if (FAILED(hr))
         {
-            LOG_ERROR("TextureManager: CommandListのResetに失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("TextureManager: CommandListのResetに失敗", hr);
             return InvalidTextureID;
         }
 
@@ -174,7 +174,7 @@ namespace Engine::Graphics
         HRESULT hr = cmdList->Close();
         if (FAILED(hr))
         {
-            LOG_ERROR("TextureManager: CommandListのCloseに失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("TextureManager: CommandListのCloseに失敗", hr);
             return;
         }
 
@@ -196,7 +196,7 @@ namespace Engine::Graphics
         hr = cmdQueue->Signal(fence.Get(), fenceValue);
         if (FAILED(hr))
         {
-            LOG_ERROR("TextureManager: Fenceのシグナルに失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("TextureManager: Fenceのシグナルに失敗", hr);
             return;
         }
 
@@ -213,14 +213,14 @@ namespace Engine::Graphics
         HRESULT hr = cmdAllocator->Reset();
         if (FAILED(hr))
         {
-            LOG_ERROR("TextureManager: CommandAllocatorのResetに失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("TextureManager: CommandAllocatorのResetに失敗", hr);
             return false;
         }
 
         hr = cmdList->Reset(cmdAllocator.Get(), nullptr);
         if (FAILED(hr))
         {
-            LOG_ERROR("TextureManager: CommandListのResetに失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("TextureManager: CommandListのResetに失敗", hr);
             return false;
         }
 
@@ -251,7 +251,7 @@ namespace Engine::Graphics
         );
         if (FAILED(hr))
         {
-            LOG_ERROR("TextureManager: Fallbackリソースの生成に失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("TextureManager: Fallbackリソースの生成に失敗", hr);
             return false;
         }
 
@@ -286,7 +286,7 @@ namespace Engine::Graphics
         );
         if (FAILED(hr))
         {
-            LOG_ERROR("TextureManager: Fallbackアップロードバッファの生成に失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("TextureManager: Fallbackアップロードバッファの生成に失敗", hr);
             return false;
         }
 
@@ -295,7 +295,7 @@ namespace Engine::Graphics
         hr = uploadBuffer->Map(0, nullptr, &mapped);
         if (FAILED(hr))
         {
-            LOG_ERROR("TextureManager: Fallbackアップロードバッファのマップに失敗");
+            LOG_HRESULT("TextureManager: Fallbackアップロードバッファのマップに失敗", hr);
             return false;
         }
         uint32_t white = 0xFFFFFFFF;

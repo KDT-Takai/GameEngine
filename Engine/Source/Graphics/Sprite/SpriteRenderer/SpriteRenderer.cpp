@@ -185,7 +185,7 @@ namespace Engine::Graphics
         );
         if (FAILED(hr))
         {
-            LOG_ERROR("SpriteRenderer: RootSignatureÇÃê∂ê¨Ç…é∏îs: {}", HR_LOG(hr));
+            LOG_HRESULT("SpriteRenderer: RootSignatureÇÃê∂ê¨Ç…é∏îs", hr);
             return false;
         }
 
@@ -271,7 +271,7 @@ namespace Engine::Graphics
         );
         if (FAILED(hr))
         {
-            LOG_ERROR("SpriteRenderer: PipelineStateÇÃê∂ê¨Ç…é∏îs: {}", HR_LOG(hr));
+            LOG_HRESULT("SpriteRenderer: PipelineStateÇÃê∂ê¨Ç…é∏îs", hr);
             return false;
         }
 
@@ -319,7 +319,7 @@ namespace Engine::Graphics
             );
             if (FAILED(hr))
             {
-                LOG_ERROR("SpriteRenderer: RootSignatureÇÃê∂ê¨Ç…é∏îs: 0x{:08X}", static_cast<uint32_t>(hr));
+                LOG_HRESULT("SpriteRenderer: VertexBufferÇÃê∂ê¨Ç…é∏îs", hr);
                 return false;
             }
 
@@ -327,7 +327,7 @@ namespace Engine::Graphics
             hr = vertexBuffer->Map(0, nullptr, &mapped);
             if (FAILED(hr))
             {
-                LOG_ERROR("SpriteRenderer: VertexBufferÇÃê∂ê¨Ç…é∏îs: 0x{:08X}", static_cast<uint32_t>(hr));
+                LOG_HRESULT("SpriteRenderer: VertexBufferÇÃÉ}ÉbÉvÇ…é∏îs", hr);
                 return false;
             }
             memcpy(mapped, vertices, bufferSize);
@@ -364,7 +364,7 @@ namespace Engine::Graphics
             );
             if (FAILED(hr))
             {
-                LOG_ERROR("SpriteRenderer: VertexBufferÇÃê∂ê¨Ç…é∏îs: 0x{:08X}", static_cast<uint32_t>(hr));
+                LOG_HRESULT("SpriteRenderer: IndexBufferÇÃê∂ê¨Ç…é∏îs", hr);
                 return false;
             }
 
@@ -372,7 +372,7 @@ namespace Engine::Graphics
             hr = indexBuffer->Map(0, nullptr, &mapped);
             if (FAILED(hr))
             {
-                LOG_ERROR("SpriteRenderer: IndexBufferÇÃê∂ê¨Ç…é∏îs: 0x{:08X}", static_cast<uint32_t>(hr));
+                LOG_HRESULT("SpriteRenderer: IndexBufferÇÃÉ}ÉbÉvÇ…é∏îs", hr);
                 return false;
             }
             memcpy(mapped, indices, bufferSize);

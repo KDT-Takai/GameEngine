@@ -1,6 +1,7 @@
 #include "pch/pch.h"
 #include "Constantbuffer.hpp"
 #include "Graphics/ConstantBuffer/TransformBuffer.hpp"
+#include "Graphics/Sprite/SpriteRenderer/SpriteRenderer.hpp"
 
 namespace Engine::Graphics
 {
@@ -29,15 +30,14 @@ namespace Engine::Graphics
         );
         if (FAILED(hr))
         {
-            LOG_ERROR("ConstantBufferの生成に失敗: 0x{:08X}", HR_LOG(hr));
+            LOG_HRESULT("ConstantBufferの生成に失敗", hr);
             return false;
         }
 
         hr = resource->Map(0, nullptr, &mapped);
         if (FAILED(hr))
         {
-			LOG_ERROR("ConstantBufferのマップに失敗");
-//            LOG_ERROR("ConstantBufferのマップに失敗: 0x{:08X}", HR_LOG(hr));
+            LOG_HRESULT("ConstantBufferのマップに失敗", hr);
             return false;
         }
 
@@ -71,7 +71,9 @@ namespace Engine::Graphics
         return resource->GetGPUVirtualAddress();
     }
 
-    // 明示的インスタンス化（使う型をここに列挙する）
+    // 明示的インスタンス化
     template class ConstantBuffer<TransformBuffer>;
+    template class ConstantBuffer<SpriteTransformBuffer>;
+    template class ConstantBuffer<SpriteBuffer>;
 
 } // Engine::Graphics

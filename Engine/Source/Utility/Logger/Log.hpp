@@ -27,3 +27,5 @@ namespace Engine::Utility
 #define LOG_WARN(...)     SPDLOG_WARN(__VA_ARGS__)
 #define LOG_ERROR(...)    SPDLOG_ERROR(__VA_ARGS__)
 #define LOG_CRITICAL(...) SPDLOG_CRITICAL(__VA_ARGS__)
+#define HR_LOG(hr) static_cast<uint32_t>(hr)
+#define LOG_HRESULT(msg, hr) LOG_ERROR("{}: 0x{:08X}", msg, static_cast<uint32_t>(hr))

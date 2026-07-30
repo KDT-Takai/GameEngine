@@ -22,7 +22,7 @@ namespace Engine::Graphics
         );
         if (FAILED(hr))
         {
-            LOG_ERROR("テクスチャの読み込みに失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("テクスチャの読み込みに失敗", hr);
             return false;
         }
 
@@ -54,7 +54,7 @@ namespace Engine::Graphics
         );
         if (FAILED(hr))
         {
-            LOG_ERROR("テクスチャリソースの生成に失敗: {}", HR_LOG(hr));
+            LOG_HRESULT("テクスチャリソースの生成に失敗", hr);
             return false;
         }
 
@@ -88,7 +88,7 @@ namespace Engine::Graphics
         );
         if (FAILED(hr))
         {
-            LOG_ERROR("アップロードバッファの生成に失敗");
+            LOG_HRESULT("アップロードバッファの生成に失敗", hr);
             return false;
         }
 
@@ -97,7 +97,7 @@ namespace Engine::Graphics
         hr = uploadBuffer->Map(0, nullptr, &mapped);
         if (FAILED(hr))
         {
-            LOG_ERROR("アップロードバッファのマップに失敗");
+            LOG_HRESULT("アップロードバッファのマップに失敗", hr);
             return false;
         }
 
