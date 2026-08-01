@@ -17,6 +17,9 @@ namespace Engine::System
 		std::wstring wdir(currentDir);
 		LOG_INFO("作業ディレクトリ: " + std::string(wdir.begin(), wdir.end()));
 
+		// ECSのレジストリ生成
+		Engine::System::ECS::Registry::Create();
+
 		// ウィンドウの生成
 		window = std::make_unique<Window>();
 		bool InitializeWindowFlag = window->Initialize(std::wstring(title, title + strlen(title)).c_str(), width, height);
@@ -44,6 +47,12 @@ namespace Engine::System
 		auto* context = renderer.GetContext();
 		auto& imgui = Engine::System::ImGuiManager::GetInstance();
 
+		// 2D用の正射影行列
+		DirectX::XMMATRIX view = DirectX::XMMatrixIdentity();
+		DirectX::XMMATRIX projection = DirectX::XMMatrixOrthographicLH(
+			2.0f, 2.0f, 0.0f, 1.0f
+		);
+
 		float angle = 0.0f;
 
 		while (true)
@@ -66,10 +75,21 @@ namespace Engine::System
 			context->SetRenderTarget();
 			context->ClearRenderTarget();
 
+			// Triangle（テスト用）
 			angle += 0.01f;
 			auto wvp = DirectX::XMMatrixRotationZ(angle);
 			triangle->SetWVP(wvp);
 			triangle->Draw(context->GetCmdList().Get());
+
+			// スプライト描画
+			spriteRenderSystem.Update(
+				Engine::System::ECS::Registry::GetInstance().GetRegistry(),
+				context->GetCmdList().Get(),
+				*spriteRenderer,
+				*textureManager,
+				view,
+				projection
+			);
 
 			// ImGuiのUI更新
 			imgui.Update();
@@ -89,10 +109,12 @@ namespace Engine::System
 	void Framework::Finalize()
 	{
 		DX12Finalize();
+		Engine::System::ECS::Registry::GetInstance().ForceAllClear();
+		Engine::System::ECS::Registry::Delete();
 		// 先にDX12Deviceを削除しておく
 		Engine::Graphics::DX12Device::GetInstance().Finalize();
 		Engine::Graphics::DX12Device::Delete();
-
+		Engine::Utility::EngineContext::Delete();
 		Engine::Utility::Logger::Delete();
 	}
 
@@ -147,11 +169,44 @@ namespace Engine::System
 			return false;
 		}
 
+		// TextureManager
+		textureManager = std::make_unique<Engine::Graphics::TextureManager>();
+		if (!textureManager->Initialize())
+		{
+			LOG_ERROR("TextureManagerの初期化に失敗");
+			return false;
+		}
+		textureManager->AddContext();
+
+		// SpriteRenderer
+		spriteRenderer = std::make_unique<Engine::Graphics::SpriteRenderer>();
+		if (!spriteRenderer->Initialize(
+			*shaderLoader,
+			context->GetBackBufferFormat(),
+			context->GetDepthBufferFormat()
+		))
+		{
+			LOG_ERROR("SpriteRendererの初期化に失敗");
+			return false;
+		}
+
+		// テスト用エンティティ作成
+		auto& reg = Engine::System::ECS::Registry::GetInstance();
+		auto entity = reg.CreateEntity();
+		reg.AddComponent<Engine::Graphics::TransformComponent>(entity);
+		auto& sprite = reg.AddComponent<Engine::Graphics::SpriteComponent>(entity);
+		sprite.textureID = textureManager->Load(L"../App/Assets/Test/Test.png");
+
 		return true;
 	}
 
 	void Framework::DX12Finalize()
 	{
+		spriteRenderer->Finalize();
+		spriteRenderer.reset();
+		textureManager->Finalize();
+		textureManager.reset();
+
 		triangle->Finalize();
 		triangle.reset();
 		shaderLoader.reset();

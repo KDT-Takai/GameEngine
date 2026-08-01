@@ -25,6 +25,13 @@
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "dxguid.lib")
 
+// DirectXTex
+#ifdef _DEBUG
+#pragma comment(lib, "..\\packages\\directxtex_desktop_win10.2026.5.8.1\\native\\lib\\x64\\Debug\\DirectXTex.lib")
+#else
+#pragma comment(lib, "..\\packages\\directxtex_desktop_win10.2026.5.8.1\\native\\lib\\x64\\Release\\DirectXTex.lib")
+#endif
+
 // STL
 #include <array>
 #include <vector>

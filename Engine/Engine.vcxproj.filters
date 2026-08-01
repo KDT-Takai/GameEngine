@@ -218,6 +218,12 @@
     <ClInclude Include="Source\Graphics\Sprite\SpriteRenderSystem\SpriteRenderSystem.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Source\System\ECS\Registry\Registry.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\ECS\Tag\PersistentTag.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

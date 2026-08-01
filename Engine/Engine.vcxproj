@@ -72,6 +72,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -201,6 +213,8 @@
     <ClInclude Include="Source\Graphics\Sprite\SpriteRenderer\SpriteRenderer.hpp" />
     <ClInclude Include="Source\Graphics\Texture\Texture\Texture.hpp" />
     <ClInclude Include="Source\Graphics\Texture\TextureID\TextureID.hpp" />
+    <ClInclude Include="Source\System\ECS\Registry\Registry.hpp" />
+    <ClInclude Include="Source\System\ECS\Tag\PersistentTag.hpp" />
     <ClInclude Include="Source\System\ImGui\ImGuiManager.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Descriptor\CbvSrvUavDescriptorAllocator\CbvSrvUavDescriptorAllocator.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Descriptor\DsvDescriptorAllocator\DsvDescriptorAllocator.hpp" />
