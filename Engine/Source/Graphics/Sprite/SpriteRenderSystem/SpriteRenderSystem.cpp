@@ -19,10 +19,16 @@ namespace Engine::Graphics
             {
                 if (!sprite.visible) return;
 
+                // オフセット計算
+                float offsetX = -(sprite.pivot.x - 0.5f) * sprite.size.x;
+                float offsetY = (sprite.pivot.y - 0.5f) * sprite.size.y;
+
                 // World行列の計算
                 DirectX::XMMATRIX world =
-                    DirectX::XMMatrixScaling(transform.scale.x, transform.scale.y, 1.0f) *
+                    DirectX::XMMatrixScaling(sprite.size.x, sprite.size.y, 1.0f) *
+                    DirectX::XMMatrixTranslation(offsetX, offsetY, 0.0f) *
                     DirectX::XMMatrixRotationZ(transform.rotation) *
+                    DirectX::XMMatrixScaling(transform.scale.x, transform.scale.y, 1.0f) *
                     DirectX::XMMatrixTranslation(
                         transform.position.x,
                         transform.position.y,

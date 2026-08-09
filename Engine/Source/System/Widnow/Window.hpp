@@ -17,6 +17,8 @@ namespace Engine::System
 		// ゲッター
 		HWND GetHWnd() const { return m_hwnd; }
 		HINSTANCE GetHInstance() const { return m_wndClass.hInstance; }
+		LONG GetWidth()  const { return m_width; }
+		LONG GetHeight() const { return m_height; }
 	private:
 		// ウィンドウクラスの登録
 		bool RegisterWindowClass();
@@ -25,5 +27,7 @@ namespace Engine::System
 	private:
 		HWND m_hwnd = nullptr;		// ウィンドウハンドル
 		WNDCLASSEX m_wndClass = {};	// ウィンドウクラス
+		LONG m_width = 0;
+		LONG m_height = 0;
 	};
 } // Engine::System

@@ -157,6 +157,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\System\Input\InputManager\InputManager.cpp" />
+    <ClCompile Include="Source\System\Input\PadInput\PadInput.cpp" />
+    <ClCompile Include="Source\System\Input\MouseInput\MouseInput.cpp" />
+    <ClCompile Include="Source\System\Input\KeyInput\KeyInput.cpp" />
     <ClCompile Include="Source\Graphics\ConstantBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Shader\Precompiledshaderloader.cpp" />
     <ClCompile Include="Source\Graphics\Shader\RuntimeShaderLoader.cpp" />
@@ -192,6 +196,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="external\entt\entt.hpp" />
+    <ClInclude Include="Source\System\ECS\Tag\MainCameraTag.hpp" />
+    <ClInclude Include="Source\System\Input\InputManager\InputManager.hpp" />
+    <ClInclude Include="Source\System\Input\PadInput\PadInput.hpp" />
+    <ClInclude Include="Source\System\Input\MouseInput\MouseInput.hpp" />
+    <ClInclude Include="Source\System\Input\KeyInput\KeyInput.hpp" />
     <ClInclude Include="Source\Graphics\Component\SpriteComponent\SpriteComponent.hpp" />
     <ClInclude Include="Source\Graphics\Component\TransformComponent\TransformComponent.hpp" />
     <ClInclude Include="Source\Graphics\ConstantBuffer\ConstantBuffer.hpp" />
@@ -226,6 +235,8 @@
     <ClInclude Include="Source\Framework\Framework.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Type.hpp" />
     <ClInclude Include="Source\pch\pch.h" />
+    <ClInclude Include="Source\System\Input\InputUtils\InputUtils.hpp" />
+    <ClInclude Include="Source\System\Screen\Screen.hpp" />
     <ClInclude Include="Source\Utility\EngineContext\EngineContext.hpp" />
     <ClInclude Include="Source\Utility\Logger\Log.hpp" />
     <ClInclude Include="Source\Utility\Singleton\Singleton.hpp" />

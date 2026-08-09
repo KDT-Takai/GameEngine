@@ -12,6 +12,9 @@ namespace Engine::System
 		// EngineContext の生成（最初に作る）
 		Engine::Utility::EngineContext::Create();
 
+		// 仮想解像度の設定
+		Engine::System::Screen::SetVirtualSize(1920.0f, 1080.0f);
+
 		wchar_t currentDir[MAX_PATH];
 		GetCurrentDirectoryW(MAX_PATH, currentDir);
 		std::wstring wdir(currentDir);
@@ -27,11 +30,22 @@ namespace Engine::System
 		{
 			return false;
 		}
+		REGISTER_CONTEXT(*window);
+
 		// DX12の初期化
 		if (!DX12Initialize(width, height))
 		{
 			return false;
 		}
+
+		// 入力関係の初期化
+		Engine::System::Input::InputManager::Create();
+		if (!Engine::System::Input::InputManager::GetInstance().Initialize(window->GetHWnd()))
+		{
+			LOG_ERROR("InputManagerの初期化に失敗");
+			return false;
+		}
+
 		// ImGuiのテスト
 		ImGuiManager::GetInstance().AddDebugUI([]() {
 			ImGui::Begin("ImGui");
@@ -43,6 +57,9 @@ namespace Engine::System
 
 	void Framework::Run()
 	{
+		// 入力の更新
+		Engine::System::Input::InputManager::GetInstance().Update();
+
 		auto& renderer = Engine::Graphics::DX12Renderer::GetInstance();
 		auto* context = renderer.GetContext();
 		auto& imgui = Engine::System::ImGuiManager::GetInstance();
@@ -50,7 +67,10 @@ namespace Engine::System
 		// 2D用の正射影行列
 		DirectX::XMMATRIX view = DirectX::XMMatrixIdentity();
 		DirectX::XMMATRIX projection = DirectX::XMMatrixOrthographicLH(
-			2.0f, 2.0f, 0.0f, 1.0f
+			1920.0f,  // 仮想幅
+			1080.0f,  // 仮想高さ
+			0.0f,
+			1.0f
 		);
 
 		float angle = 0.0f;
@@ -108,6 +128,8 @@ namespace Engine::System
 
 	void Framework::Finalize()
 	{
+		Engine::System::Input::InputManager::GetInstance().Finalize();
+		Engine::System::Input::InputManager::Delete();
 		DX12Finalize();
 		Engine::System::ECS::Registry::GetInstance().ForceAllClear();
 		Engine::System::ECS::Registry::Delete();
@@ -196,6 +218,7 @@ namespace Engine::System
 		reg.AddComponent<Engine::Graphics::TransformComponent>(entity);
 		auto& sprite = reg.AddComponent<Engine::Graphics::SpriteComponent>(entity);
 		sprite.textureID = textureManager->Load(L"../App/Assets/Test/Test.png");
+		sprite.size = { 500.0f, 500.0f };
 
 		return true;
 	}

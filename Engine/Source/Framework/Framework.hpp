@@ -2,6 +2,8 @@
 #include <memory>
 #include "System/Widnow/Window.hpp"
 #include "System/ECS/Registry/Registry.hpp"
+#include "System/Screen/Screen.hpp"
+#include "System/Input/InputManager/InputManager.hpp"
 
 #include "Utility/Singleton/Singleton.hpp"
 #include "Graphics/DX12/Device/DX12Device.hpp"
