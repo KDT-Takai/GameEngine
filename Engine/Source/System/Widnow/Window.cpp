@@ -35,6 +35,10 @@ namespace Engine::System
 
 	bool Window::Initialize(const wchar_t* title, LONG width, LONG height)
 	{
+		// ウィンドウサイズの保存
+		m_width = width;
+		m_height = height;
+
 		// ウィンドウクラスの登録
 		bool RegisterWindowFlag = RegisterWindowClass();
 		if (!RegisterWindowFlag)

@@ -72,6 +72,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -145,6 +157,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\System\Input\InputManager\InputManager.cpp" />
+    <ClCompile Include="Source\System\Input\PadInput\PadInput.cpp" />
+    <ClCompile Include="Source\System\Input\MouseInput\MouseInput.cpp" />
+    <ClCompile Include="Source\System\Input\KeyInput\KeyInput.cpp" />
     <ClCompile Include="Source\Graphics\ConstantBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Shader\Precompiledshaderloader.cpp" />
     <ClCompile Include="Source\Graphics\Shader\RuntimeShaderLoader.cpp" />
@@ -156,6 +172,9 @@
     <ClCompile Include="external\ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="external\ImGui\imgui_tables.cpp" />
     <ClCompile Include="external\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Source\Graphics\Sprite\SpriteRenderer\SpriteRenderer.cpp" />
+    <ClCompile Include="Source\Graphics\Sprite\SpriteRenderSystem\SpriteRenderSystem.cpp" />
+    <ClCompile Include="Source\Graphics\Texture\Texture\Texture.cpp" />
     <ClCompile Include="Source\System\ImGui\ImGuiManager.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Descriptor\CbvSrvUavDescriptorAllocator\CbvSrvUavDescriptorAllocator.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Descriptor\DsvDescriptorAllocator\DsvDescriptorAllocator.cpp" />
@@ -173,8 +192,17 @@
     </ClCompile>
     <ClCompile Include="Source\System\Widnow\Window.cpp" />
     <ClCompile Include="Source\Graphics\Primitive\Triangle.cpp" />
+    <ClCompile Include="Source\Graphics\Texture\TextureManager\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="external\entt\entt.hpp" />
+    <ClInclude Include="Source\System\ECS\Tag\MainCameraTag.hpp" />
+    <ClInclude Include="Source\System\Input\InputManager\InputManager.hpp" />
+    <ClInclude Include="Source\System\Input\PadInput\PadInput.hpp" />
+    <ClInclude Include="Source\System\Input\MouseInput\MouseInput.hpp" />
+    <ClInclude Include="Source\System\Input\KeyInput\KeyInput.hpp" />
+    <ClInclude Include="Source\Graphics\Component\SpriteComponent\SpriteComponent.hpp" />
+    <ClInclude Include="Source\Graphics\Component\TransformComponent\TransformComponent.hpp" />
     <ClInclude Include="Source\Graphics\ConstantBuffer\ConstantBuffer.hpp" />
     <ClInclude Include="Source\Graphics\ConstantBuffer\TransformBuffer.hpp" />
     <ClInclude Include="Source\Graphics\Shader\Precompiledshaderloader.hpp" />
@@ -191,6 +219,11 @@
     <ClInclude Include="external\ImGui\imstb_rectpack.h" />
     <ClInclude Include="external\ImGui\imstb_textedit.h" />
     <ClInclude Include="external\ImGui\imstb_truetype.h" />
+    <ClInclude Include="Source\Graphics\Sprite\SpriteRenderer\SpriteRenderer.hpp" />
+    <ClInclude Include="Source\Graphics\Texture\Texture\Texture.hpp" />
+    <ClInclude Include="Source\Graphics\Texture\TextureID\TextureID.hpp" />
+    <ClInclude Include="Source\System\ECS\Registry\Registry.hpp" />
+    <ClInclude Include="Source\System\ECS\Tag\PersistentTag.hpp" />
     <ClInclude Include="Source\System\ImGui\ImGuiManager.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Descriptor\CbvSrvUavDescriptorAllocator\CbvSrvUavDescriptorAllocator.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Descriptor\DsvDescriptorAllocator\DsvDescriptorAllocator.hpp" />
@@ -202,10 +235,15 @@
     <ClInclude Include="Source\Framework\Framework.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Type.hpp" />
     <ClInclude Include="Source\pch\pch.h" />
+    <ClInclude Include="Source\System\Input\InputUtils\InputUtils.hpp" />
+    <ClInclude Include="Source\System\Screen\Screen.hpp" />
+    <ClInclude Include="Source\Utility\EngineContext\EngineContext.hpp" />
     <ClInclude Include="Source\Utility\Logger\Log.hpp" />
     <ClInclude Include="Source\Utility\Singleton\Singleton.hpp" />
     <ClInclude Include="Source\System\Widnow\Window.hpp" />
     <ClInclude Include="Source\Graphics\Primitive\Triangle.hpp" />
+    <ClInclude Include="Source\Graphics\Texture\TextureManager\TextureManager.hpp" />
+    <ClInclude Include="Source\Graphics\Sprite\SpriteRenderSystem\SpriteRenderSystem.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
