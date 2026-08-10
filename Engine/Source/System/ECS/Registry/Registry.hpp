@@ -108,7 +108,16 @@ namespace Engine::System::ECS
         template<typename T, typename... Args>
         T& AddComponent(entt::entity entity, Args&&... args)
         {
-            return registry.emplace<T>(entity, std::forward<Args>(args)...);
+            if constexpr (std::is_empty_v<T>)
+            {
+                registry.emplace<T>(entity);
+                static T dummy{};
+                return dummy;
+            }
+            else
+            {
+                return registry.emplace<T>(entity, std::forward<Args>(args)...);
+            }
         }
 
         // コンポーネント削除

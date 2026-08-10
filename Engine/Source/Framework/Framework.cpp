@@ -65,12 +65,8 @@ namespace Engine::System
 		auto& imgui = Engine::System::ImGuiManager::GetInstance();
 
 		// 2D用の正射影行列
-		DirectX::XMMATRIX view = DirectX::XMMatrixIdentity();
-		DirectX::XMMATRIX projection = DirectX::XMMatrixOrthographicLH(
-			1920.0f,  // 仮想幅
-			1080.0f,  // 仮想高さ
-			0.0f,
-			1.0f
+		auto cameraData = cameraSystem.GetMainCameraData(
+			Engine::System::ECS::Registry::GetInstance().GetRegistry()
 		);
 
 		float angle = 0.0f;
@@ -95,6 +91,10 @@ namespace Engine::System
 			context->SetRenderTarget();
 			context->ClearRenderTarget();
 
+			auto cameraData = cameraSystem.GetMainCameraData(
+				Engine::System::ECS::Registry::GetInstance().GetRegistry()
+			);
+
 			// Triangle（テスト用）
 			angle += 0.01f;
 			auto wvp = DirectX::XMMatrixRotationZ(angle);
@@ -107,8 +107,8 @@ namespace Engine::System
 				context->GetCmdList().Get(),
 				*spriteRenderer,
 				*textureManager,
-				view,
-				projection
+				cameraData.view,
+				cameraData.projection
 			);
 
 			// ImGuiのUI更新
@@ -212,8 +212,15 @@ namespace Engine::System
 			return false;
 		}
 
-		// テスト用エンティティ作成
 		auto& reg = Engine::System::ECS::Registry::GetInstance();
+
+		// カメラエンティティ作成
+		auto cameraEntity = reg.CreateEntity();
+		reg.AddComponent<Engine::Graphics::TransformComponent>(cameraEntity);
+		reg.AddComponent<Engine::System::Camera::CameraComponent>(cameraEntity);
+		reg.AddComponent<Engine::System::ECS::MainCameraTag>(cameraEntity);
+
+		// テスト用エンティティ作成
 		auto entity = reg.CreateEntity();
 		reg.AddComponent<Engine::Graphics::TransformComponent>(entity);
 		auto& sprite = reg.AddComponent<Engine::Graphics::SpriteComponent>(entity);

@@ -157,6 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\System\Camera\CameraSystem\CameraSystem.cpp" />
     <ClCompile Include="Source\System\Input\InputManager\InputManager.cpp" />
     <ClCompile Include="Source\System\Input\PadInput\PadInput.cpp" />
     <ClCompile Include="Source\System\Input\MouseInput\MouseInput.cpp" />
@@ -195,6 +196,8 @@
     <ClCompile Include="Source\Graphics\Texture\TextureManager\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\System\Camera\CameraSystem\CameraSystem.hpp" />
+    <ClInclude Include="Source\System\Camera\CameraComponent\CameraComponent.hpp" />
     <ClInclude Include="external\entt\entt.hpp" />
     <ClInclude Include="Source\System\ECS\Tag\MainCameraTag.hpp" />
     <ClInclude Include="Source\System\Input\InputManager\InputManager.hpp" />

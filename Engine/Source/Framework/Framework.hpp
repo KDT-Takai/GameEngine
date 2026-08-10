@@ -4,8 +4,10 @@
 #include "System/ECS/Registry/Registry.hpp"
 #include "System/Screen/Screen.hpp"
 #include "System/Input/InputManager/InputManager.hpp"
+#include "System/Camera/CameraSystem/CameraSystem.hpp"
 
 #include "Utility/Singleton/Singleton.hpp"
+
 #include "Graphics/DX12/Device/DX12Device.hpp"
 #include "Graphics/DX12/Renderer/DX12Renderer.hpp"
 #include "Graphics/DX12/Descriptor/DX12DescriptorHeapManager.hpp"
@@ -47,5 +49,8 @@ namespace Engine::System
 		std::unique_ptr<Engine::Graphics::TextureManager>       textureManager;
 		std::unique_ptr<Engine::Graphics::SpriteRenderer>       spriteRenderer;
 		Engine::Graphics::SpriteRenderSystem                    spriteRenderSystem;
+
+		// ÉJÉÅÉâ
+		Engine::System::Camera::CameraSystem cameraSystem;
 	};
 }
