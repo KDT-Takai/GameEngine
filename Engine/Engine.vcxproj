@@ -157,7 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\System\Debug\EntityInspector\EntityInspector.cpp">
+    <ClCompile Include="Source\System\EntityInspector\EntityInspector.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Source\System\Camera\CameraSystem\CameraSystem.cpp" />
@@ -199,7 +199,7 @@
     <ClCompile Include="Source\Graphics\Texture\TextureManager\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\System\Debug\EntityInspector\EntityInspector.hpp">
+    <ClInclude Include="Source\System\EntityInspector\EntityInspector.hpp">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="Source\System\Camera\CameraSystem\CameraSystem.hpp" />
