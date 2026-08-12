@@ -30,11 +30,18 @@ namespace Engine::System::Camera
                 found = true;
             });
 
-		// MainCameraTag を持つカメラが見つからなかった場合、警告ログを出力
+		// 初回だけカメラログを出力
         static bool logged = false;
-        if (!found && !logged)
+        if (!logged)
         {
-            LOG_WARN("MainCameraTagを持つカメラが見つかりません。デフォルト値を使用します。");
+            if (found)
+            {
+                LOG_INFO("メインカメラを検出しました");
+            }
+            else
+            {
+                LOG_WARN("MainCameraTagを持つカメラが見つかりません。デフォルト値を使用します。");
+            }
             logged = true;
         }
 

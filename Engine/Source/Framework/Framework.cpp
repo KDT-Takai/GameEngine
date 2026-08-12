@@ -218,7 +218,7 @@ namespace Engine::System
 		auto cameraEntity = reg.CreateEntity();
 		reg.AddComponent<Engine::Graphics::TransformComponent>(cameraEntity);
 		reg.AddComponent<Engine::System::Camera::CameraComponent>(cameraEntity);
-		reg.AddComponent<Engine::System::ECS::MainCameraTag>(cameraEntity);
+		reg.EmplaceComponent<Engine::System::ECS::MainCameraTag>(cameraEntity);
 
 		// テスト用エンティティ作成
 		auto entity = reg.CreateEntity();
