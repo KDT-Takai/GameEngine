@@ -159,3 +159,42 @@ VSMain（頂点シェーダ）
 頂点の座標をWVP行列で変換して画面上の位置を決めています。UVは uvRect を使って「テクスチャのどの範囲を表示するか」に変換
 PSMain（ピクセルシェーダ）
 テクスチャから色をサンプリングして、SpriteComponent::color を掛け合わせています。フォールバックのホワイトテクスチャの場合は color がそのまま出力
+
+
+スプライトのサイズ、位置、pivot、色の変更
+入力関係
+カメラ　２ｄ、３ｄ
+モデルの描画 Assimp or FBX SDK
+ライティング
+
+後で
+深度ソート
+サウンド（miniaudio）
+フォント
+
+
+## 未完了・今後の予定
+
+優先度高
+
+EntityInspector  （ImGuiでEntity・Component確認）
+モデルの描画      （Assimp or FBX SDK）
+深度ソート
+
+優先度中
+
+ライティング・シャドウ
+3Dカメラ操作（パン・オービット）
+Triangleの削除（テスト用なので整理）
+
+優先度低
+
+サウンド（miniaudio）
+フォント・テキスト描画
+Assetsの自動読み込み
+RenderImGuiの実装（KeyInput・MouseInput・PadInput）
+
+設計として検討中
+
+コマンドの記録とGPU送信の分離
+AddComponent の空構造体対応の整理
