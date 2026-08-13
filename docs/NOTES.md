@@ -198,3 +198,8 @@ RenderImGuiの実装（KeyInput・MouseInput・PadInput）
 
 コマンドの記録とGPU送信の分離
 AddComponent の空構造体対応の整理
+
+
+今後
+EntityInspectorのコンポーネントの登録をFrameWorkでやるのではなく別のクラスで行うようにする
+その後モデル

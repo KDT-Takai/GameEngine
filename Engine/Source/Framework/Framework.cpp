@@ -46,12 +46,6 @@ namespace Engine::System
 			return false;
 		}
 
-		// ImGuiのテスト
-		ImGuiManager::GetInstance().AddDebugUI([]() {
-			ImGui::Begin("ImGui");
-			ImGui::Text("Test");
-			ImGui::End();
-			}, "test");
 		return true;
 	}
 
@@ -109,6 +103,10 @@ namespace Engine::System
 				*textureManager,
 				cameraData.view,
 				cameraData.projection
+			);
+
+			entityInspector.Draw(
+				Engine::System::ECS::Registry::GetInstance().GetRegistry()
 			);
 
 			// ImGuiのUI更新
@@ -212,20 +210,10 @@ namespace Engine::System
 			return false;
 		}
 
-		auto& reg = Engine::System::ECS::Registry::GetInstance();
-
-		// カメラエンティティ作成
-		auto cameraEntity = reg.CreateEntity();
-		reg.AddComponent<Engine::Graphics::TransformComponent>(cameraEntity);
-		reg.AddComponent<Engine::System::Camera::CameraComponent>(cameraEntity);
-		reg.EmplaceComponent<Engine::System::ECS::MainCameraTag>(cameraEntity);
-
-		// テスト用エンティティ作成
-		auto entity = reg.CreateEntity();
-		reg.AddComponent<Engine::Graphics::TransformComponent>(entity);
-		auto& sprite = reg.AddComponent<Engine::Graphics::SpriteComponent>(entity);
-		sprite.textureID = textureManager->Load(L"../App/Assets/Test/Test.png");
-		sprite.size = { 500.0f, 500.0f };
+		// SpriteRenderSystem
+		SetupEntities();
+		// EntityInspector
+		RegisterComponents();
 
 		return true;
 	}
@@ -247,5 +235,68 @@ namespace Engine::System
 		Engine::Graphics::DX12DescriptorHeapManager::Delete();
 		Engine::Graphics::DX12Renderer::GetInstance().Finalize();
 		Engine::Graphics::DX12Renderer::Delete();
+	}
+	void Framework::SetupEntities()
+	{
+		auto& reg = Engine::System::ECS::Registry::GetInstance();
+
+		// カメラエンティティ作成
+		auto cameraEntity = reg.CreateEntity();
+		reg.AddComponent<Engine::Graphics::TransformComponent>(cameraEntity);
+		reg.AddComponent<Engine::System::Camera::CameraComponent>(cameraEntity);
+		reg.EmplaceComponent<Engine::System::ECS::MainCameraTag>(cameraEntity);
+
+		// テスト用エンティティ作成
+		auto entity = reg.CreateEntity();
+		reg.AddComponent<Engine::Graphics::TransformComponent>(entity);
+		auto& sprite = reg.AddComponent<Engine::Graphics::SpriteComponent>(entity);
+		sprite.textureID = textureManager->Load(L"../App/Assets/Test/Test.png");
+		sprite.size = { 500.0f, 500.0f };
+	}
+
+	void Framework::RegisterComponents()
+	{
+		entityInspector.RegisterComponent<Engine::Graphics::TransformComponent>(
+			"Transform",
+			[](entt::registry& reg, entt::entity entity)
+			{
+				auto& t = reg.get<Engine::Graphics::TransformComponent>(entity);
+				ImGui::DragFloat3("Position", &t.position.x, 1.0f);
+				ImGui::DragFloat("Rotation", &t.rotation, 0.01f);
+				ImGui::DragFloat2("Scale", &t.scale.x, 0.1f);
+			}
+		);
+
+		entityInspector.RegisterComponent<Engine::Graphics::SpriteComponent>(
+			"Sprite",
+			[](entt::registry& reg, entt::entity entity)
+			{
+				auto& s = reg.get<Engine::Graphics::SpriteComponent>(entity);
+				ImGui::DragFloat2("Size", &s.size.x, 1.0f);
+				ImGui::DragFloat2("Pivot", &s.pivot.x, 0.01f, 0.0f, 1.0f);
+				ImGui::ColorEdit4("Color", &s.color.x);
+				ImGui::DragFloat4("UVRect", &s.uvRect.x, 0.01f, 0.0f, 1.0f);
+				ImGui::Checkbox("Visible", &s.visible);
+			}
+		);
+
+		entityInspector.RegisterComponent<Engine::System::Camera::CameraComponent>(
+			"Camera",
+			[](entt::registry& reg, entt::entity entity)
+			{
+				auto& c = reg.get<Engine::System::Camera::CameraComponent>(entity);
+				int type = static_cast<int>(c.projectionType);
+				if (ImGui::Combo("Type", &type, "Orthographic\0Perspective\0"))
+				{
+					c.projectionType =
+						static_cast<Engine::System::Camera::CameraComponent::ProjectionType>(type);
+				}
+				ImGui::DragFloat("Zoom", &c.zoom, 0.01f, 0.1f, 10.0f);
+				ImGui::DragFloat("Near", &c.nearClip, 0.1f);
+				ImGui::DragFloat("Far", &c.farClip, 1.0f);
+				ImGui::DragFloat("FOV", &c.fov, 1.0f, 1.0f, 179.0f);
+				ImGui::DragFloat("Rotation", &c.rotation, 0.01f);
+			}
+		);
 	}
 }
