@@ -5,6 +5,7 @@
 #include "System/Screen/Screen.hpp"
 #include "System/Input/InputManager/InputManager.hpp"
 #include "System/Camera/CameraSystem/CameraSystem.hpp"
+#include "System/EntityInspector/EntityInspector.hpp"
 
 #include "Utility/Singleton/Singleton.hpp"
 
@@ -38,6 +39,8 @@ namespace Engine::System
 	private:
 		bool DX12Initialize(int width, int height);
 		void DX12Finalize();
+		void SetupEntities();
+		void RegisterComponents();
 		// ウィンドウ
 		std::unique_ptr<Window> window;
 
@@ -52,5 +55,7 @@ namespace Engine::System
 
 		// カメラ
 		Engine::System::Camera::CameraSystem cameraSystem;
+
+		Engine::System::Debug::EntityInspector entityInspector;
 	};
 }
