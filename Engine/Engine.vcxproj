@@ -91,7 +91,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(ProjectDir)Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(ProjectDir)Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -110,7 +110,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(ProjectDir)Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -127,7 +127,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\Engine\external\SpdLog\Include;$(ProjectDir)Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\Engine\external\SpdLog\Include;$(ProjectDir)Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -146,7 +146,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(ProjectDir)Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
