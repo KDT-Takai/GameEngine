@@ -9,7 +9,7 @@ namespace Engine::System
 	{
 		Engine::Utility::Logger::Create();
 
-		// EngineContext の生成（最初に作る）
+		// EngineContextの生成
 		Engine::Utility::EngineContext::Create();
 
 		// 仮想解像度の設定
@@ -22,6 +22,9 @@ namespace Engine::System
 
 		// ECSのレジストリ生成
 		Engine::System::ECS::Registry::Create();
+
+		// AssetManagerの生成
+		Engine::System::Assets::AssetManager::Create();
 
 		// ウィンドウの生成
 		window = std::make_unique<Window>();
@@ -108,6 +111,8 @@ namespace Engine::System
 			entityInspector.Draw(
 				Engine::System::ECS::Registry::GetInstance().GetRegistry()
 			);
+
+			assetBrowser.Draw();
 
 			// ImGuiのUI更新
 			imgui.Update();
@@ -210,6 +215,9 @@ namespace Engine::System
 			return false;
 		}
 
+		RegisterAssetLoaders();
+		Engine::System::Assets::AssetManager::GetInstance().LoadDirectory(L"../App/Assets/");
+
 		// SpriteRenderSystem
 		SetupEntities();
 		// EntityInspector
@@ -225,6 +233,8 @@ namespace Engine::System
 		textureManager->Finalize();
 		textureManager.reset();
 
+		Engine::System::Assets::AssetManager::Delete();
+
 		triangle->Finalize();
 		triangle.reset();
 		shaderLoader.reset();
@@ -236,6 +246,7 @@ namespace Engine::System
 		Engine::Graphics::DX12Renderer::GetInstance().Finalize();
 		Engine::Graphics::DX12Renderer::Delete();
 	}
+
 	void Framework::SetupEntities()
 	{
 		auto& reg = Engine::System::ECS::Registry::GetInstance();
@@ -250,7 +261,7 @@ namespace Engine::System
 		auto entity = reg.CreateEntity();
 		reg.AddComponent<Engine::Graphics::TransformComponent>(entity);
 		auto& sprite = reg.AddComponent<Engine::Graphics::SpriteComponent>(entity);
-		sprite.textureID = textureManager->Load(L"../App/Assets/Test/Test.png");
+		sprite.textureID = Engine::System::Assets::AssetManager::GetInstance().GetTextureID("Test");
 		sprite.size = { 500.0f, 500.0f };
 	}
 
@@ -298,5 +309,34 @@ namespace Engine::System
 				ImGui::DragFloat("Rotation", &c.rotation, 0.01f);
 			}
 		);
+	}
+
+	void Framework::RegisterAssetLoaders()
+	{
+		auto& assetManager = Engine::System::Assets::AssetManager::GetInstance();
+
+		// テクスチャローダー登録
+		assetManager.RegisterLoader(".png", [&](const std::wstring& path) -> uint64_t
+			{
+				return textureManager->Load(path);
+			});
+		assetManager.RegisterLoader(".jpg", [&](const std::wstring& path) -> uint64_t
+			{
+				return textureManager->Load(path);
+			});
+		assetManager.RegisterLoader(".jpeg", [&](const std::wstring& path) -> uint64_t
+			{
+				return textureManager->Load(path);
+			});
+		assetManager.RegisterLoader(".bmp", [&](const std::wstring& path) -> uint64_t
+			{
+				return textureManager->Load(path);
+			});
+
+		// モデルローダー登録（将来）
+		// assetManager.RegisterLoader(".fbx", [&](const std::wstring& path) -> uint64_t
+		// {
+		//     return modelManager->Load(path);
+		// });
 	}
 }

@@ -157,6 +157,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Graphics\Model\ModelComponent\ModelComponent.cpp" />
+    <ClCompile Include="Source\Graphics\Model\ModelRenderSystem\ModelRenderSystem.cpp" />
+    <ClCompile Include="Source\Graphics\Model\ModelRenderer\ModelRenderer.cpp" />
+    <ClCompile Include="Source\Graphics\Model\ModelManager\ModelManager.cpp" />
+    <ClCompile Include="Source\Graphics\Model\ModelLoader\ModelLoader.cpp" />
+    <ClCompile Include="Source\Graphics\Model\Model\Model.cpp" />
+    <ClCompile Include="Source\Graphics\Model\Mesh\Mesh.cpp" />
+    <ClCompile Include="Source\Graphics\Model\Material\Material.cpp" />
+    <ClCompile Include="Source\System\Assets\AssetBrowser\AssetBrowser.cpp" />
+    <ClCompile Include="Source\System\Assets\AssetManager\AssetManager.cpp" />
     <ClCompile Include="Source\System\EntityInspector\EntityInspector.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
@@ -199,6 +209,17 @@
     <ClCompile Include="Source\Graphics\Texture\TextureManager\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Graphics\Model\ModelComponent\ModelComponent.hpp" />
+    <ClInclude Include="Source\Graphics\Model\ModelRenderSystem\ModelRenderSystem.hpp" />
+    <ClInclude Include="Source\Graphics\Model\ModelRenderer\ModelRenderer.hpp" />
+    <ClInclude Include="Source\Graphics\Model\ModelManager\ModelManager.hpp" />
+    <ClInclude Include="Source\Graphics\Model\ModelLoader\ModelLoader.hpp" />
+    <ClInclude Include="Source\Graphics\Model\Model\Model.hpp" />
+    <ClInclude Include="Source\Graphics\Model\Mesh\Mesh.hpp" />
+    <ClInclude Include="Source\Graphics\Model\Material\Material.hpp" />
+    <ClInclude Include="Source\Graphics\Model\ModelVertex\ModelVertex.hpp" />
+    <ClInclude Include="Source\System\Assets\AssetBrowser\AssetBrowser.hpp" />
+    <ClInclude Include="Source\System\Assets\AssetManager\AssetManager.hpp" />
     <ClInclude Include="Source\System\EntityInspector\EntityInspector.hpp">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>

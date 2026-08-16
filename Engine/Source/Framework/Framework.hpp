@@ -6,6 +6,8 @@
 #include "System/Input/InputManager/InputManager.hpp"
 #include "System/Camera/CameraSystem/CameraSystem.hpp"
 #include "System/EntityInspector/EntityInspector.hpp"
+#include "System/Assets/AssetManager/AssetManager.hpp"
+#include "System/Assets/AssetBrowser/AssetBrowser.hpp"
 
 #include "Utility/Singleton/Singleton.hpp"
 
@@ -41,6 +43,7 @@ namespace Engine::System
 		void DX12Finalize();
 		void SetupEntities();
 		void RegisterComponents();
+		void RegisterAssetLoaders();
 		// ウィンドウ
 		std::unique_ptr<Window> window;
 
@@ -56,6 +59,10 @@ namespace Engine::System
 		// カメラ
 		Engine::System::Camera::CameraSystem cameraSystem;
 
+		// EntityInspector
 		Engine::System::Debug::EntityInspector entityInspector;
+
+		// AssetBrowser
+		Engine::System::AssetBrowser assetBrowser;
 	};
 }
