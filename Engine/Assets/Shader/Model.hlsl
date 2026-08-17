@@ -1,3 +1,5 @@
+//#pragma pack_matrix(row_major)
+
 // 定数バッファ
 cbuffer ModelTransformBuffer : register(b0)
 {
@@ -39,8 +41,8 @@ PSInput VSMain(VSInput input)
 
     output.position = mul(viewPos, projection);
 
-//    output.position.z = 0.5f;
-//    output.position.w = 20.0f;
+    output.position.z = 0.5f;
+    output.position.w = 20.0f;
     
     output.normal = input.normal;
     output.uv = input.uv;

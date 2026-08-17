@@ -16,7 +16,7 @@ namespace Engine::System::Camera
         ProjectionType projectionType = ProjectionType::Orthographic;
 
         // ‹¤’Êƒpƒ‰ƒ[ƒ^
-        float nearClip = 0.0f;
+        float nearClip = 0.1f;
         float farClip = 1000.0f;
         float zoom = 1.0f;
         float rotation = 0.0f;

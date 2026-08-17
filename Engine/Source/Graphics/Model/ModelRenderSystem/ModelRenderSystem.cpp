@@ -42,6 +42,10 @@ namespace Engine::Graphics
                     DirectX::XMMatrixRotationRollPitchYaw(transform.rotation.x, transform.rotation.y, transform.rotation.z) *
                     DirectX::XMMatrixTranslation(transform.position.x, transform.position.y, transform.position.z);
 
+                //DirectX::XMMATRIX worldT = DirectX::XMMatrixTranspose(world);
+                //DirectX::XMMATRIX viewT = DirectX::XMMatrixTranspose(view);
+                //DirectX::XMMATRIX projT = DirectX::XMMatrixTranspose(projection);
+
                 renderer.Draw(cmdList, modelData, world, view, projection, texManager);
             });
     }
