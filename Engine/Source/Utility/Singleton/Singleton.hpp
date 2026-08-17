@@ -39,6 +39,7 @@ namespace Engine::Utility
 		// 取得
 		static T& GetInstance() {
 			assert(instance != nullptr && "Instanceが存在しない");
+
 			return *instance;
 		}
 		// 生ポインタ取得用

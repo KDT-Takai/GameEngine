@@ -157,14 +157,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Graphics\Model\ModelComponent\ModelComponent.cpp" />
     <ClCompile Include="Source\Graphics\Model\ModelRenderSystem\ModelRenderSystem.cpp" />
     <ClCompile Include="Source\Graphics\Model\ModelRenderer\ModelRenderer.cpp" />
     <ClCompile Include="Source\Graphics\Model\ModelManager\ModelManager.cpp" />
     <ClCompile Include="Source\Graphics\Model\ModelLoader\ModelLoader.cpp" />
     <ClCompile Include="Source\Graphics\Model\Model\Model.cpp" />
     <ClCompile Include="Source\Graphics\Model\Mesh\Mesh.cpp" />
-    <ClCompile Include="Source\Graphics\Model\Material\Material.cpp" />
     <ClCompile Include="Source\System\Assets\AssetBrowser\AssetBrowser.cpp" />
     <ClCompile Include="Source\System\Assets\AssetManager\AssetManager.cpp" />
     <ClCompile Include="Source\System\EntityInspector\EntityInspector.cpp">
@@ -176,8 +174,8 @@
     <ClCompile Include="Source\System\Input\MouseInput\MouseInput.cpp" />
     <ClCompile Include="Source\System\Input\KeyInput\KeyInput.cpp" />
     <ClCompile Include="Source\Graphics\ConstantBuffer\ConstantBuffer.cpp" />
-    <ClCompile Include="Source\Graphics\Shader\Precompiledshaderloader.cpp" />
-    <ClCompile Include="Source\Graphics\Shader\RuntimeShaderLoader.cpp" />
+    <ClCompile Include="Source\Graphics\Shader\Precompiledshaderloader\Precompiledshaderloader.cpp" />
+    <ClCompile Include="Source\Graphics\Shader\RuntimeShaderLoader\RuntimeShaderLoader.cpp" />
     <ClCompile Include="Source\Graphics\DX12\Descriptor\DX12DescriptorHeapManager.cpp" />
     <ClCompile Include="external\ImGui\imgui.cpp" />
     <ClCompile Include="external\ImGui\ImGuizmo.cpp" />
@@ -205,11 +203,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\System\Widnow\Window.cpp" />
-    <ClCompile Include="Source\Graphics\Primitive\Triangle.cpp" />
+    <ClCompile Include="Source\Graphics\Primitive\Triangle\Triangle.cpp" />
     <ClCompile Include="Source\Graphics\Texture\TextureManager\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Graphics\Component\ModelComponent\ModelComponent.hpp" />
     <ClInclude Include="Source\Graphics\Model\ModelComponent\ModelComponent.hpp" />
+    <ClInclude Include="Source\Graphics\Model\ModelID\ModelID.hpp" />
     <ClInclude Include="Source\Graphics\Model\ModelRenderSystem\ModelRenderSystem.hpp" />
     <ClInclude Include="Source\Graphics\Model\ModelRenderer\ModelRenderer.hpp" />
     <ClInclude Include="Source\Graphics\Model\ModelManager\ModelManager.hpp" />
@@ -235,9 +235,9 @@
     <ClInclude Include="Source\Graphics\Component\TransformComponent\TransformComponent.hpp" />
     <ClInclude Include="Source\Graphics\ConstantBuffer\ConstantBuffer.hpp" />
     <ClInclude Include="Source\Graphics\ConstantBuffer\TransformBuffer.hpp" />
-    <ClInclude Include="Source\Graphics\Shader\Precompiledshaderloader.hpp" />
-    <ClInclude Include="Source\Graphics\Shader\RuntimeShaderLoader.hpp" />
-    <ClInclude Include="Source\Graphics\Shader\IShaderLoader.hpp" />
+    <ClInclude Include="Source\Graphics\Shader\Precompiledshaderloader\Precompiledshaderloader.hpp" />
+    <ClInclude Include="Source\Graphics\Shader\RuntimeShaderLoader\RuntimeShaderLoader.hpp" />
+    <ClInclude Include="Source\Graphics\Shader\IShaderLoader\IShaderLoader.hpp" />
     <ClInclude Include="Source\Graphics\DX12\Descriptor\DX12DescriptorHeapManager.hpp" />
     <ClInclude Include="external\ImGui\imconfig.h" />
     <ClInclude Include="external\ImGui\imgui.h" />
@@ -271,7 +271,7 @@
     <ClInclude Include="Source\Utility\Logger\Log.hpp" />
     <ClInclude Include="Source\Utility\Singleton\Singleton.hpp" />
     <ClInclude Include="Source\System\Widnow\Window.hpp" />
-    <ClInclude Include="Source\Graphics\Primitive\Triangle.hpp" />
+    <ClInclude Include="Source\Graphics\Primitive\Triangle\Triangle.hpp" />
     <ClInclude Include="Source\Graphics\Texture\TextureManager\TextureManager.hpp" />
     <ClInclude Include="Source\Graphics\Sprite\SpriteRenderSystem\SpriteRenderSystem.hpp" />
   </ItemGroup>

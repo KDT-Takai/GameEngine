@@ -15,11 +15,16 @@
 #include "Graphics/DX12/Renderer/DX12Renderer.hpp"
 #include "Graphics/DX12/Descriptor/DX12DescriptorHeapManager.hpp"
 
-#include "Graphics/Shader/RuntimeShaderLoader.hpp"
-#include "Graphics/Primitive/Triangle.hpp"
+#include "Graphics/Shader/RuntimeShaderLoader/RuntimeShaderLoader.hpp"
+#include "Graphics/Primitive/Triangle/Triangle.hpp"
 #include "Graphics/Texture/TextureManager/TextureManager.hpp"
 #include "Graphics/Sprite/SpriteRenderer/SpriteRenderer.hpp"
 #include "Graphics/Sprite/SpriteRenderSystem/SpriteRenderSystem.hpp"
+// Ç‡Ç≈ÇÈ
+#include "Graphics/Model/ModelManager/ModelManager.hpp"
+#include "Graphics/Model/ModelRenderer/ModelRenderer.hpp"
+#include "Graphics/Model/ModelRenderSystem/ModelRenderSystem.hpp"
+#include "Graphics/Component/ModelComponent/ModelComponent.hpp"
 
 // ëOï˚êÈåæ
 namespace Engine::Graphics
@@ -64,5 +69,8 @@ namespace Engine::System
 
 		// AssetBrowser
 		Engine::System::AssetBrowser assetBrowser;
+
+		std::unique_ptr<Engine::Graphics::ModelRenderer>  modelRenderer;
+		Engine::Graphics::ModelRenderSystem               modelRenderSystem;
 	};
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "Utility/Singleton/Singleton.hpp"
 #include "Graphics/Texture/TextureID/TextureID.hpp"
+#include "Graphics/Model/ModelID/ModelID.hpp"
 #include <functional>
 #include <string>
 #include <unordered_map>
@@ -16,6 +17,8 @@ namespace Engine::System::Assets
 
         // フォルダを再帰的に走査してロード
         void LoadDirectory(const std::wstring& directory);
+        void LoadDirectory(const std::wstring& directory, const std::string& filterExt = "");
+        void LoadDirectoryOrdered(const std::wstring& directory);
 
         // 単一ファイルをロード
         void LoadFile(const std::wstring& path);
@@ -23,8 +26,9 @@ namespace Engine::System::Assets
         // 名前からID取得（拡張子あり・なし・大文字小文字無視）
         Engine::Graphics::TextureID GetTextureID(const std::string& name) const;
 
-        // ModelID GetModelID(const std::string& name) const;
+        Engine::Graphics::ModelID GetModelID(const std::string& name) const;
         // SoundID GetSoundID(const std::string& name) const;
+
 
         // AssetBrowser用
         struct AssetInfo

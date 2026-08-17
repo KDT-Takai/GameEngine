@@ -16,8 +16,8 @@ namespace Engine::Graphics
         float animationSpeed = 1.0f;
 
         // •`‰æŠÖ˜A
-        bool castShadow = true;  // ‰e‚ğ—‚Æ‚·‚©
-        bool receiveShadow = true;  // ‰e‚ğó‚¯‚é‚©
+        bool castShadow = true;
+        bool receiveShadow = true;
 
         // ƒŒƒCƒ„[
         int layer = 0;

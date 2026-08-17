@@ -297,3 +297,7 @@ ModelRenderSystem
 7. ModelRenderer.hpp / .cpp
 8. ModelRenderSystem.hpp / .cpp
 9. ModelComponent.hpp
+
+モデルやテクスチャの改善点
+名前の衝突　Kipfel.png Kipfel.fbxが衝突するので対策をする
+ロードを明示的にテクスチャを指定できるようにする
