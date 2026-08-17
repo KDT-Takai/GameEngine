@@ -34,6 +34,8 @@ namespace Engine::Graphics
                     return;
                 }
 
+                // LOG_DEBUG("Model Transform: pos=({}, {}, {}), scale=({}, {}, {})", transform.position.x, transform.position.y, transform.position.z, transform.scale.x, transform.scale.y, transform.scale.z);
+
                 // WorldçsóÒÇÃåvéZ
                 DirectX::XMMATRIX world =
                     DirectX::XMMatrixScaling(transform.scale.x, transform.scale.y, transform.scale.z) *

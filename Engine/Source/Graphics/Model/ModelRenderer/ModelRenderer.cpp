@@ -58,6 +58,11 @@ namespace Engine::Graphics
         DirectX::XMStoreFloat4x4(&data.view, view);
         DirectX::XMStoreFloat4x4(&data.projection, projection);
 
+        //DirectX::XMStoreFloat4x4(&data.world, DirectX::XMMatrixTranspose(world));
+        //DirectX::XMStoreFloat4x4(&data.view, DirectX::XMMatrixTranspose(view));
+        //DirectX::XMStoreFloat4x4(&data.projection, DirectX::XMMatrixTranspose(projection));
+
+
         // RootSignature・PSO
         cmdList->SetGraphicsRootSignature(rootSignature.Get());
         cmdList->SetPipelineState(pipelineState.Get());
@@ -76,17 +81,43 @@ namespace Engine::Graphics
             transformBuffer.Update(data);
 
             // b0: TransformBuffer
-            cmdList->SetGraphicsRootConstantBufferView(
-                0, transformBuffer.GetGPUVirtualAddress());
+            cmdList->SetGraphicsRootConstantBufferView(0, transformBuffer.GetGPUVirtualAddress());
 
             // t0: SRV（テクスチャ）
             const Texture* texture = texManager.Get(material.diffuseTexture);
-            cmdList->SetGraphicsRootDescriptorTable(
-                1, texture->GetHandle().gpuHandle);
+            cmdList->SetGraphicsRootDescriptorTable(1, texture->GetHandle().gpuHandle);
 
             //LOG_DEBUG("ModelRenderer: mesh描画開始");
             mesh->Draw(cmdList);
         }
+        DirectX::XMFLOAT4X4 viewMat;
+        DirectX::XMFLOAT4X4 projMat;
+
+        DirectX::XMStoreFloat4x4(&viewMat, view);
+        DirectX::XMStoreFloat4x4(&projMat, projection);
+
+        //LOG_DEBUG(
+        //    "View:\n"
+        //    "[{}, {}, {}, {}]\n"
+        //    "[{}, {}, {}, {}]\n"
+        //    "[{}, {}, {}, {}]\n"
+        //    "[{}, {}, {}, {}]",
+        //    viewMat._11, viewMat._12, viewMat._13, viewMat._14,
+        //    viewMat._21, viewMat._22, viewMat._23, viewMat._24,
+        //    viewMat._31, viewMat._32, viewMat._33, viewMat._34,
+        //    viewMat._41, viewMat._42, viewMat._43, viewMat._44
+        //);
+        //LOG_DEBUG(
+        //    "Projection:\n"
+        //    "[{}, {}, {}, {}]\n"
+        //    "[{}, {}, {}, {}]\n"
+        //    "[{}, {}, {}, {}]\n"
+        //    "[{}, {}, {}, {}]",
+        //    projMat._11, projMat._12, projMat._13, projMat._14,
+        //    projMat._21, projMat._22, projMat._23, projMat._24,
+        //    projMat._31, projMat._32, projMat._33, projMat._34,
+        //    projMat._41, projMat._42, projMat._43, projMat._44
+        //);
     }
 
     bool ModelRenderer::CreateRootSignature()

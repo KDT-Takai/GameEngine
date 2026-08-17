@@ -36,10 +36,13 @@ PSInput VSMain(VSInput input)
 
     float4 worldPos = mul(float4(input.position, 1.0f), world);
     float4 viewPos = mul(worldPos, view);
+
     output.position = mul(viewPos, projection);
 
-    // –@ü‚ğƒ[ƒ‹ƒh‹óŠÔ‚É•ÏŠ·
-    output.normal = mul(input.normal, (float3x3) world);
+//    output.position.z = 0.5f;
+//    output.position.w = 20.0f;
+    
+    output.normal = input.normal;
     output.uv = input.uv;
 
     return output;
