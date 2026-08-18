@@ -39,8 +39,8 @@ PSInput VSMain(VSInput input)
 
     output.position = mul(viewPos, projection);
 
-//    output.position.z = 0.5f;
-//    output.position.w = 20.0f;
+    output.position.z = 0.5f;
+    output.position.w = 3.0f;
     
     output.normal = input.normal;
     output.uv = input.uv;
