@@ -364,3 +364,10 @@ FodyWeavers.xsd
 
 # .vs の中の launchSettings.json だけは特別にGitで管理する
 !**/.vs/**/launchSettings.json
+
+
+# Assimpのbinとlibフォルダを例外的にGit管理対象にする
+!**/external/Assimp/build/bin/
+!**/external/Assimp/build/bin/**
+!**/external/Assimp/build/lib/
+!**/external/Assimp/build/lib/**
