@@ -160,6 +160,7 @@
     <ClCompile Include="Source\Graphics\Model\ModelRenderSystem\ModelRenderSystem.cpp" />
     <ClCompile Include="Source\Graphics\Model\ModelRenderer\ModelRenderer.cpp" />
     <ClCompile Include="Source\Graphics\Model\ModelManager\ModelManager.cpp" />
+    <ClCompile Include="Source\Graphics\Model\BinaryModelLoader\BinaryModelLoader.cpp" />
     <ClCompile Include="Source\Graphics\Model\ModelLoader\ModelLoader.cpp" />
     <ClCompile Include="Source\Graphics\Model\Model\Model.cpp" />
     <ClCompile Include="Source\Graphics\Model\Mesh\Mesh.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="Source\Graphics\Model\ModelRenderSystem\ModelRenderSystem.hpp" />
     <ClInclude Include="Source\Graphics\Model\ModelRenderer\ModelRenderer.hpp" />
     <ClInclude Include="Source\Graphics\Model\ModelManager\ModelManager.hpp" />
+    <ClInclude Include="Source\Graphics\Model\BinaryModelLoader\BinaryModelLoader.hpp" />
     <ClInclude Include="Source\Graphics\Model\ModelLoader\ModelLoader.hpp" />
     <ClInclude Include="Source\Graphics\Model\Model\Model.hpp" />
     <ClInclude Include="Source\Graphics\Model\Mesh\Mesh.hpp" />

@@ -55,7 +55,7 @@ namespace Engine::System::Assets
     void AssetManager::LoadDirectoryOrdered(const std::wstring& directory)
     {
         static const std::vector<std::string> textureExts = { ".png", ".jpg", ".jpeg", ".bmp" };
-        static const std::vector<std::string> modelExts = { ".fbx", ".obj", ".gltf" };
+        static const std::vector<std::string> modelExts = { ".fbx", ".obj", ".gltf", ".mdl" };
         static const std::vector<std::string> soundExts = { ".wav", ".mp3", ".ogg" };
 
         for (const auto& ext : textureExts) LoadDirectory(directory, ext);
@@ -90,7 +90,7 @@ namespace Engine::System::Assets
         {
             info.type = "Texture";
         }
-        else if (ext == ".fbx" || ext == ".obj" || ext == ".gltf")
+        else if (ext == ".fbx" || ext == ".obj" || ext == ".gltf" || ext == ".mdl")
         {
             info.type = "Model";
         }

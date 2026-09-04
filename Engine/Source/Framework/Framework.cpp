@@ -400,5 +400,9 @@ namespace Engine::System
 			{
 				return Engine::Graphics::ModelManager::GetInstance().Load(path);
 			});
+		assetManager.RegisterLoader(".mdl", [&](const std::wstring& path) -> uint64_t
+			{
+				return Engine::Graphics::ModelManager::GetInstance().Load(path);
+			});
 	}
 }

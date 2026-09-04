@@ -3,6 +3,7 @@
 #include "Graphics/Model/ModelID/ModelID.hpp"
 #include "Graphics/Model/Model/Model.hpp"
 #include "Graphics/Model/ModelLoader/ModelLoader.hpp"
+#include "Graphics/Model/BinaryModelLoader/BinaryModelLoader.hpp"
 #include <unordered_map>
 #include <memory>
 #include <string>
@@ -28,5 +29,6 @@ namespace Engine::Graphics
     private:
         std::unordered_map<ModelID, std::unique_ptr<Model>> models;
         std::unique_ptr<ModelLoader>                        modelLoader;
+        std::unique_ptr<BinaryModelLoader>                  binaryModelLoader;
     };
 } // Engine::Graphics

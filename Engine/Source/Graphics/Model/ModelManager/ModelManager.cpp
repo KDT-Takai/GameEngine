@@ -1,12 +1,16 @@
 #include "pch/pch.h"
 #include "ModelManager.hpp"
 #include "Utility/EngineContext/EngineContext.hpp"
+#include <filesystem>
+#include <algorithm>
+#include <cwctype>
 
 namespace Engine::Graphics
 {
     bool ModelManager::Initialize()
     {
         modelLoader = std::make_unique<ModelLoader>();
+        binaryModelLoader = std::make_unique<BinaryModelLoader>();
         LOG_INFO("ModelManagerの初期化に成功");
         return true;
     }
@@ -19,6 +23,7 @@ namespace Engine::Graphics
         }
         models.clear();
         modelLoader.reset();
+        binaryModelLoader.reset();
     }
 
     ModelID ModelManager::Load(const std::wstring& path)
@@ -32,8 +37,12 @@ namespace Engine::Graphics
             return id;
         }
 
+        // 拡張子でローダーを切り替え(.mdlはAssimp非依存のバイナリローダー)
+        std::wstring ext = std::filesystem::path(path).extension().wstring();
+        std::ranges::transform(ext, ext.begin(), [](wchar_t c) { return static_cast<wchar_t>(std::towlower(c)); });
+
         // モデルロード
-        auto model = modelLoader->Load(path);
+        auto model = (ext == L".mdl") ? binaryModelLoader->Load(path) : modelLoader->Load(path);
         if (!model)
         {
             LOG_ERROR("ModelManager: モデルのロードに失敗: {}", std::string(path.begin(), path.end()));
