@@ -59,7 +59,9 @@ GameEngine/
 ├─ Debugger/                  ★デバッグ専用プロジェクト(Release非同梱)
 │  ├─ Source/Logging/         DevLogSink(ファイルログ出力の実体)
 │  ├─ Logs/latest.log         ★実行するたびに上書きされるログファイル。AIはここを読めば実行結果が分かる
-│  └─ PROJECT_MAP.md          このファイル
+│  └─ docs/
+│     ├─ CONVENTIONS.md       ファイル構成・命名規則(実コードから観測した実態)
+│     └─ PROJECT_MAP.md       このファイル
 │
 └─ docs/
    ├─ NOTES.md                設計メモ・TODO(開発者の生の思考メモ、優先度付きTODOあり)

@@ -134,7 +134,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="PROJECT_MAP.md" />
+    <None Include="docs\PROJECT_MAP.md" />
+    <None Include="docs\CONVENTIONS.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
