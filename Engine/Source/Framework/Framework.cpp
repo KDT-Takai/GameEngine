@@ -114,9 +114,10 @@ namespace Engine::System
 				cameraData.projection
 			);
 
+#ifdef _DEBUG
 			entityInspector.Draw(Engine::System::ECS::Registry::GetInstance().GetRegistry());
-
 			assetBrowser.Draw();
+#endif
 
 			// ImGuiÇÃUIçXêV
 			imgui.Update();
@@ -249,7 +250,9 @@ namespace Engine::System
 		// SpriteRenderSystem
 		SetupEntities();
 		// EntityInspector
+#ifdef _DEBUG
 		RegisterComponents();
+#endif
 
 		return true;
 	}
@@ -320,6 +323,7 @@ namespace Engine::System
 		}
 	}
 
+#ifdef _DEBUG
 	void Framework::RegisterComponents()
 	{
 		entityInspector.RegisterComponent<Engine::Graphics::TransformComponent>(
@@ -365,6 +369,7 @@ namespace Engine::System
 			}
 		);
 	}
+#endif
 
 	void Framework::RegisterAssetLoaders()
 	{
