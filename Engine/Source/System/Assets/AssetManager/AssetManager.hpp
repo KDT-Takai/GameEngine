@@ -24,7 +24,7 @@ namespace Engine::System::Assets
         void LoadFile(const std::wstring& path);
 
         // 名前からID取得（拡張子あり・なし・大文字小文字無視）
-        Engine::Graphics::TextureID GetTextureID(const std::string& name) const;
+        Engine::Graphics::TextureID GetTextureID(const std::string& name, const std::wstring& directoryHint = L"") const;
 
         Engine::Graphics::ModelID GetModelID(const std::string& name) const;
         // SoundID GetSoundID(const std::string& name) const;
