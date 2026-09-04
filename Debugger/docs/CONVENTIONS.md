@@ -72,7 +72,7 @@ Engine::Debugger::Logging    // Debugger専用コード
 | サフィックス | 役割 | 例 |
 |---|---|---|
 | `~Manager` | ライフサイクル管理・ID→実体のキャッシュ | `TextureManager`, `AssetManager`, `ModelManager` |
-| `~Loader` | 外部ファイルの読み込み専任 | `ModelLoader`, `RuntimeShaderLoader` |
+| `~Loader` | 外部ファイルの読み込み専任 | `BinaryModelLoader`, `RuntimeShaderLoader` |
 | `~Renderer` | 実際の描画コマンド発行 | `SpriteRenderer`, `ModelRenderer` |
 | `~RenderSystem` | ECSの `view<>` を回して `~Renderer` を呼ぶ | `SpriteRenderSystem`, `ModelRenderSystem` |
 | `~Component` | ECSコンポーネント。データのみ、ロジックを持たない | `TransformComponent`, `SpriteComponent`, `ModelComponent` |

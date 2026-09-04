@@ -91,7 +91,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(ProjectDir)Source;$(SolutionDir)Debugger\Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(ProjectDir)Source;$(SolutionDir)Debugger\Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -110,7 +110,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(SolutionDir)Debugger\Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(SolutionDir)Debugger\Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -127,7 +127,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\Engine\external\SpdLog\Include;$(ProjectDir)Source;$(SolutionDir)Debugger\Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\Engine\external\SpdLog\Include;$(ProjectDir)Source;$(SolutionDir)Debugger\Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -146,7 +146,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(SolutionDir)Debugger\Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(SolutionDir)Debugger\Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -161,7 +161,6 @@
     <ClCompile Include="Source\Graphics\Model\ModelRenderer\ModelRenderer.cpp" />
     <ClCompile Include="Source\Graphics\Model\ModelManager\ModelManager.cpp" />
     <ClCompile Include="Source\Graphics\Model\BinaryModelLoader\BinaryModelLoader.cpp" />
-    <ClCompile Include="Source\Graphics\Model\ModelLoader\ModelLoader.cpp" />
     <ClCompile Include="Source\Graphics\Model\Model\Model.cpp" />
     <ClCompile Include="Source\Graphics\Model\Mesh\Mesh.cpp" />
     <ClCompile Include="Source\System\Assets\AssetManager\AssetManager.cpp" />
@@ -211,7 +210,6 @@
     <ClInclude Include="Source\Graphics\Model\ModelRenderer\ModelRenderer.hpp" />
     <ClInclude Include="Source\Graphics\Model\ModelManager\ModelManager.hpp" />
     <ClInclude Include="Source\Graphics\Model\BinaryModelLoader\BinaryModelLoader.hpp" />
-    <ClInclude Include="Source\Graphics\Model\ModelLoader\ModelLoader.hpp" />
     <ClInclude Include="Source\Graphics\Model\Model\Model.hpp" />
     <ClInclude Include="Source\Graphics\Model\Mesh\Mesh.hpp" />
     <ClInclude Include="Source\Graphics\Model\Material\Material.hpp" />

@@ -392,14 +392,6 @@ namespace Engine::System
 			{
 				return textureManager->Load(path);
 			});
-		assetManager.RegisterLoader(".fbx", [&](const std::wstring& path) -> uint64_t
-			{
-				return Engine::Graphics::ModelManager::GetInstance().Load(path);
-			});
-		assetManager.RegisterLoader(".obj", [&](const std::wstring& path) -> uint64_t
-			{
-				return Engine::Graphics::ModelManager::GetInstance().Load(path);
-			});
 		assetManager.RegisterLoader(".mdl", [&](const std::wstring& path) -> uint64_t
 			{
 				return Engine::Graphics::ModelManager::GetInstance().Load(path);

@@ -79,7 +79,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(SolutionDir)Engine\external\SpdLog\Include;$(SolutionDir)Engine\external;$(SolutionDir)Engine;$(SolutionDir)Engine\Source;$(ProjectDir)Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\SpdLog\Include;$(SolutionDir)Engine\external;$(SolutionDir)Engine;$(SolutionDir)Engine\Source;$(ProjectDir)Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -92,7 +92,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(SolutionDir)Engine\external\SpdLog\Include;$(SolutionDir)Engine\external;$(SolutionDir)Engine;$(SolutionDir)Engine\Source;$(ProjectDir)Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\SpdLog\Include;$(SolutionDir)Engine\external;$(SolutionDir)Engine;$(SolutionDir)Engine\Source;$(ProjectDir)Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(SolutionDir)Engine\external\SpdLog\Include;$(SolutionDir)Engine\external;$(SolutionDir)Engine;$(SolutionDir)Engine\Source;$(ProjectDir)Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\SpdLog\Include;$(SolutionDir)Engine\external;$(SolutionDir)Engine;$(SolutionDir)Engine\Source;$(ProjectDir)Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -116,7 +116,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(SolutionDir)Engine\external\SpdLog\Include;$(SolutionDir)Engine\external;$(SolutionDir)Engine;$(SolutionDir)Engine\Source;$(ProjectDir)Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\SpdLog\Include;$(SolutionDir)Engine\external;$(SolutionDir)Engine;$(SolutionDir)Engine\Source;$(ProjectDir)Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemDefinitionGroup>

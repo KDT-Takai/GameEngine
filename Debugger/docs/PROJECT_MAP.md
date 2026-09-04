@@ -25,14 +25,14 @@
 GameEngine/
 ├─ App/                      実行用プロジェクト
 │  ├─ main.cpp                エントリポイント(Framework::Initialize/Run/Finalizeを呼ぶだけ)
-│  └─ Assets/                 ゲームアセット(Models/*.fbx, Textures/*.png, Test/*.png)
+│  └─ Assets/                 ゲームアセット(Models/*.mdl [+変換元の*.fbx], Textures/*.png, Test/*.png)
 │
 ├─ Engine/                    エンジン本体(Release同梱)
 │  ├─ Source/
 │  │  ├─ Framework/           初期化・メインループ統括(Framework.hpp/.cpp)
 │  │  ├─ Graphics/
 │  │  │  ├─ DX12/             D3D12デバイス・レンダラー・デスクリプタヒープ等の低レベルラッパー
-│  │  │  ├─ Model/            Assimp経由のモデル読み込み・描画(ModelLoader/ModelManager/ModelRenderer/Mesh/Material)
+│  │  │  ├─ Model/            独自バイナリ`.mdl`のモデル読み込み・描画(BinaryModelLoader/ModelManager/ModelRenderer/Mesh/Material。2026-09-05にAssimp版ModelLoaderを撤去、Assimp依存なし)
 │  │  │  ├─ Sprite/           2Dスプライト描画
 │  │  │  ├─ Primitive/        Triangle(テスト用、削除予定 by NOTES.md)
 │  │  │  ├─ Texture/          テクスチャ読み込み・管理
@@ -54,7 +54,7 @@ GameEngine/
 │  │  │  └─ EngineContext/    サービスロケータ的な仕組み
 │  │  └─ pch/                 プリコンパイル済みヘッダ(Windows/D3D12/STL/ImGuiを一括include)
 │  ├─ Assets/Shader/          HLSLシェーダー(Model.hlsl, Sprite.hlsl, Triangle.hlsl)
-│  └─ external/                Assimp, ImGui, entt, SpdLog等のサードパーティ
+│  └─ external/                ImGui, entt, SpdLog等のサードパーティ(Assimpは撤去済み、変換ツール側のみで使用)
 │
 ├─ Debugger/                  ★デバッグ専用プロジェクト(Release非同梱)
 │  ├─ Source/Logging/         DevLogSink(ファイルログ出力の実体)
@@ -93,17 +93,21 @@ DirectXMathは行ベクトル規約(`v' = v * M`)。HLSL側でこれと整合さ
 `#pragma pack_matrix(row_major)` が必要(`Model.hlsl`で対応済み)。これが無いとC++側の行列と
 HLSL側のデフォルト(column_major)がズレて、変換が壊れる(過去に発生した不具合)。
 
-### 4. Assimp経由のモデル読み込み
-FBXのマテリアルは、エクスポート元(特にUnityなど)によってテクスチャの格納チャンネルが
-`aiTextureType_DIFFUSE` とは限らない(`BASE_COLOR`や`EMISSIVE`に入ることがある)。
-`ModelLoader::ProcessMaterial` は複数チャンネルを候補として順に確認する実装になっている。
+### 4. モデル読み込み(`.mdl`バイナリ、Assimp非依存)
+ランタイムはAssimpを使わず、独自バイナリ形式`.mdl`を`BinaryModelLoader`で読むだけ(2026-09-05、
+Assimp版`ModelLoader`を撤去)。`.fbx`から`.mdl`への変換は別リポジトリ[ModelConverter](https://github.com/ShaF-u/ModelConverter)の
+CLIツール(`Tools/ModelConverter.exe`)で事前に行う。新規モデルはこのツールを通さないと
+エンジンで読み込めない(直接FBXを読むフォールバックは無い)。
+FBXのマテリアル変換時の注意点(テクスチャ格納チャンネルが`aiTextureType_DIFFUSE`とは限らず
+`BASE_COLOR`や`EMISSIVE`に入ることがある等)はModelConverter側の`ProcessMaterial`の話であり、
+このリポジトリのコードには存在しない。
 
 ## 現在の実装状況(docs/NOTES.mdより抜粋・整理)
 
 ### 実装済み
 - DirectX12基盤(Device/Renderer/RendererContext/DescriptorHeap)
 - ECS(entt)基盤、TransformComponent/SpriteComponent/ModelComponent/CameraComponent
-- スプライト描画、モデル描画(Assimp経由、テクスチャ解決含む)
+- スプライト描画、モデル描画(独自バイナリ`.mdl`経由、テクスチャ解決含む。Assimpはランタイム非依存)
 - EntityInspector(ImGui、Debugger行き)
 - AssetManager(拡張子別ローダー登録、ディレクトリフォールバック解決)
 - ファイルログ出力(`Debugger/Logs/latest.log`、DevLogSink経由、Debugのみ)

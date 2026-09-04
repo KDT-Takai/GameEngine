@@ -123,9 +123,6 @@
     <ClCompile Include="Source\Graphics\Model\BinaryModelLoader\BinaryModelLoader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Model\ModelLoader\ModelLoader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Graphics\Model\ModelManager\ModelManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -312,9 +309,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\Model\BinaryModelLoader\BinaryModelLoader.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\Model\ModelLoader\ModelLoader.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\Model\ModelManager\ModelManager.hpp">

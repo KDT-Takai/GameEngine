@@ -1,7 +1,6 @@
 #include "pch/pch.h"
 #include "AssetManager.hpp"
 #include <filesystem>
-#include <unordered_set>
 
 namespace Engine::System::Assets
 {
@@ -53,53 +52,12 @@ namespace Engine::System::Assets
         }
     }
 
-    std::unordered_set<std::string> AssetManager::CollectStems(const std::wstring& directory, const std::string& ext) const
-    {
-        std::unordered_set<std::string> stems;
-        if (!std::filesystem::exists(directory)) return stems;
-
-        for (const auto& entry : std::filesystem::recursive_directory_iterator(directory))
-        {
-            if (!entry.is_regular_file()) continue;
-            if (ToLower(GetExtension(entry.path().wstring())) != ext) continue;
-            stems.insert(ToLower(GetFileName(entry.path().wstring())));
-        }
-        return stems;
-    }
-
     void AssetManager::LoadDirectoryOrdered(const std::wstring& directory)
     {
         static const std::vector<std::string> textureExts = { ".png", ".jpg", ".jpeg", ".bmp" };
-        static const std::vector<std::string> modelExts = { ".fbx", ".obj", ".gltf" };
         static const std::vector<std::string> soundExts = { ".wav", ".mp3", ".ogg" };
 
         for (const auto& ext : textureExts) LoadDirectory(directory, ext);
-
-        // 同名(拡張子抜き)の.mdlが既に存在するモデルは.fbx/.obj/.gltfを二重ロードしない。
-        // 放置すると同じモデルがCPU/GPU上に二重に存在するうえ、AssetManagerの名前引きmapが
-        // 後からロードされた拡張子で黙って上書きされ、どちらが使われるかロード順に依存してしまう。
-        std::unordered_set<std::string> mdlStems = CollectStems(directory, ".mdl");
-        if (std::filesystem::exists(directory))
-        {
-            for (const auto& ext : modelExts)
-            {
-                for (const auto& entry : std::filesystem::recursive_directory_iterator(directory))
-                {
-                    if (!entry.is_regular_file()) continue;
-                    if (ToLower(GetExtension(entry.path().wstring())) != ext) continue;
-
-                    std::wstring path = entry.path().wstring();
-                    if (mdlStems.contains(ToLower(GetFileName(path))))
-                    {
-                        LOG_INFO("同名の.mdlが存在するためスキップ: {}", std::string(path.begin(), path.end()));
-                        continue;
-                    }
-
-                    LoadFile(path);
-                }
-            }
-        }
-
         LoadDirectory(directory, ".mdl");
         for (const auto& ext : soundExts) LoadDirectory(directory, ext);
     }
@@ -131,7 +89,7 @@ namespace Engine::System::Assets
         {
             info.type = "Texture";
         }
-        else if (ext == ".fbx" || ext == ".obj" || ext == ".gltf" || ext == ".mdl")
+        else if (ext == ".mdl")
         {
             info.type = "Model";
         }
