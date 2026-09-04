@@ -5,6 +5,7 @@
 #include <functional>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 
 namespace Engine::System::Assets
 {
@@ -50,6 +51,9 @@ namespace Engine::System::Assets
         static std::string  ToLower(const std::string& str);
         static std::string  GetExtension(const std::wstring& path);
         static std::string  GetFileName(const std::wstring& path);
+
+        // directory内でextに一致するファイルの拡張子なしファイル名(小文字)集合を返す
+        std::unordered_set<std::string> CollectStems(const std::wstring& directory, const std::string& ext) const;
 
         // ファイル名
         std::unordered_map<std::string, AssetInfo> assets;
