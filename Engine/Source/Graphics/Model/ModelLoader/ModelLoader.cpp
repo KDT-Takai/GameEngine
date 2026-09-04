@@ -158,23 +158,58 @@ namespace Engine::Graphics
         aiString materialName;
         aiMat->Get(AI_MATKEY_NAME, materialName);
 
-        // ベースカラー
-        aiColor4D color;
-        if (aiMat->Get(AI_MATKEY_COLOR_DIFFUSE, color) == AI_SUCCESS)
+        static const aiTextureType kColorTextureTypes[] = {
+            aiTextureType_DIFFUSE,
+            aiTextureType_BASE_COLOR,
+            aiTextureType_EMISSIVE,
+        };
+
+        aiTextureType colorTextureType = aiTextureType_NONE;
+        for (aiTextureType type : kColorTextureTypes)
         {
-            material.color = { color.r, color.g, color.b, color.a };
+            if (aiMat->GetTextureCount(type) > 0)
+            {
+                colorTextureType = type;
+                break;
+            }
         }
 
-        // diffuseテクスチャ
-        if (aiMat->GetTextureCount(aiTextureType_DIFFUSE) > 0)
+        aiColor4D matchedColor;
+        bool gotMatchedColor = false;
+        if (colorTextureType == aiTextureType_EMISSIVE)
+        {
+            gotMatchedColor = (aiMat->Get(AI_MATKEY_COLOR_EMISSIVE, matchedColor) == AI_SUCCESS);
+        }
+        else if (colorTextureType == aiTextureType_BASE_COLOR)
+        {
+            gotMatchedColor = (aiMat->Get(AI_MATKEY_BASE_COLOR, matchedColor) == AI_SUCCESS);
+        }
+        else if (colorTextureType == aiTextureType_DIFFUSE)
+        {
+            gotMatchedColor = (aiMat->Get(AI_MATKEY_COLOR_DIFFUSE, matchedColor) == AI_SUCCESS);
+        }
+        if (gotMatchedColor &&
+            (matchedColor.r > 0.0f || matchedColor.g > 0.0f || matchedColor.b > 0.0f))
+        {
+            material.color = { matchedColor.r, matchedColor.g, matchedColor.b, matchedColor.a };
+        }
+        if (colorTextureType != aiTextureType_NONE)
         {
             aiString texPath;
-            aiMat->GetTexture(aiTextureType_DIFFUSE, 0, &texPath);
+            aiMat->GetTexture(colorTextureType, 0, &texPath);
 
             // テクスチャ名でAssetManagerから取得
-            std::string texName = std::filesystem::path(texPath.C_Str()).filename().string();
+            std::string rawTexPath = texPath.C_Str();
+            std::string texName = rawTexPath;
+            auto slashPos = rawTexPath.find_last_of("/\\");
+            if (slashPos != std::string::npos)
+            {
+                texName = rawTexPath.substr(slashPos + 1);
+            }
 
-            material.diffuseTexture = Engine::System::Assets::AssetManager::GetInstance().GetTextureID(texName);
+            material.diffuseTexture = Engine::System::Assets::AssetManager::GetInstance().GetTextureID(
+                texName,
+                std::wstring(directory.begin(), directory.end()));
             LOG_DEBUG("Material: {} Texture: {} ID: {}", material.name, texName, material.diffuseTexture);
         }
         return material;

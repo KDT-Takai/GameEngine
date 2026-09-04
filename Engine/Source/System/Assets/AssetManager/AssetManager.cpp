@@ -111,7 +111,7 @@ namespace Engine::System::Assets
             std::string(path.begin(), path.end()));
     }
 
-    Engine::Graphics::TextureID AssetManager::GetTextureID(const std::string& name) const
+    Engine::Graphics::TextureID AssetManager::GetTextureID(const std::string& name, const std::wstring& directoryHint) const
     {
         std::string lower = ToLower(name);
 
@@ -136,6 +136,38 @@ namespace Engine::System::Assets
                 fileLower == nameWithoutExt)
             {
                 return static_cast<Engine::Graphics::TextureID>(info.id);
+            }
+        }
+
+        if (!directoryHint.empty())
+        {
+            std::filesystem::path hintDir =
+                std::filesystem::path(directoryHint).lexically_normal();
+
+            Engine::Graphics::TextureID candidate = Engine::Graphics::InvalidTextureID;
+            int matchCount = 0;
+
+            for (const auto& [key, info] : assets)
+            {
+                if (info.type != "Texture") continue;
+
+                std::filesystem::path assetDir =
+                    std::filesystem::path(info.fullPath).parent_path().lexically_normal();
+
+                if (ToLower(assetDir.string()) == ToLower(hintDir.string()))
+                {
+                    candidate = static_cast<Engine::Graphics::TextureID>(info.id);
+                    ++matchCount;
+                }
+            }
+
+            if (matchCount == 1)
+            {
+                LOG_INFO(
+                    "Texture name mismatch, using directory fallback: {} ({})",
+                    name,
+                    std::string(directoryHint.begin(), directoryHint.end()));
+                return candidate;
             }
         }
 
