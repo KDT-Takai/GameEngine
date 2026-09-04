@@ -1,3 +1,5 @@
+#pragma pack_matrix(row_major)
+
 // 定数バッファ
 cbuffer TransformBuffer : register(b0)
 {
