@@ -14,8 +14,10 @@ This file covers only what those two don't: build/run commands and the cross-fil
 Visual Studio 2022 (v143 toolset) solution, MSVC only. No CI, no test suite, no linter configured — don't invent commands for these.
 
 ```powershell
-& "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" DirectX12.sln /p:Configuration=Debug /p:Platform=x64 /m
+& "F:\visualstudioIDE\MSBuild\Current\Bin\MSBuild.exe" DirectX12.sln /p:Configuration=Debug /p:Platform=x64 /m
 ```
+
+(VS2022のインストール先はマシンによって異なる。`vswhere -all -property installationPath`で確認できる。)
 
 - Add `/t:App`, `/t:Engine`, or `/t:Debugger` to build a single project.
 - Configurations: `Debug` / `Release`. Platforms: `x64` (the only one actually verified) / `Win32` (present but unexercised).
@@ -49,6 +51,10 @@ Most files under `Engine/Source` are saved as **Shift-JIS (CP932)**, not UTF-8. 
 Before editing a file with Japanese content in it:
 1. Check whether it's actually CP932 — most `.cpp`/`.hpp` under `Engine/Source` are; `.vcxproj` / `.sln` / `.filters` / `.md` files are UTF-8 and safe to edit normally.
 2. If it's CP932, do a byte-safe replace instead of a normal text edit: read the file via `[System.Text.Encoding]::GetEncoding(932)`, do a literal (non-regex, or single-line-only regex) string replacement, and write it back with the same encoding. Never run a multi-line/DOTALL regex across a CP932 file — an overly broad match has previously deleted entire functions by accident.
+
+## Tools
+
+`Tools/ModelConverter/` — built CLI tool (`ModelConverter.exe` + `assimp-vc143-mt.dll`) that converts `.fbx` to this engine's own binary model format `.mdl`, so the runtime can skip Assimp parsing. Source lives in the separate [ModelConverter](https://github.com/ShaF-u/ModelConverter) repo; only build artifacts are checked in here. Runtime side: `Engine/Source/Graphics/Model/BinaryModelLoader/` reads `.mdl`, registered in `Framework::RegisterAssetLoaders()` alongside the existing Assimp-based `.fbx`/`.obj` loader — both extensions coexist, `ModelManager::Load()` picks the loader by extension. `App/Assets/Models/Kipfel.mdl` is a converted-and-committed test asset; see `Tools/ModelConverter/README.md` for regeneration steps.
 
 ## Other things worth knowing before touching them
 
