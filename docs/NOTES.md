@@ -203,3 +203,101 @@ AddComponent の空構造体対応の整理
 今後
 EntityInspectorのコンポーネントの登録をFrameWorkでやるのではなく別のクラスで行うようにする
 その後モデル
+
+
+## モデル
+ModelVertex.hpp
+役割: 頂点データの構造体定義のみ
+持つもの:
+  position   （位置）
+  normal     （法線）
+  uv         （テクスチャ座標）
+  tangent    （接線）
+  bitangent  （従法線）
+Material
+役割: 1つのマテリアルのデータを持つ
+持つもの:
+  diffuseTexture  （色テクスチャのID）
+  color           （ベースカラー）
+将来追加:
+  normalMap       （法線マップ）
+  roughnessMap    （粗さ）
+  metallicMap     （金属度）
+Mesh
+役割: 1つのメッシュのGPUリソースを管理
+持つもの:
+  VertexBuffer
+  IndexBuffer
+  Material参照
+やること:
+  GPUリソースの生成・破棄
+  Draw呼び出し
+Model
+役割: 複数のMeshをまとめたもの
+持つもの:
+  Mesh の配列
+  モデル名
+将来追加:
+  アニメーション情報
+  ボーン情報
+ModelID
+役割: 型安全なモデルの識別子
+TextureIDと同じ設計
+  using ModelID = uint64_t;
+  static constexpr ModelID InvalidModelID = 0;
+ModelLoader
+役割: Assimpを使ってファイルを読み込んでModelを生成する
+やること:
+  aiScene からメッシュデータを取得
+  頂点・インデックスデータを変換
+  マテリアル・テクスチャ情報を取得
+  Model を返す
+ModelManager
+役割: Modelのロード・キャッシュ・全破棄
+TextureManagerと同じ設計
+持つもの:
+  unordered_map<ModelID, unique_ptr<Model>>  キャッシュ
+やること:
+  Load(path) → ModelID
+  Get(id)    → Model*
+  Finalize() → 全破棄
+ModelRenderer
+役割: Modelを描画する
+持つもの:
+  PSO
+  RootSignature
+  ConstantBuffer<ModelTransformBuffer>
+やること:
+  Initialize（PSO・RootSignature生成）
+  Draw（cmdList・Model・カメラ行列を受け取って描画）
+ModelRenderSystem
+役割: ENTTのview<>でModelComponentを持つEntityを回してModelRendererを呼ぶ
+SpriteRenderSystemと同じ設計
+ModelComponent
+役割: ENTTのコンポーネント、パラメータのみ
+持つもの:
+  ModelID   modelID
+  bool      visible
+依存関係の流れ
+ModelLoader
+    ↓ Model を生成
+ModelManager
+    ↓ Model を管理・提供
+ModelRenderer
+    ↓ Model を描画
+ModelRenderSystem
+    ↓ ENTT で回す
+
+1. ModelVertex.hpp
+2. Material.hpp / .cpp
+3. Mesh.hpp / .cpp
+4. Model.hpp / .cpp
+5. ModelLoader.hpp / .cpp（ModelManagerが内包）
+6. ModelManager.hpp / .cpp
+7. ModelRenderer.hpp / .cpp
+8. ModelRenderSystem.hpp / .cpp
+9. ModelComponent.hpp
+
+モデルやテクスチャの改善点
+名前の衝突　Kipfel.png Kipfel.fbxが衝突するので対策をする
+ロードを明示的にテクスチャを指定できるようにする

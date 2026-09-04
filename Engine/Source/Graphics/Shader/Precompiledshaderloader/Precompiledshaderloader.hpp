@@ -1,5 +1,5 @@
 #pragma once
-#include "IShaderLoader.hpp"
+#include "../IShaderLoader/IShaderLoader.hpp"
 
 namespace Engine::Graphics
 {

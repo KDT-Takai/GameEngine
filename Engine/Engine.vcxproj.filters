@@ -72,13 +72,13 @@
     <ClCompile Include="Source\Graphics\DX12\Descriptor\DX12DescriptorHeapManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Primitive\Triangle.cpp">
+    <ClCompile Include="Source\Graphics\Primitive\Triangle\Triangle.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Shader\RuntimeShaderLoader.cpp">
+    <ClCompile Include="Source\Graphics\Shader\RuntimeShaderLoader\RuntimeShaderLoader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Shader\Precompiledshaderloader.cpp">
+    <ClCompile Include="Source\Graphics\Shader\Precompiledshaderloader\Precompiledshaderloader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\Texture\Texture\Texture.cpp">
@@ -112,6 +112,30 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\EntityInspector\EntityInspector.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Assets\AssetManager\AssetManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Assets\AssetBrowser\AssetBrowser.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Model\Mesh\Mesh.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Model\Model\Model.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Model\ModelLoader\ModelLoader.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Model\ModelManager\ModelManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Model\ModelRenderer\ModelRenderer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Model\ModelRenderSystem\ModelRenderSystem.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -191,16 +215,16 @@
     <ClInclude Include="Source\Graphics\DX12\Descriptor\DX12DescriptorHeapManager.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\Primitive\Triangle.hpp">
+    <ClInclude Include="Source\Graphics\Primitive\Triangle\Triangle.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\Shader\IShaderLoader.hpp">
+    <ClInclude Include="Source\Graphics\Shader\IShaderLoader\IShaderLoader.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\Shader\RuntimeShaderLoader.hpp">
+    <ClInclude Include="Source\Graphics\Shader\RuntimeShaderLoader\RuntimeShaderLoader.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\Shader\Precompiledshaderloader.hpp">
+    <ClInclude Include="Source\Graphics\Shader\Precompiledshaderloader\Precompiledshaderloader.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\ConstantBuffer\ConstantBuffer.hpp">
@@ -270,6 +294,45 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Source\System\EntityInspector\EntityInspector.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Assets\AssetManager\AssetManager.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Assets\AssetBrowser\AssetBrowser.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Model\ModelVertex\ModelVertex.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Model\Material\Material.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Model\Mesh\Mesh.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Model\Model\Model.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Model\ModelLoader\ModelLoader.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Model\ModelManager\ModelManager.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Model\ModelRenderer\ModelRenderer.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Model\ModelRenderSystem\ModelRenderSystem.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Model\ModelComponent\ModelComponent.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Model\ModelID\ModelID.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Component\ModelComponent\ModelComponent.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

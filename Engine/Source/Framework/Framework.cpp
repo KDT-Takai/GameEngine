@@ -9,7 +9,7 @@ namespace Engine::System
 	{
 		Engine::Utility::Logger::Create();
 
-		// EngineContext の生成（最初に作る）
+		// EngineContextの生成
 		Engine::Utility::EngineContext::Create();
 
 		// 仮想解像度の設定
@@ -22,6 +22,9 @@ namespace Engine::System
 
 		// ECSのレジストリ生成
 		Engine::System::ECS::Registry::Create();
+
+		// AssetManagerの生成
+		Engine::System::Assets::AssetManager::Create();
 
 		// ウィンドウの生成
 		window = std::make_unique<Window>();
@@ -51,22 +54,17 @@ namespace Engine::System
 
 	void Framework::Run()
 	{
-		// 入力の更新
-		Engine::System::Input::InputManager::GetInstance().Update();
-
 		auto& renderer = Engine::Graphics::DX12Renderer::GetInstance();
 		auto* context = renderer.GetContext();
 		auto& imgui = Engine::System::ImGuiManager::GetInstance();
-
-		// 2D用の正射影行列
-		auto cameraData = cameraSystem.GetMainCameraData(
-			Engine::System::ECS::Registry::GetInstance().GetRegistry()
-		);
 
 		float angle = 0.0f;
 
 		while (true)
 		{
+			// 入力の更新
+			Engine::System::Input::InputManager::GetInstance().Update();
+
 			if (!window->ProcessMessage())
 			{
 				break;
@@ -90,10 +88,10 @@ namespace Engine::System
 			);
 
 			// Triangle（テスト用）
-			angle += 0.01f;
-			auto wvp = DirectX::XMMatrixRotationZ(angle);
-			triangle->SetWVP(wvp);
-			triangle->Draw(context->GetCmdList().Get());
+			//angle += 0.01f;
+			//auto wvp = DirectX::XMMatrixRotationZ(angle);
+			//triangle->SetWVP(wvp);
+			//triangle->Draw(context->GetCmdList().Get());
 
 			// スプライト描画
 			spriteRenderSystem.Update(
@@ -105,9 +103,20 @@ namespace Engine::System
 				cameraData.projection
 			);
 
-			entityInspector.Draw(
-				Engine::System::ECS::Registry::GetInstance().GetRegistry()
+			// モデル描画
+			modelRenderSystem.Update(
+				Engine::System::ECS::Registry::GetInstance().GetRegistry(),
+				context->GetCmdList().Get(),
+				*modelRenderer,
+				Engine::Graphics::ModelManager::GetInstance(),
+				*textureManager,
+				cameraData.view,
+				cameraData.projection
 			);
+
+			entityInspector.Draw(Engine::System::ECS::Registry::GetInstance().GetRegistry());
+
+			assetBrowser.Draw();
 
 			// ImGuiのUI更新
 			imgui.Update();
@@ -210,6 +219,33 @@ namespace Engine::System
 			return false;
 		}
 
+		// ModelManager
+		Engine::Graphics::ModelManager::Create();
+		if (!Engine::Graphics::ModelManager::GetInstance().Initialize())
+		{
+			LOG_ERROR("ModelManagerの初期化に失敗");
+			return false;
+		}
+		Engine::Graphics::ModelManager::GetInstance().AddContext();
+
+		// ModelRenderer
+		modelRenderer = std::make_unique<Engine::Graphics::ModelRenderer>();
+		if (!modelRenderer->Initialize(
+			*shaderLoader,
+			L"../Engine/Assets/Shader/Model.hlsl",
+			L"../Engine/Assets/Shader/Model.hlsl",
+			context->GetBackBufferFormat(),
+			context->GetDepthBufferFormat()
+		))
+		{
+			LOG_ERROR("ModelRendererの初期化に失敗");
+			return false;
+		}
+
+		RegisterAssetLoaders();
+//		Engine::System::Assets::AssetManager::GetInstance().LoadDirectory(L"../App/Assets/");
+		Engine::System::Assets::AssetManager::GetInstance().LoadDirectoryOrdered(L"../App/Assets/");
+
 		// SpriteRenderSystem
 		SetupEntities();
 		// EntityInspector
@@ -225,9 +261,17 @@ namespace Engine::System
 		textureManager->Finalize();
 		textureManager.reset();
 
+		Engine::System::Assets::AssetManager::Delete();
+
 		triangle->Finalize();
 		triangle.reset();
 		shaderLoader.reset();
+
+		modelRenderer->Finalize();
+		modelRenderer.reset();
+
+		Engine::Graphics::ModelManager::GetInstance().Finalize();
+		Engine::Graphics::ModelManager::Delete();
 
 		Engine::System::ImGuiManager::GetInstance().Finalize();
 		Engine::System::ImGuiManager::Delete();
@@ -236,22 +280,44 @@ namespace Engine::System
 		Engine::Graphics::DX12Renderer::GetInstance().Finalize();
 		Engine::Graphics::DX12Renderer::Delete();
 	}
+
 	void Framework::SetupEntities()
 	{
 		auto& reg = Engine::System::ECS::Registry::GetInstance();
 
 		// カメラエンティティ作成
 		auto cameraEntity = reg.CreateEntity();
-		reg.AddComponent<Engine::Graphics::TransformComponent>(cameraEntity);
-		reg.AddComponent<Engine::System::Camera::CameraComponent>(cameraEntity);
+		auto& cameraTransform = reg.AddComponent<Engine::Graphics::TransformComponent>(cameraEntity);
+		cameraTransform.position = { 0.0f, 0.0f, -20.0f };
+		auto& camera = reg.AddComponent<Engine::System::Camera::CameraComponent>(cameraEntity);
+		camera.projectionType = Engine::System::Camera::CameraComponent::ProjectionType::Perspective;
+		camera.fov = 60.0f;
+		camera.nearClip = 0.1f;
+		camera.farClip = 1000.0f;
 		reg.EmplaceComponent<Engine::System::ECS::MainCameraTag>(cameraEntity);
 
 		// テスト用エンティティ作成
 		auto entity = reg.CreateEntity();
 		reg.AddComponent<Engine::Graphics::TransformComponent>(entity);
 		auto& sprite = reg.AddComponent<Engine::Graphics::SpriteComponent>(entity);
-		sprite.textureID = textureManager->Load(L"../App/Assets/Test/Test.png");
+		sprite.textureID = Engine::System::Assets::AssetManager::GetInstance().GetTextureID("Test");
 		sprite.size = { 500.0f, 500.0f };
+
+		// モデルエンティティ作成
+		auto modelEntity = reg.CreateEntity();
+		auto& modelTransform = reg.AddComponent<Engine::Graphics::TransformComponent>(modelEntity);
+		modelTransform.position = { 0.0f, 0.0f, 0.0f };
+		modelTransform.scale = { 1.0f, 1.0f, 1.0f };
+
+		auto& modelComp = reg.AddComponent<Engine::Graphics::ModelComponent>(modelEntity);
+		modelComp.modelID = Engine::System::Assets::AssetManager::GetInstance().GetModelID("Kipfel");
+
+		// SetupEntities を一時的に変更
+		LOG_DEBUG("検索: {}", "Kipfel");
+		for (const auto& [key, info] : Engine::System::Assets::AssetManager::GetInstance().GetAssets())
+		{
+			LOG_DEBUG("登録済み: key={} fileName={} type={}", key, info.fileName, info.type);
+		}
 	}
 
 	void Framework::RegisterComponents()
@@ -262,8 +328,8 @@ namespace Engine::System
 			{
 				auto& t = reg.get<Engine::Graphics::TransformComponent>(entity);
 				ImGui::DragFloat3("Position", &t.position.x, 1.0f);
-				ImGui::DragFloat("Rotation", &t.rotation, 0.01f);
-				ImGui::DragFloat2("Scale", &t.scale.x, 0.1f);
+				ImGui::DragFloat3("Rotation", &t.rotation.x, 0.01f);
+				ImGui::DragFloat3("Scale", &t.scale.x, 0.1f);
 			}
 		);
 
@@ -298,5 +364,36 @@ namespace Engine::System
 				ImGui::DragFloat("Rotation", &c.rotation, 0.01f);
 			}
 		);
+	}
+
+	void Framework::RegisterAssetLoaders()
+	{
+		auto& assetManager = Engine::System::Assets::AssetManager::GetInstance();
+
+		// 各種テクスチャローダー登録
+		assetManager.RegisterLoader(".png", [&](const std::wstring& path) -> uint64_t
+			{
+				return textureManager->Load(path);
+			});
+		assetManager.RegisterLoader(".jpg", [&](const std::wstring& path) -> uint64_t
+			{
+				return textureManager->Load(path);
+			});
+		assetManager.RegisterLoader(".jpeg", [&](const std::wstring& path) -> uint64_t
+			{
+				return textureManager->Load(path);
+			});
+		assetManager.RegisterLoader(".bmp", [&](const std::wstring& path) -> uint64_t
+			{
+				return textureManager->Load(path);
+			});
+		assetManager.RegisterLoader(".fbx", [&](const std::wstring& path) -> uint64_t
+			{
+				return Engine::Graphics::ModelManager::GetInstance().Load(path);
+			});
+		assetManager.RegisterLoader(".obj", [&](const std::wstring& path) -> uint64_t
+			{
+				return Engine::Graphics::ModelManager::GetInstance().Load(path);
+			});
 	}
 }

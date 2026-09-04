@@ -1,6 +1,6 @@
 #pragma once
 #include "Graphics/DX12/Type.hpp"
-#include "Graphics/Shader/IShaderLoader.hpp"
+#include "Graphics/Shader/IShaderLoader/IShaderLoader.hpp"
 #include "Graphics/ConstantBuffer/ConstantBuffer.hpp"
 #include "Graphics/ConstantBuffer/TransformBuffer.hpp"
 #include <dxgi1_6.h>

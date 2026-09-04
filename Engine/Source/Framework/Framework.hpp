@@ -6,6 +6,8 @@
 #include "System/Input/InputManager/InputManager.hpp"
 #include "System/Camera/CameraSystem/CameraSystem.hpp"
 #include "System/EntityInspector/EntityInspector.hpp"
+#include "System/Assets/AssetManager/AssetManager.hpp"
+#include "System/Assets/AssetBrowser/AssetBrowser.hpp"
 
 #include "Utility/Singleton/Singleton.hpp"
 
@@ -13,11 +15,16 @@
 #include "Graphics/DX12/Renderer/DX12Renderer.hpp"
 #include "Graphics/DX12/Descriptor/DX12DescriptorHeapManager.hpp"
 
-#include "Graphics/Shader/RuntimeShaderLoader.hpp"
-#include "Graphics/Primitive/Triangle.hpp"
+#include "Graphics/Shader/RuntimeShaderLoader/RuntimeShaderLoader.hpp"
+#include "Graphics/Primitive/Triangle/Triangle.hpp"
 #include "Graphics/Texture/TextureManager/TextureManager.hpp"
 #include "Graphics/Sprite/SpriteRenderer/SpriteRenderer.hpp"
 #include "Graphics/Sprite/SpriteRenderSystem/SpriteRenderSystem.hpp"
+// もでる
+#include "Graphics/Model/ModelManager/ModelManager.hpp"
+#include "Graphics/Model/ModelRenderer/ModelRenderer.hpp"
+#include "Graphics/Model/ModelRenderSystem/ModelRenderSystem.hpp"
+#include "Graphics/Component/ModelComponent/ModelComponent.hpp"
 
 // 前方宣言
 namespace Engine::Graphics
@@ -41,6 +48,7 @@ namespace Engine::System
 		void DX12Finalize();
 		void SetupEntities();
 		void RegisterComponents();
+		void RegisterAssetLoaders();
 		// ウィンドウ
 		std::unique_ptr<Window> window;
 
@@ -56,6 +64,13 @@ namespace Engine::System
 		// カメラ
 		Engine::System::Camera::CameraSystem cameraSystem;
 
+		// EntityInspector
 		Engine::System::Debug::EntityInspector entityInspector;
+
+		// AssetBrowser
+		Engine::System::AssetBrowser assetBrowser;
+
+		std::unique_ptr<Engine::Graphics::ModelRenderer>  modelRenderer;
+		Engine::Graphics::ModelRenderSystem               modelRenderSystem;
 	};
 }

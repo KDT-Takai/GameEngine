@@ -16,7 +16,7 @@ namespace Engine::System::Camera
         ProjectionType projectionType = ProjectionType::Orthographic;
 
         // 共通パラメータ
-        float nearClip = 0.0f;
+        float nearClip = 0.1f;
         float farClip = 1000.0f;
         float zoom = 1.0f;
         float rotation = 0.0f;
@@ -25,27 +25,24 @@ namespace Engine::System::Camera
         float fov = 60.0f;  // 視野角
 
         // View行列取得
-        DirectX::XMMATRIX GetViewMatrix(
-            const Engine::Graphics::TransformComponent& transform) const
+        DirectX::XMMATRIX GetViewMatrix(const Engine::Graphics::TransformComponent& transform) const
         {
             DirectX::XMVECTOR eye = DirectX::XMLoadFloat3(&transform.position);
 
             if (projectionType == ProjectionType::Orthographic)
             {
-                DirectX::XMVECTOR at = DirectX::XMVectorAdd(
-                    eye, DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f));
+                DirectX::XMVECTOR at = DirectX::XMVectorAdd(eye, DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f));
                 DirectX::XMVECTOR up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
                 // rotation
-                DirectX::XMMATRIX rotMat = DirectX::XMMatrixRotationZ(rotation);
+                DirectX::XMMATRIX rotMat = DirectX::XMMatrixRotationRollPitchYaw(transform.rotation.x, transform.rotation.y, transform.rotation.z);
                 up = DirectX::XMVector3TransformNormal(up, rotMat);
 
                 return DirectX::XMMatrixLookAtLH(eye, at, up);
             }
             else
             {
-                DirectX::XMVECTOR at = DirectX::XMVectorAdd(
-                    eye, DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f));
+                DirectX::XMVECTOR at = DirectX::XMVectorAdd(eye, DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f));
                 DirectX::XMVECTOR up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
                 return DirectX::XMMatrixLookAtLH(eye, at, up);
@@ -70,6 +67,12 @@ namespace Engine::System::Camera
                     nearClip,
                     farClip
                 );
+                //return DirectX::XMMatrixPerspectiveFovLH(
+                //    DirectX::XMConvertToRadians(60.0f),
+                //    16.0f / 9.0f,
+                //    0.1f,
+                //    1000.0f
+                //);
             }
         }
     };

@@ -2,6 +2,7 @@
 #include "Constantbuffer.hpp"
 #include "Graphics/ConstantBuffer/TransformBuffer.hpp"
 #include "Graphics/Sprite/SpriteRenderer/SpriteRenderer.hpp"
+#include "Graphics/Model/ModelRenderer/ModelRenderer.hpp"
 
 namespace Engine::Graphics
 {
@@ -75,5 +76,6 @@ namespace Engine::Graphics
     template class ConstantBuffer<TransformBuffer>;
     template class ConstantBuffer<SpriteTransformBuffer>;
     template class ConstantBuffer<SpriteBuffer>;
+    template class ConstantBuffer<ModelTransformBuffer>;
 
 } // Engine::Graphics

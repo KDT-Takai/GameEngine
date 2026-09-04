@@ -2,7 +2,7 @@
 #include "Graphics/Component/SpriteComponent/SpriteComponent.hpp"
 #include "Graphics/Component/TransformComponent/TransformComponent.hpp"
 #include "Graphics/Texture/Texture/Texture.hpp"
-#include "Graphics/Shader/IShaderLoader.hpp"
+#include "Graphics/Shader/IShaderLoader/IShaderLoader.hpp"
 #include "Graphics/ConstantBuffer/ConstantBuffer.hpp"
 #include "Graphics/DX12/Type.hpp"
 #include <DirectXMath.h>

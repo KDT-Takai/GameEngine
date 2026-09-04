@@ -1,3 +1,5 @@
+#pragma pack_matrix(row_major)
+
 cbuffer TransformBuffer : register(b0)
 {
     float4x4 wvp; // World * View * Projection çsóÒ

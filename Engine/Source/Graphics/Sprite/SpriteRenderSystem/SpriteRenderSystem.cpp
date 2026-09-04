@@ -27,8 +27,8 @@ namespace Engine::Graphics
                 DirectX::XMMATRIX world =
                     DirectX::XMMatrixScaling(sprite.size.x, sprite.size.y, 1.0f) *
                     DirectX::XMMatrixTranslation(offsetX, offsetY, 0.0f) *
-                    DirectX::XMMatrixRotationZ(transform.rotation) *
-                    DirectX::XMMatrixScaling(transform.scale.x, transform.scale.y, 1.0f) *
+                    DirectX::XMMatrixRotationRollPitchYaw(transform.rotation.x, transform.rotation.y, transform.rotation.z) *
+                    DirectX::XMMatrixScaling(transform.scale.x, transform.scale.y, transform.scale.z) *
                     DirectX::XMMatrixTranslation(
                         transform.position.x,
                         transform.position.y,
