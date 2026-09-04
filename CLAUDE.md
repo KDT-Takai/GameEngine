@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Git: never commit without being asked
+
+This repo is the user's personal DirectX12 study project. They want to review every diff and write every
+commit themselves. Never run `git commit` (or `git push`) here on your own initiative — even after finishing
+a task that would normally end with a commit elsewhere. Stage/inspect changes if useful, but leave the actual
+commit to the user unless they explicitly ask you to commit.
+
 ## Detailed docs (read these for anything not covered here)
 
 - `Debugger/docs/PROJECT_MAP.md` — directory map, per-module purpose, current implementation status, and a running list of gotchas discovered while working in this repo.
