@@ -5,9 +5,13 @@
 #include "System/Screen/Screen.hpp"
 #include "System/Input/InputManager/InputManager.hpp"
 #include "System/Camera/CameraSystem/CameraSystem.hpp"
-#include "System/EntityInspector/EntityInspector.hpp"
 #include "System/Assets/AssetManager/AssetManager.hpp"
+
+#ifdef _DEBUG
+// Debugger (Debug-only; not linked/built in Release)
+#include "System/EntityInspector/EntityInspector.hpp"
 #include "System/Assets/AssetBrowser/AssetBrowser.hpp"
+#endif
 
 #include "Utility/Singleton/Singleton.hpp"
 
@@ -47,7 +51,9 @@ namespace Engine::System
 		bool DX12Initialize(int width, int height);
 		void DX12Finalize();
 		void SetupEntities();
+#ifdef _DEBUG
 		void RegisterComponents();
+#endif
 		void RegisterAssetLoaders();
 		// ウィンドウ
 		std::unique_ptr<Window> window;
@@ -65,10 +71,14 @@ namespace Engine::System
 		Engine::System::Camera::CameraSystem cameraSystem;
 
 		// EntityInspector
+#ifdef _DEBUG
 		Engine::System::Debug::EntityInspector entityInspector;
+#endif
 
 		// AssetBrowser
+#ifdef _DEBUG
 		Engine::System::AssetBrowser assetBrowser;
+#endif
 
 		std::unique_ptr<Engine::Graphics::ModelRenderer>  modelRenderer;
 		Engine::Graphics::ModelRenderSystem               modelRenderSystem;

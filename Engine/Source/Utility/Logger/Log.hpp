@@ -2,7 +2,13 @@
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 //#include <spdlog/spdlog.h>
 #include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
 #include "Utility/Singleton/Singleton.hpp"
+
+#ifdef _DEBUG
+// Debugger (Debug-only; not linked/built in Release): adds file logging.
+#include "Logging/DevLogSink.hpp"
+#endif
 
 namespace Engine::Utility
 {
@@ -13,8 +19,24 @@ namespace Engine::Utility
     private:
         Logger()
         {
+            // Console sink: colored output for interactive runs.
+            // Always present, in both Debug and Release.
+            auto consoleSink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+
+            auto logger = std::make_shared<spdlog::logger>(
+                "default", spdlog::sinks_init_list{ consoleSink });
+
+            spdlog::set_default_logger(logger);
             spdlog::set_pattern("[%H:%M:%S][%^%l%$][%s:%#] %v");
             spdlog::set_level(spdlog::level::trace);
+
+#ifdef _DEBUG
+            // File logging (Logs/latest.log) is a Debugger feature: it lets
+            // the latest run's log be read straight from disk (e.g. by
+            // Claude Code) without needing console output pasted in. Not
+            // present in Release builds.
+            Engine::Debugger::Logging::AttachFileLogSink();
+#endif
         }
 
         ~Logger() = default;

@@ -91,7 +91,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(ProjectDir)Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(ProjectDir)Source;$(SolutionDir)Debugger\Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -110,7 +110,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(SolutionDir)Debugger\Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -127,7 +127,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\Engine\external\SpdLog\Include;$(ProjectDir)Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\Engine\external\SpdLog\Include;$(ProjectDir)Source;$(SolutionDir)Debugger\Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -146,7 +146,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\external\Assimp\include;$(SolutionDir)Engine\external\Assimp\build\include;$(ProjectDir)external\SpdLog\Include;$(ProjectDir)external;$(ProjectDir);$(ProjectDir)Source;..\external\SpdLog\Include;$(SolutionDir)Debugger\Source</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -163,11 +163,7 @@
     <ClCompile Include="Source\Graphics\Model\ModelLoader\ModelLoader.cpp" />
     <ClCompile Include="Source\Graphics\Model\Model\Model.cpp" />
     <ClCompile Include="Source\Graphics\Model\Mesh\Mesh.cpp" />
-    <ClCompile Include="Source\System\Assets\AssetBrowser\AssetBrowser.cpp" />
     <ClCompile Include="Source\System\Assets\AssetManager\AssetManager.cpp" />
-    <ClCompile Include="Source\System\EntityInspector\EntityInspector.cpp">
-      <DeploymentContent>false</DeploymentContent>
-    </ClCompile>
     <ClCompile Include="Source\System\Camera\CameraSystem\CameraSystem.cpp" />
     <ClCompile Include="Source\System\Input\InputManager\InputManager.cpp" />
     <ClCompile Include="Source\System\Input\PadInput\PadInput.cpp" />

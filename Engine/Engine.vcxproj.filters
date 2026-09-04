@@ -111,13 +111,7 @@
     <ClCompile Include="Source\System\Camera\CameraSystem\CameraSystem.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\EntityInspector\EntityInspector.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Source\System\Assets\AssetManager\AssetManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Assets\AssetBrowser\AssetBrowser.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\Model\Mesh\Mesh.cpp">
